@@ -14,7 +14,6 @@ import { Role } from "@prisma/client";
 import { Public } from "src/decorators/public.decorator";
 import { Roles } from "src/decorators/roles.decorator";
 import { RoleGuard } from "src/guards/role.guard";
-import { PrismaService } from "src/prisma/prisma.service";
 import { CreateProductDto } from "./dto/create-product.dto";
 import { UpdateProductDto } from "./dto/update-product.dto";
 import { ProductService } from "./product.service";
@@ -23,10 +22,7 @@ import { ProductService } from "./product.service";
 @ApiBearerAuth()
 @Controller("product")
 export class ProductController {
-  constructor(
-    private readonly prismaService: PrismaService,
-    private readonly productService: ProductService,
-  ) {}
+  constructor(private readonly productService: ProductService) {}
 
   @Roles(Role.ADMIN)
   @UseGuards(RoleGuard)
@@ -102,7 +98,7 @@ export class ProductController {
 
     const { attributes, prices, images, ...rest } = updateProductDto;
 
-    return this.prismaService.product.update({
+    return this.productService.update({
       data: {
         ...rest,
         productAttributes: {

@@ -44,7 +44,7 @@ export class AuthService {
     return this.mailService.sendMail({
       from: "admin@eminaliyev.tech",
       to: user.email,
-      subject: "Gift.az email confirmation",
+      subject: "Gift | Email confirmation",
       text: accessToken,
     });
   }

@@ -1,0 +1,20 @@
+{
+  "devDependencies": {
+    "prettier": "^2.8.4",
+    "prettier-plugin-organize-imports": "^3.2.2",
+    "prisma": "^4.10.1",
+    "turbo": "^1.8.2"
+  },
+  "scripts": {
+    "dev": "turbo run dev",
+    "build": "turbo run build",
+    "start": "npx prisma migrate deploy && node apps/backend/dist/main"
+  },
+  "workspaces": [
+    "apps/*",
+    "packages/*"
+  ],
+  "dependencies": {
+    "@prisma/client": "^4.10.1"
+  }
+}

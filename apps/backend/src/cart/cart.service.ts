@@ -1,8 +1,8 @@
 import { Injectable } from "@nestjs/common";
-import { DiscountType } from "@prisma/client";
+import { Cart, DiscountType, Prisma } from "@prisma/client";
 import { PrismaService } from "src/prisma/prisma.service";
 import Stripe from "stripe";
-import { CartDto } from "./dto/CartDto";
+import { CartItem, CreateCartDto } from "./dto/create-cart.dto";
 
 const stripe = new Stripe(
   "sk_test_51MIdcaFDm83hh989c1RyCXyQrnWN6FbShtk95LerPXNqEwOXX8Ja8jt5QDlDQnI7dNj1Xmi335EXRHWCSV8EeFEo00et16hvsP",
@@ -11,22 +11,60 @@ const stripe = new Stripe(
 
 @Injectable()
 export class CartService {
-  constructor(private readonly prisma: PrismaService) {}
+  constructor(private readonly prismaService: PrismaService) {}
 
-  async add(userId: number, cartDto: CartDto) {
-    const { products } = cartDto;
+  async findMany<T extends Prisma.CartFindManyArgs>(
+    args?: Prisma.SelectSubset<T, Prisma.CartFindManyArgs>,
+  ) {
+    return this.prismaService.cart.findMany(args);
+  }
 
-    await this.prisma.cart.deleteMany({
-      where: { userId },
-    });
+  async addToCart(userId: number, createCartDto: CreateCartDto) {
+    const { items } = createCartDto;
 
-    return this.prisma.cart.createMany({
-      data: products.map(({ productId, count }) => ({
-        userId,
-        productId,
-        count,
-      })),
-    });
+    const cart = await this.findMany({ where: { userId } });
+
+    const itemsToAdd: CartItem[] = [];
+    const itemsToDelete: Cart[] = [];
+
+    for (const item of cart) {
+      const foundItem = items.find((i) => i.productId === item.productId);
+
+      if (foundItem) {
+        await this.prismaService.cart.update({
+          data: {
+            quantity: foundItem.quantity,
+          },
+          where: { userId_productId: { userId, productId: item.productId } },
+        });
+      } else {
+        itemsToDelete.push(item);
+      }
+    }
+
+    for (const item of items) {
+      const foundItem = cart.find((i) => i.productId === item.productId);
+
+      if (!foundItem) {
+        itemsToAdd.push(item);
+      }
+    }
+
+    await Promise.all([
+      this.prismaService.cart.createMany({
+        data: itemsToAdd.map((item) => ({ userId, ...item })),
+      }),
+      this.prismaService.cart.deleteMany({
+        where: {
+          userId,
+          productId: {
+            in: itemsToDelete.map(({ productId }) => productId),
+          },
+        },
+      }),
+    ]);
+
+    return this.findMany({ where: { userId } });
   }
 
   async applyDiscount(total: number, discountCode: string) {
@@ -34,7 +72,7 @@ export class CartService {
     let discountTotal = total;
 
     const discount = discountCode
-      ? await this.prisma.discount.findUnique({
+      ? await this.prismaService.discount.findUnique({
           where: { code: discountCode },
         })
       : null;
@@ -64,7 +102,7 @@ export class CartService {
       }
 
       if (discount.limit) {
-        await this.prisma.discount.update({
+        await this.prismaService.discount.update({
           data: {
             remaining: {
               decrement: 1,
@@ -78,21 +116,16 @@ export class CartService {
     return discountTotal;
   }
 
-  async getTotal(userId: number, discountCode?: string) {
+  async findTotal(userId: number, discountCode?: string) {
     const now = new Date();
 
-    const cart = await this.prisma.cart.findMany({
+    const cart = await this.findMany({
       where: { userId },
-      orderBy: [{ count: "desc" }],
       select: {
-        id: true,
-        count: true,
+        quantity: true,
         product: {
           select: {
             id: true,
-            category: true,
-            name: true,
-            description: true,
             prices: {
               select: {
                 id: true,
@@ -114,13 +147,12 @@ export class CartService {
           !_price.endDate || (_price.startDate < now && _price.endDate > now),
       );
 
-      total += item.count * price.value;
+      total += item.quantity * price.value;
     });
 
     const discountTotal = await this.applyDiscount(total, discountCode);
 
     return {
-      cart,
       total,
       discountTotal,
     };
@@ -129,11 +161,10 @@ export class CartService {
   async checkout(userId: number) {
     const now = new Date();
 
-    const cart = await this.prisma.cart.findMany({
+    const cart = await this.prismaService.cart.findMany({
       where: { userId },
       select: {
-        id: true,
-        count: true,
+        quantity: true,
         product: {
           select: {
             id: true,
@@ -169,7 +200,7 @@ export class CartService {
           },
           unit_amount: price.value * 100,
         },
-        quantity: item.count,
+        quantity: item.quantity,
       });
     });
 
@@ -177,10 +208,8 @@ export class CartService {
       mode: "payment",
       payment_method_types: ["card"],
       line_items,
-      success_url:
-        "https://sdp2022-app.vercel.app/order/success/{CHECKOUT_SESSION_ID}",
-      cancel_url:
-        "https://sdp2022-app.vercel.app/order/error/{CHECKOUT_SESSION_ID}",
+      success_url: "{CHECKOUT_SESSION_ID}",
+      cancel_url: "{CHECKOUT_SESSION_ID}",
     });
 
     return session.url;

@@ -4,12 +4,11 @@ import {
   IsArray,
   IsNotEmpty,
   IsNumber,
-  IsOptional,
   IsString,
   ValidateNested,
 } from "class-validator";
 
-class Product {
+export class CartItem {
   @ApiProperty()
   @IsString()
   @IsNotEmpty()
@@ -17,14 +16,13 @@ class Product {
 
   @ApiProperty()
   @IsNumber()
-  count: number;
+  quantity: number;
 }
 
-export class CartDto {
-  @ApiProperty({ isArray: true, type: Product, required: false })
-  @IsOptional()
+export class CreateCartDto {
+  @ApiProperty({ isArray: true, type: CartItem, required: true })
   @IsArray()
   @ValidateNested({ each: true })
-  @Type(() => Product)
-  products: Product[];
+  @Type(() => CartItem)
+  items: CartItem[];
 }

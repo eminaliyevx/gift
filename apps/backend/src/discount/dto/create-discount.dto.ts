@@ -5,6 +5,7 @@ import {
   IsIn,
   IsNotEmpty,
   IsNumber,
+  IsOptional,
   IsString,
 } from "class-validator";
 
@@ -25,10 +26,12 @@ export class CreateDiscountDto {
   value: number;
 
   @ApiProperty()
+  @IsOptional()
   @IsNumber()
   limit: number;
 
   @ApiProperty()
+  @IsOptional()
   @IsNumber()
   remaining: number;
 
@@ -37,6 +40,7 @@ export class CreateDiscountDto {
   startDate: string;
 
   @ApiProperty()
+  @IsOptional()
   @IsDateString()
   endDate: string;
 }

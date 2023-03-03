@@ -24,11 +24,6 @@ class ProductAttribute {
 
 class Price {
   @ApiProperty()
-  @IsString()
-  @IsNotEmpty()
-  currencyId: string;
-
-  @ApiProperty()
   @IsNumber()
   value: number;
 
@@ -72,4 +67,8 @@ export class CreateProductDto {
   @ValidateNested({ each: true })
   @Type(() => Price)
   prices: Price[];
+
+  @ApiProperty({ isArray: true, type: "string", required: true })
+  @IsArray()
+  images: string[];
 }

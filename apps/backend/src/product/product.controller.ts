@@ -17,20 +17,24 @@ import { RoleGuard } from "src/guards/role.guard";
 import { PrismaService } from "src/prisma/prisma.service";
 import { CreateProductDto } from "./dto/create-product.dto";
 import { UpdateProductDto } from "./dto/update-product.dto";
+import { ProductService } from "./product.service";
 
 @ApiTags("Product")
 @ApiBearerAuth()
 @Controller("product")
 export class ProductController {
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(
+    private readonly prismaService: PrismaService,
+    private readonly productService: ProductService,
+  ) {}
 
   @Roles(Role.ADMIN)
   @UseGuards(RoleGuard)
   @Post()
   async create(@Body() createProductDto: CreateProductDto) {
-    const { attributes, prices, ...rest } = createProductDto;
+    const { attributes, prices, images, ...rest } = createProductDto;
 
-    return this.prismaService.product.create({
+    return this.productService.create({
       data: {
         ...rest,
         productAttributes: {
@@ -47,26 +51,10 @@ export class ProductController {
               }
             : undefined,
         },
-      },
-      select: {
-        id: true,
-        name: true,
-        description: true,
-        category: true,
-        productAttributes: {
-          select: {
-            id: true,
-            value: true,
-            attribute: true,
-          },
-        },
-        prices: {
-          select: {
-            id: true,
-            value: true,
-            startDate: true,
-            endDate: true,
-          },
+        images: {
+          createMany: images
+            ? { data: images.map((url) => ({ url })) }
+            : undefined,
         },
       },
     });
@@ -74,51 +62,15 @@ export class ProductController {
 
   @Public()
   @Get()
-  async findAll() {
-    return this.prismaService.product.findMany({
-      select: {
-        id: true,
-        name: true,
-        description: true,
-        category: true,
-        prices: {
-          select: {
-            id: true,
-            value: true,
-            startDate: true,
-            endDate: true,
-          },
-        },
-      },
-    });
+  async findMany() {
+    return this.productService.findMany();
   }
 
   @Public()
   @Get(":id")
-  async findOne(@Param("id") id: string) {
-    const product = await this.prismaService.product.findUnique({
+  async findUnique(@Param("id") id: string) {
+    const product = await this.productService.findUnique({
       where: { id },
-      select: {
-        id: true,
-        name: true,
-        description: true,
-        category: true,
-        productAttributes: {
-          select: {
-            id: true,
-            value: true,
-            attribute: true,
-          },
-        },
-        prices: {
-          select: {
-            id: true,
-            value: true,
-            startDate: true,
-            endDate: true,
-          },
-        },
-      },
     });
 
     if (!product) {
@@ -135,11 +87,12 @@ export class ProductController {
     @Param("id") id: string,
     @Body() updateProductDto: UpdateProductDto,
   ) {
-    const product = await this.prismaService.product.findUnique({
+    const product = await this.productService.findUnique({
       where: { id },
       include: {
         productAttributes: true,
         prices: true,
+        images: true,
       },
     });
 
@@ -147,7 +100,7 @@ export class ProductController {
       throw new NotFoundException("Product not found");
     }
 
-    const { attributes, prices, ...rest } = updateProductDto;
+    const { attributes, prices, images, ...rest } = updateProductDto;
 
     return this.prismaService.product.update({
       data: {
@@ -168,29 +121,16 @@ export class ProductController {
               }
             : undefined,
         },
+        images: {
+          deleteMany: images ? {} : undefined,
+          createMany: images
+            ? {
+                data: images.map((url) => ({ url })),
+              }
+            : undefined,
+        },
       },
       where: { id },
-      select: {
-        id: true,
-        name: true,
-        description: true,
-        category: true,
-        productAttributes: {
-          select: {
-            id: true,
-            value: true,
-            attribute: true,
-          },
-        },
-        prices: {
-          select: {
-            id: true,
-            value: true,
-            startDate: true,
-            endDate: true,
-          },
-        },
-      },
     });
   }
 
@@ -198,7 +138,7 @@ export class ProductController {
   @UseGuards(RoleGuard)
   @Delete(":id")
   async delete(@Param("id") id: string) {
-    const product = await this.prismaService.product.findUnique({
+    const product = await this.productService.findUnique({
       where: { id },
     });
 
@@ -206,29 +146,8 @@ export class ProductController {
       throw new NotFoundException("Product not found");
     }
 
-    return this.prismaService.product.delete({
+    return this.productService.delete({
       where: { id },
-      select: {
-        id: true,
-        name: true,
-        description: true,
-        category: true,
-        productAttributes: {
-          select: {
-            id: true,
-            value: true,
-            attribute: true,
-          },
-        },
-        prices: {
-          select: {
-            id: true,
-            value: true,
-            startDate: true,
-            endDate: true,
-          },
-        },
-      },
     });
   }
 }

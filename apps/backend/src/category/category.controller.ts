@@ -43,14 +43,14 @@ export class CategoryController {
 
   @Public()
   @Get()
-  async findAll() {
-    return this.categoryService.findAll();
+  async findMany() {
+    return this.categoryService.findMany();
   }
 
   @Public()
   @Get(":id")
-  async findOne(@Param("id") id: string) {
-    const category = await this.categoryService.findOne({
+  async findUnique(@Param("id") id: string) {
+    const category = await this.categoryService.findUnique({
       where: { id },
       include: { attributes: true },
     });
@@ -69,7 +69,7 @@ export class CategoryController {
     @Param("id") id: string,
     @Body() updateCategoryDto: UpdateCategoryDto,
   ) {
-    const category = await this.categoryService.findOne({
+    const category = await this.categoryService.findUnique({
       where: { id },
       include: {
         attributes: true,
@@ -114,7 +114,7 @@ export class CategoryController {
   @UseGuards(RoleGuard)
   @Delete(":id")
   async delete(@Param("id") id: string) {
-    const category = await this.categoryService.findOne({
+    const category = await this.categoryService.findUnique({
       where: { id },
     });
 

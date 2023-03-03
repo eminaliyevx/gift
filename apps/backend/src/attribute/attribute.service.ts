@@ -12,13 +12,13 @@ export class AttributeService {
     return this.prismaService.attribute.create(args);
   }
 
-  async findAll<T extends Prisma.AttributeFindManyArgs>(
+  async findMany<T extends Prisma.AttributeFindManyArgs>(
     args?: Prisma.SelectSubset<T, Prisma.AttributeFindManyArgs>,
   ) {
     return this.prismaService.attribute.findMany(args);
   }
 
-  async findOne<T extends Prisma.AttributeFindUniqueArgs>(
+  async findUnique<T extends Prisma.AttributeFindUniqueArgs>(
     args: Prisma.SelectSubset<T, Prisma.AttributeFindUniqueArgs>,
   ) {
     return this.prismaService.attribute.findUnique(args);

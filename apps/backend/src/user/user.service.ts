@@ -19,7 +19,7 @@ export class UserService {
     });
   }
 
-  async findOne<T extends Prisma.UserFindUniqueArgs>(
+  async findUnique<T extends Prisma.UserFindUniqueArgs>(
     args: Prisma.SelectSubset<T, Prisma.UserFindUniqueArgs>,
   ) {
     return this.prismaService.user.findUnique(args);

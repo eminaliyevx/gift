@@ -43,14 +43,14 @@ export class AttributeController {
 
   @Public()
   @Get()
-  async findAll() {
-    return this.attributeService.findAll();
+  async findMany() {
+    return this.attributeService.findMany();
   }
 
   @Public()
   @Get(":id")
-  async findOne(@Param("id") id: string) {
-    const attribute = await this.attributeService.findOne({
+  async findUnique(@Param("id") id: string) {
+    const attribute = await this.attributeService.findUnique({
       where: { id },
       include: { categories: true },
     });
@@ -69,7 +69,7 @@ export class AttributeController {
     @Param("id") id: string,
     @Body() updateAttributeDto: UpdateAttributeDto,
   ) {
-    const attribute = await this.attributeService.findOne({
+    const attribute = await this.attributeService.findUnique({
       where: { id },
       include: {
         categories: true,
@@ -114,7 +114,7 @@ export class AttributeController {
   @UseGuards(RoleGuard)
   @Delete(":id")
   async delete(@Param("id") id: string) {
-    const attribute = await this.attributeService.findOne({
+    const attribute = await this.attributeService.findUnique({
       where: { id },
     });
 

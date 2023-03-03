@@ -64,7 +64,7 @@ export class AuthController {
   @Get("account")
   async getAccount(@GetUser() user: User) {
     if (user) {
-      return this.userService.findOne({
+      return this.userService.findUnique({
         where: { id: user.id },
         include: {
           customer: true,

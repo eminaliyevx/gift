@@ -12,13 +12,13 @@ export class CategoryService {
     return this.prismaService.category.create(args);
   }
 
-  async findAll<T extends Prisma.CategoryFindManyArgs>(
+  async findMany<T extends Prisma.CategoryFindManyArgs>(
     args?: Prisma.SelectSubset<T, Prisma.CategoryFindManyArgs>,
   ) {
     return this.prismaService.category.findMany(args);
   }
 
-  async findOne<T extends Prisma.CategoryFindUniqueArgs>(
+  async findUnique<T extends Prisma.CategoryFindUniqueArgs>(
     args: Prisma.SelectSubset<T, Prisma.CategoryFindUniqueArgs>,
   ) {
     return this.prismaService.category.findUnique(args);

@@ -14,7 +14,7 @@ import { Role } from "@prisma/client";
 import { Public } from "src/decorators/public.decorator";
 import { Roles } from "src/decorators/roles.decorator";
 import { RoleGuard } from "src/guards/role.guard";
-import { PrismaService } from "src/prisma/prisma.service";
+import { AttributeService } from "./attribute.service";
 import { CreateAttributeDto } from "./dto/create-attribute.dto";
 import { UpdateAttributeDto } from "./dto/update-attribute.dto";
 
@@ -22,7 +22,7 @@ import { UpdateAttributeDto } from "./dto/update-attribute.dto";
 @ApiBearerAuth()
 @Controller("attribute")
 export class AttributeController {
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(private readonly attributeService: AttributeService) {}
 
   @Roles(Role.ADMIN)
   @UseGuards(RoleGuard)
@@ -30,7 +30,7 @@ export class AttributeController {
   async create(@Body() createAttributeDto: CreateAttributeDto) {
     const { categories, ...rest } = createAttributeDto;
 
-    return this.prismaService.attribute.create({
+    return this.attributeService.create({
       data: {
         ...rest,
         categories: {
@@ -44,13 +44,13 @@ export class AttributeController {
   @Public()
   @Get()
   async findAll() {
-    return this.prismaService.attribute.findMany();
+    return this.attributeService.findAll();
   }
 
   @Public()
   @Get(":id")
   async findOne(@Param("id") id: string) {
-    const attribute = await this.prismaService.attribute.findUnique({
+    const attribute = await this.attributeService.findOne({
       where: { id },
       include: { categories: true },
     });
@@ -69,7 +69,7 @@ export class AttributeController {
     @Param("id") id: string,
     @Body() updateAttributeDto: UpdateAttributeDto,
   ) {
-    const attribute = await this.prismaService.attribute.findUnique({
+    const attribute = await this.attributeService.findOne({
       where: { id },
       include: {
         categories: true,
@@ -88,6 +88,7 @@ export class AttributeController {
           .filter((category) => !attributeCategories.includes(category))
           .map((id) => ({ id }))
       : undefined;
+
     const disconnect = categories
       ? attributeCategories
           .filter(
@@ -96,7 +97,7 @@ export class AttributeController {
           .map((id) => ({ id }))
       : undefined;
 
-    return this.prismaService.attribute.update({
+    return this.attributeService.update({
       data: {
         ...rest,
         categories: {
@@ -113,7 +114,7 @@ export class AttributeController {
   @UseGuards(RoleGuard)
   @Delete(":id")
   async delete(@Param("id") id: string) {
-    const attribute = await this.prismaService.attribute.findUnique({
+    const attribute = await this.attributeService.findOne({
       where: { id },
     });
 
@@ -121,7 +122,7 @@ export class AttributeController {
       throw new NotFoundException("Attribute not found");
     }
 
-    return this.prismaService.attribute.delete({
+    return this.attributeService.delete({
       where: { id },
       include: { categories: true },
     });

@@ -17,30 +17,30 @@ describe("CartService", () => {
 
   it("should return the discounted total if discount type is PERCENTAGE_TOTAL", async () => {
     prisma.discount.findUnique = jest.fn().mockReturnValueOnce({
-      id: "test1",
-      code: "testCode",
+      id: "TEST_DISCOUNT",
+      code: "TEST_DISCOUNT_CODE",
       type: "PERCENTAGE_TOTAL",
       value: 15,
       startDate: new Date(2023, 1, 1),
-      endDate: new Date(2023, 3, 1),
+      endDate: new Date(2023, 4, 1),
     });
 
-    const result = await service.applyDiscount(100, "testCode");
+    const result = await service.applyDiscount(100, "TEST_DISCOUNT");
 
     expect(result).toBe(85);
   });
 
   it("should return the discounted total if discount type is FIXED_TOTAL", async () => {
     prisma.discount.findUnique = jest.fn().mockReturnValueOnce({
-      id: "test1",
-      code: "testCode",
+      id: "TEST_DISCOUNT",
+      code: "TEST_DISCOUNT_CODE",
       type: "FIXED_TOTAL",
       value: 15,
       startDate: new Date(2023, 1, 1),
-      endDate: new Date(2023, 3, 1),
+      endDate: new Date(2023, 4, 1),
     });
 
-    const result = await service.applyDiscount(60, "testCode");
+    const result = await service.applyDiscount(60, "TEST_DISCOUNT");
 
     expect(result).toBe(45);
   });
@@ -49,34 +49,22 @@ describe("CartService", () => {
     prisma.cart.findMany = jest.fn().mockReturnValueOnce([
       {
         id: "cldqbajce0002offwxk29zhje",
-        count: 1,
+        quantity: 1,
         product: {
           id: "cldq8ehai0004of2cu3e10h9h",
-          category: {
-            id: "cldq8c5n80000of2ced1zbo5n",
-            name: "Books",
-          },
-          name: "Origin",
-          description: "Dan Brown's bestseller book",
           prices: [
             {
               id: "cldq8ehai0005of2c35du4gfe",
               value: 15,
               startDate: "2023-02-04T17:30:49.482Z",
               endDate: null,
-              currency: {
-                id: "cldq8ctrc0002of2ch8cjtnw6",
-                symbol: "€",
-                acronym: "EUR",
-                name: "Euro",
-              },
             },
           ],
         },
       },
     ]);
 
-    const { total } = await service.getTotal(2, undefined);
+    const { total } = await service.findTotal(1, undefined);
 
     expect(total).toBe(15);
   });
@@ -85,27 +73,15 @@ describe("CartService", () => {
     prisma.cart.findMany = jest.fn().mockReturnValueOnce([
       {
         id: "cldqbajce0002offwxk29zhje",
-        count: 1,
+        quantity: 1,
         product: {
           id: "cldq8ehai0004of2cu3e10h9h",
-          category: {
-            id: "cldq8c5n80000of2ced1zbo5n",
-            name: "Books",
-          },
-          name: "Origin",
-          description: "Dan Brown's bestseller book",
           prices: [
             {
               id: "cldq8ehai0005of2c35du4gfe",
               value: 15,
               startDate: "2023-02-04T17:30:49.482Z",
               endDate: null,
-              currency: {
-                id: "cldq8ctrc0002of2ch8cjtnw6",
-                symbol: "€",
-                acronym: "EUR",
-                name: "Euro",
-              },
             },
           ],
         },
@@ -113,15 +89,18 @@ describe("CartService", () => {
     ]);
 
     prisma.discount.findUnique = jest.fn().mockReturnValueOnce({
-      id: "test1",
-      code: "testCode",
+      id: "TEST_DISCOUNT",
+      code: "TEST_DISCOUNT_CODE",
       type: "FIXED_TOTAL",
       value: 15,
       startDate: new Date(2023, 1, 1),
-      endDate: new Date(2023, 3, 1),
+      endDate: new Date(2023, 4, 1),
     });
 
-    const { total, discountTotal } = await service.getTotal(2, "testCode");
+    const { total, discountTotal } = await service.findTotal(
+      1,
+      "TEST_DISCOUNT",
+    );
 
     expect(total).toBe(15);
     expect(discountTotal).toBe(0);
@@ -131,13 +110,9 @@ describe("CartService", () => {
     prisma.cart.findMany = jest.fn().mockReturnValueOnce([
       {
         id: "cldqbajce0002offwxk29zhje",
-        count: 1,
+        quantity: 1,
         product: {
           id: "cldq8ehai0004of2cu3e10h9h",
-          category: {
-            id: "cldq8c5n80000of2ced1zbo5n",
-            name: "Books",
-          },
           name: "Origin",
           description: "Dan Brown's bestseller book",
           prices: [
@@ -146,19 +121,13 @@ describe("CartService", () => {
               value: 15,
               startDate: "2023-02-04T17:30:49.482Z",
               endDate: null,
-              currency: {
-                id: "cldq8ctrc0002of2ch8cjtnw6",
-                symbol: "€",
-                acronym: "EUR",
-                name: "Euro",
-              },
             },
           ],
         },
       },
     ]);
 
-    const result = await service.checkout(2);
+    const result = await service.checkout(1);
 
     expect(result).toBeDefined();
   });

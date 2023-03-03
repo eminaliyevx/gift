@@ -208,8 +208,8 @@ export class CartService {
       mode: "payment",
       payment_method_types: ["card"],
       line_items,
-      success_url: "{CHECKOUT_SESSION_ID}",
-      cancel_url: "{CHECKOUT_SESSION_ID}",
+      success_url: "http://localhost:3000/order/success/{CHECKOUT_SESSION_ID}",
+      cancel_url: "http://localhost:3000/order/error/{CHECKOUT_SESSION_ID}",
     });
 
     return session.url;

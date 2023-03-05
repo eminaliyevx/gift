@@ -13,7 +13,6 @@ import { CategoryModule } from "./category/category.module";
 import { CustomerModule } from "./customer/customer.module";
 import { DiscountModule } from "./discount/discount.module";
 import { JwtAuthGuard } from "./guards/jwt-auth.guard";
-import { PrismaService } from "./prisma/prisma.service";
 import { ProductModule } from "./product/product.module";
 import { UserModule } from "./user/user.module";
 
@@ -29,28 +28,16 @@ import { UserModule } from "./user/user.module";
     }),
     AuthModule,
     UserModule,
+    CustomerModule,
+    BusinessModule,
     CategoryModule,
     AttributeModule,
     ProductModule,
     CartModule,
     DiscountModule,
+    MailerModule,
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, "../..", "frontend", "dist"),
-    }),
-    CustomerModule,
-    BusinessModule,
-    MailerModule.forRoot({
-      transport: {
-        host: "smtp.titan.email",
-        port: 465,
-        auth: {
-          user: "admin@eminaliyev.tech",
-          pass: "fm6S7S@9wF*6ck%3",
-        },
-      },
-      defaults: {
-        from: "admin@eminaliyev.tech",
-      },
     }),
   ],
   providers: [
@@ -58,7 +45,6 @@ import { UserModule } from "./user/user.module";
       provide: APP_GUARD,
       useClass: JwtAuthGuard,
     },
-    PrismaService,
   ],
 })
 export class AppModule {}

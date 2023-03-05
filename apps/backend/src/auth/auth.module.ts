@@ -2,6 +2,7 @@ import { Module } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { JwtModule } from "@nestjs/jwt";
 import { PassportModule } from "@nestjs/passport";
+import { MailModule } from "src/mail/mail.module";
 import { MailService } from "src/mail/mail.service";
 import { PrismaService } from "src/prisma/prisma.service";
 import { UserModule } from "src/user/user.module";
@@ -22,14 +23,15 @@ import { LocalStrategy } from "./strategy/local.strategy";
       }),
       inject: [ConfigService],
     }),
+    MailModule,
   ],
   controllers: [AuthController],
   providers: [
-    PrismaService,
     AuthService,
     UserService,
     LocalStrategy,
     JwtStrategy,
+    PrismaService,
     MailService,
   ],
   exports: [AuthService],

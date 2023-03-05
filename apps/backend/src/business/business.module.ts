@@ -7,6 +7,6 @@ import { BusinessService } from "./business.service";
 @Module({
   imports: [AuthModule],
   controllers: [BusinessController],
-  providers: [PrismaService, BusinessService],
+  providers: [BusinessService, PrismaService],
 })
 export class BusinessModule {}

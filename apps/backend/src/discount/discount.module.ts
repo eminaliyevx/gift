@@ -5,6 +5,6 @@ import { DiscountService } from "./discount.service";
 
 @Module({
   controllers: [DiscountController],
-  providers: [PrismaService, DiscountService],
+  providers: [DiscountService, PrismaService],
 })
 export class DiscountModule {}

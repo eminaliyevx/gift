@@ -20,9 +20,10 @@ CREATE TABLE "User" (
     "phone" VARCHAR(16) NOT NULL,
     "password" VARCHAR(256) NOT NULL,
     "role" "Role" NOT NULL,
-    "verified" BOOLEAN NOT NULL DEFAULT false,
+    "confirmed" BOOLEAN NOT NULL DEFAULT false,
     "status" "Status" NOT NULL DEFAULT 'ACTIVE',
-    "userImageId" TEXT,
+    "createdAt" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP NOT NULL,
 
     CONSTRAINT "User_pkey" PRIMARY KEY ("id")
 );
@@ -31,21 +32,9 @@ CREATE TABLE "User" (
 CREATE TABLE "UserImage" (
     "id" TEXT NOT NULL,
     "url" TEXT NOT NULL,
+    "userId" INTEGER NOT NULL,
 
     CONSTRAINT "UserImage_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "Location" (
-    "id" TEXT NOT NULL,
-    "address" TEXT NOT NULL,
-    "latitude" DOUBLE PRECISION,
-    "longitude" DOUBLE PRECISION,
-    "note" TEXT,
-    "customerUserId" INTEGER,
-    "businessUserId" INTEGER,
-
-    CONSTRAINT "Location_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -89,6 +78,8 @@ CREATE TABLE "Product" (
     "name" VARCHAR(256) NOT NULL,
     "description" TEXT NOT NULL,
     "categoryId" TEXT NOT NULL,
+    "createdAt" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP NOT NULL,
 
     CONSTRAINT "Product_pkey" PRIMARY KEY ("id")
 );
@@ -106,8 +97,6 @@ CREATE TABLE "ProductAttribute" (
 -- CreateTable
 CREATE TABLE "ProductImage" (
     "id" TEXT NOT NULL,
-    "name" VARCHAR(256),
-    "description" TEXT,
     "url" TEXT NOT NULL,
     "productId" TEXT NOT NULL,
 
@@ -121,6 +110,8 @@ CREATE TABLE "Price" (
     "value" DOUBLE PRECISION NOT NULL,
     "startDate" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
     "endDate" TIMESTAMP,
+    "createdAt" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP NOT NULL,
 
     CONSTRAINT "Price_pkey" PRIMARY KEY ("id")
 );
@@ -145,24 +136,10 @@ CREATE TABLE "Discount" (
     "remaining" INTEGER,
     "startDate" TIMESTAMP NOT NULL,
     "endDate" TIMESTAMP,
+    "createdAt" TIMESTAMP NOT NULL DEFAULT CURRENT_TIMESTAMP,
+    "updatedAt" TIMESTAMP NOT NULL,
 
     CONSTRAINT "Discount_pkey" PRIMARY KEY ("id")
-);
-
--- CreateTable
-CREATE TABLE "Order" (
-    "id" TEXT NOT NULL,
-    "status" "OrderStatus" NOT NULL DEFAULT 'PENDING',
-    "total" DOUBLE PRECISION NOT NULL,
-    "discountTotal" DOUBLE PRECISION,
-    "note" TEXT,
-    "createdAt" TIMESTAMP(3) NOT NULL DEFAULT CURRENT_TIMESTAMP,
-    "deliveredAt" TIMESTAMP(3),
-    "customerUserId" INTEGER NOT NULL,
-    "locationId" TEXT NOT NULL,
-    "discountId" TEXT,
-
-    CONSTRAINT "Order_pkey" PRIMARY KEY ("id")
 );
 
 -- CreateTable
@@ -178,7 +155,7 @@ CREATE UNIQUE INDEX "User_email_key" ON "User"("email");
 CREATE UNIQUE INDEX "User_phone_key" ON "User"("phone");
 
 -- CreateIndex
-CREATE UNIQUE INDEX "User_userImageId_key" ON "User"("userImageId");
+CREATE UNIQUE INDEX "UserImage_userId_key" ON "UserImage"("userId");
 
 -- CreateIndex
 CREATE UNIQUE INDEX "Category_name_key" ON "Category"("name");
@@ -196,19 +173,13 @@ CREATE UNIQUE INDEX "_AttributeToCategory_AB_unique" ON "_AttributeToCategory"("
 CREATE INDEX "_AttributeToCategory_B_index" ON "_AttributeToCategory"("B");
 
 -- AddForeignKey
-ALTER TABLE "User" ADD CONSTRAINT "User_userImageId_fkey" FOREIGN KEY ("userImageId") REFERENCES "UserImage"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "UserImage" ADD CONSTRAINT "UserImage_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Location" ADD CONSTRAINT "Location_customerUserId_fkey" FOREIGN KEY ("customerUserId") REFERENCES "Customer"("userId") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "Customer" ADD CONSTRAINT "Customer_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Location" ADD CONSTRAINT "Location_businessUserId_fkey" FOREIGN KEY ("businessUserId") REFERENCES "Business"("userId") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Customer" ADD CONSTRAINT "Customer_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Business" ADD CONSTRAINT "Business_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "Business" ADD CONSTRAINT "Business_userId_fkey" FOREIGN KEY ("userId") REFERENCES "User"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "Product" ADD CONSTRAINT "Product_categoryId_fkey" FOREIGN KEY ("categoryId") REFERENCES "Category"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
@@ -217,7 +188,7 @@ ALTER TABLE "Product" ADD CONSTRAINT "Product_categoryId_fkey" FOREIGN KEY ("cat
 ALTER TABLE "ProductAttribute" ADD CONSTRAINT "ProductAttribute_productId_fkey" FOREIGN KEY ("productId") REFERENCES "Product"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "ProductAttribute" ADD CONSTRAINT "ProductAttribute_attributeId_fkey" FOREIGN KEY ("attributeId") REFERENCES "Attribute"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
+ALTER TABLE "ProductAttribute" ADD CONSTRAINT "ProductAttribute_attributeId_fkey" FOREIGN KEY ("attributeId") REFERENCES "Attribute"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "ProductImage" ADD CONSTRAINT "ProductImage_productId_fkey" FOREIGN KEY ("productId") REFERENCES "Product"("id") ON DELETE CASCADE ON UPDATE CASCADE;
@@ -226,19 +197,7 @@ ALTER TABLE "ProductImage" ADD CONSTRAINT "ProductImage_productId_fkey" FOREIGN 
 ALTER TABLE "Price" ADD CONSTRAINT "Price_productId_fkey" FOREIGN KEY ("productId") REFERENCES "Product"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
-ALTER TABLE "Cart" ADD CONSTRAINT "Cart_productId_fkey" FOREIGN KEY ("productId") REFERENCES "Product"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Cart" ADD CONSTRAINT "Cart_orderId_fkey" FOREIGN KEY ("orderId") REFERENCES "Order"("id") ON DELETE SET NULL ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Order" ADD CONSTRAINT "Order_customerUserId_fkey" FOREIGN KEY ("customerUserId") REFERENCES "Customer"("userId") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Order" ADD CONSTRAINT "Order_locationId_fkey" FOREIGN KEY ("locationId") REFERENCES "Location"("id") ON DELETE RESTRICT ON UPDATE CASCADE;
-
--- AddForeignKey
-ALTER TABLE "Order" ADD CONSTRAINT "Order_discountId_fkey" FOREIGN KEY ("discountId") REFERENCES "Discount"("id") ON DELETE SET NULL ON UPDATE CASCADE;
+ALTER TABLE "Cart" ADD CONSTRAINT "Cart_productId_fkey" FOREIGN KEY ("productId") REFERENCES "Product"("id") ON DELETE CASCADE ON UPDATE CASCADE;
 
 -- AddForeignKey
 ALTER TABLE "_AttributeToCategory" ADD CONSTRAINT "_AttributeToCategory_A_fkey" FOREIGN KEY ("A") REFERENCES "Attribute"("id") ON DELETE CASCADE ON UPDATE CASCADE;

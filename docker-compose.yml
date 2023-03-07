@@ -10,9 +10,12 @@ services:
       - docker.env
 
   app:
+    build:
+      context: .
+      dockerfile: Dockerfile
     image: gift
     env_file:
-      - .env
+      - .env.prod
     ports:
       - "3000:3000"
     depends_on:

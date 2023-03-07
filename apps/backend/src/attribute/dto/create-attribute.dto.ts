@@ -9,5 +9,5 @@ export class CreateAttributeDto {
   @ApiProperty({ isArray: true, type: "string", required: false })
   @IsOptional()
   @IsArray()
-  categories: string[];
+  categories?: string[];
 }

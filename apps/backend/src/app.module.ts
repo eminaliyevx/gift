@@ -13,6 +13,7 @@ import { CategoryModule } from "./category/category.module";
 import { CustomerModule } from "./customer/customer.module";
 import { DiscountModule } from "./discount/discount.module";
 import { JwtAuthGuard } from "./guards/jwt-auth.guard";
+import { PrismModule } from "./prisma/prisma.module";
 import { ProductModule } from "./product/product.module";
 import { UserModule } from "./user/user.module";
 
@@ -26,6 +27,7 @@ import { UserModule } from "./user/user.module";
         PORT: Joi.number().default(3000),
       }),
     }),
+    PrismModule,
     AuthModule,
     UserModule,
     CustomerModule,

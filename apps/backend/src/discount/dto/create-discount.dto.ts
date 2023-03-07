@@ -28,12 +28,12 @@ export class CreateDiscountDto {
   @ApiProperty()
   @IsOptional()
   @IsNumber()
-  limit: number;
+  limit?: number;
 
   @ApiProperty()
   @IsOptional()
   @IsNumber()
-  remaining: number;
+  remaining?: number;
 
   @ApiProperty()
   @IsDateString()
@@ -42,5 +42,5 @@ export class CreateDiscountDto {
   @ApiProperty()
   @IsOptional()
   @IsDateString()
-  endDate: string;
+  endDate?: string;
 }

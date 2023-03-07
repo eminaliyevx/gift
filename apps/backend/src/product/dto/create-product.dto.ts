@@ -30,12 +30,12 @@ class Price {
   @ApiProperty()
   @IsOptional()
   @IsDateString()
-  startDate: string;
+  startDate?: string;
 
   @ApiProperty()
   @IsOptional()
   @IsDateString()
-  endDate: string;
+  endDate?: string;
 }
 
 export class CreateProductDto {
@@ -59,16 +59,17 @@ export class CreateProductDto {
   @IsArray()
   @ValidateNested({ each: true })
   @Type(() => ProductAttribute)
-  attributes: ProductAttribute[];
+  attributes?: ProductAttribute[];
 
   @ApiProperty({ isArray: true, type: Price, required: false })
   @IsOptional()
   @IsArray()
   @ValidateNested({ each: true })
   @Type(() => Price)
-  prices: Price[];
+  prices?: Price[];
 
-  @ApiProperty({ isArray: true, type: "string", required: true })
+  @ApiProperty({ isArray: true, type: "string", required: false })
+  @IsOptional()
   @IsArray()
-  images: string[];
+  images?: string[];
 }

@@ -10,5 +10,5 @@ export class CreateCategoryDto {
   @ApiProperty({ isArray: true, type: "string", required: false })
   @IsOptional()
   @IsArray()
-  attributes: string[];
+  attributes?: string[];
 }

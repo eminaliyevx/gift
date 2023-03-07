@@ -39,6 +39,8 @@ export class AuthService {
   }
 
   async sendConfirmationEmail(user: User) {
+    delete user.password;
+
     const accessToken = this.jwtService.sign(user);
 
     return this.mailService.sendMail({
@@ -50,7 +52,7 @@ export class AuthService {
   }
 
   async confirmEmail(accessToken: string) {
-    const jwtUser = this.jwtService.decode(accessToken) as JwtUser;
+    const jwtUser = this.jwtService.verify(accessToken) as JwtUser;
 
     if (jwtUser) {
       const user = await this.userService.update({

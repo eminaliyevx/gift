@@ -1,0 +1,8 @@
+version: "3.8"
+services:
+  db-test:
+    image: postgres:latest
+    ports:
+      - 5433:5432
+    env_file:
+      - docker-test.env

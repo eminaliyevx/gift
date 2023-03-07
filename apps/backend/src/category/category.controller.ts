@@ -44,7 +44,7 @@ export class CategoryController {
   @Public()
   @Get()
   async findMany() {
-    return this.categoryService.findMany();
+    return this.categoryService.findMany({ include: { attributes: true } });
   }
 
   @Public()

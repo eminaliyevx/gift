@@ -44,6 +44,7 @@ export class AuthController {
     private readonly userService: UserService,
   ) {}
 
+  @ApiBearerAuth()
   @Roles(Role.ADMIN)
   @UseGuards(RoleGuard)
   @Post("register")

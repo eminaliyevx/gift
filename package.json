@@ -15,11 +15,11 @@
     "build:no-tests-cache": "docker compose build",
     "build:no-tests-no-cache": "docker compose build --no-cache",
     "build:tests-cache": "node -e \"const { performance } = require('perf_hooks'); const start = performance.now(); require('child_process').execSync('npm run test && docker compose build', { stdio: 'inherit' }); const end = performance.now(); console.log(`Build completed in ${(end - start) / 1000} seconds`);\"",
-    "build:tests-no-cache": "jest --clearCache && node -e \"const { performance } = require('perf_hooks'); const start = performance.now(); require('child_process').execSync('npm run test && docker compose build --no-cache', { stdio: 'inherit' }); const end = performance.now(); console.log(`Build completed in ${(end - start) / 1000} seconds`);\"",
-    "deploy:no-tests-cache": "node -e \"const { performance } = require('perf_hooks'); const start = performance.now(); require('child_process').execSync('docker compose build && docker compose up -d', { stdio: 'inherit' }); const end = performance.now(); console.log(`Deployed in ${(end - start) / 1000} seconds`);\"",
-    "deploy:no-tests-no-cache": "node -e \"const { performance } = require('perf_hooks'); const start = performance.now(); require('child_process').execSync('docker compose build --no-cache && docker compose up -d', { stdio: 'inherit' }); const end = performance.now(); console.log(`Deployed in ${(end - start) / 1000} seconds`);\"",
-    "deploy:tests-cache": "node -e \"const { performance } = require('perf_hooks'); const start = performance.now(); require('child_process').execSync('npm run test && docker compose build && docker compose up -d', { stdio: 'inherit' }); const end = performance.now(); console.log(`Deployed in ${(end - start) / 1000} seconds`);\"",
-    "deploy:tests-no-cache": "jest --clearCache && node -e \"const { performance } = require('perf_hooks'); const start = performance.now(); require('child_process').execSync('npm run test && docker compose build --no-cache && docker compose up -d', { stdio: 'inherit' }); const end = performance.now(); console.log(`Deployed in ${(end - start) / 1000} seconds`);\""
+    "build:tests-no-cache": "node -e \"const { performance } = require('perf_hooks'); const start = performance.now(); require('child_process').execSync('jest --clearCache && npm run test && docker compose build --no-cache', { stdio: 'inherit' }); const end = performance.now(); console.log(`Build completed in ${(end - start) / 1000} seconds`);\"",
+    "deploy:no-tests-cache": "time -p sh -c 'docker compose build; docker compose up -d'",
+    "deploy:no-tests-no-cache": "time -p sh -c 'docker compose build --no-cache; docker compose up -d'",
+    "deploy:tests-cache": "time -p sh -c 'npm run test; docker compose build; docker compose up -d'",
+    "deploy:tests-no-cache": "time -p sh -c 'npm run test; docker compose build --no-cache; docker compose up -d'"
   },
   "workspaces": [
     "apps/*",

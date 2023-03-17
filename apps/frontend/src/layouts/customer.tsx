@@ -14,7 +14,6 @@ import {
 import { useMediaQuery } from "@mantine/hooks";
 import { openModal } from "@mantine/modals";
 import { showNotification } from "@mantine/notifications";
-import { Role } from "@prisma/client";
 import { useEffect, useState } from "react";
 import { Link, Outlet } from "react-router-dom";
 import { ChevronDown, Dashboard, Logout, Mail, User } from "tabler-icons-react";
@@ -82,7 +81,7 @@ const CustomerLayout = () => {
                 </Button>
               )}
 
-              {user && user.role === Role.CUSTOMER && (
+              {user && user.role === "CUSTOMER" && (
                 <Menu width={200}>
                   <Menu.Target>
                     <Button
@@ -107,12 +106,12 @@ const CustomerLayout = () => {
                 </Menu>
               )}
 
-              {user && user.role !== Role.CUSTOMER && (
+              {user && user.role !== "CUSTOMER" && (
                 <Button
                   color="green"
                   size="md"
                   component={Link}
-                  to={user.role === Role.BUSINESS ? "/business" : "/admin"}
+                  to={user.role === "BUSINESS" ? "/business" : "/admin"}
                   leftIcon={<Dashboard />}
                 >
                   Dashboard

@@ -12,7 +12,7 @@ import { DateInput } from "@mantine/dates";
 import { useForm, zodResolver } from "@mantine/form";
 import { closeModal, openModal } from "@mantine/modals";
 import { showNotification } from "@mantine/notifications";
-import { Gender, Role } from "@prisma/client";
+import type { Gender, Role } from "@prisma/client";
 import { isMobilePhone } from "class-validator";
 import dayjs from "dayjs";
 import { useEffect, useState } from "react";
@@ -53,7 +53,7 @@ const baseSchema = z
         invalid_type_error: "Select role",
       })
       .refine(
-        (arg) => arg === Role.CUSTOMER || arg === Role.BUSINESS,
+        (arg) => arg === "CUSTOMER" || arg === "BUSINESS",
         "Select role"
       ),
   })
@@ -73,7 +73,7 @@ const customerSchema = baseSchema
         invalid_type_error: "Select gender",
       })
       .refine(
-        (arg) => arg === Gender.MALE || arg === Gender.FEMALE,
+        (arg) => arg === "MALE"|| arg === "FEMALE",
         "Select gender"
       ),
   })
@@ -105,9 +105,9 @@ const Register = () => {
   });
 
   useEffect(() => {
-    if (form.values.role === Role.CUSTOMER) {
+    if (form.values.role === "CUSTOMER") {
       setSchema(customerSchema);
-    } else if (form.values.role === Role.BUSINESS) {
+    } else if (form.values.role === "BUSINESS") {
       setSchema(businessSchema);
     } else {
       setSchema(baseSchema);
@@ -125,7 +125,7 @@ const Register = () => {
     setLoading(true);
 
     try {
-      if (rest.role === Role.CUSTOMER) {
+      if (rest.role === "CUSTOMER") {
         await axios.post("/customer/register", {
           firstName,
           lastName,
@@ -133,7 +133,7 @@ const Register = () => {
           gender,
           ...rest,
         });
-      } else if (rest.role === Role.BUSINESS) {
+      } else if (rest.role === "BUSINESS") {
         await axios.post("/business/register", {
           name,
           ...rest,
@@ -229,8 +229,8 @@ const Register = () => {
         placeholder="Who are you?"
         size="lg"
         data={[
-          { value: Role.CUSTOMER, label: Role.CUSTOMER },
-          { value: Role.BUSINESS, label: Role.BUSINESS },
+          { value: "CUSTOMER", label: "Customer"},
+          { value: "BUSINESS", label: "Business" },
         ]}
         mb="md"
         styles={(theme) => ({
@@ -256,7 +256,7 @@ const Register = () => {
         {...form.getInputProps("role")}
       />
 
-      {form.values.role === Role.BUSINESS && (
+      {form.values.role === "BUSINESS" && (
         <TextInput
           placeholder="Name"
           size="lg"
@@ -275,7 +275,7 @@ const Register = () => {
         />
       )}
 
-      {form.values.role === Role.CUSTOMER && (
+      {form.values.role === "CUSTOMER" && (
         <>
           <TextInput
             placeholder="First name"
@@ -323,8 +323,8 @@ const Register = () => {
             placeholder="Gender"
             size="lg"
             data={[
-              { value: Gender.MALE, label: Gender.MALE },
-              { value: Gender.FEMALE, label: Gender.FEMALE },
+              { value: "MALE", label: "Male" },
+              { value: "FEMALE", label: "Female" },
             ]}
             mb="md"
             styles={(theme) => ({

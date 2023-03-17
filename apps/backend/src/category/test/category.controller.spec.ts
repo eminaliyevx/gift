@@ -1,6 +1,5 @@
 import { ConfigService } from "@nestjs/config";
 import { Test } from "@nestjs/testing";
-import { MailModule } from "src/mail/mail.module";
 import { PrismaService } from "src/prisma/prisma.service";
 import { CategoryController } from "../category.controller";
 import { CategoryService } from "../category.service";
@@ -11,7 +10,6 @@ describe("CategoryController", () => {
 
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
-      imports: [MailModule],
       controllers: [CategoryController],
       providers: [CategoryService, PrismaService, ConfigService],
     }).compile();

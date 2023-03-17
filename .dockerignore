@@ -1,10 +1,10 @@
 node_modules
 .git
 .env.test
-.env.dev
-.env.prod
+.env.development
+.env.production
 docker.env
 docker-test.dev
-docker-dev.env
+docker-development.env
 docker-compose-test.yml
-docker-compose-dev.yml
+docker-compose-development.yml

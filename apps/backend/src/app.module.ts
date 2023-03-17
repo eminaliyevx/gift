@@ -13,7 +13,7 @@ import { CategoryModule } from "./category/category.module";
 import { CustomerModule } from "./customer/customer.module";
 import { DiscountModule } from "./discount/discount.module";
 import { JwtAuthGuard } from "./guards/jwt-auth.guard";
-import { PrismModule } from "./prisma/prisma.module";
+import { PrismaModule } from "./prisma/prisma.module";
 import { ProductModule } from "./product/product.module";
 import { UserModule } from "./user/user.module";
 
@@ -24,10 +24,14 @@ import { UserModule } from "./user/user.module";
       validationSchema: Joi.object({
         DATABASE_URL: Joi.string().required(),
         JWT_SECRET: Joi.string().required(),
-        PORT: Joi.number().default(3000),
+        PORT: Joi.number().default(80),
+        EMAIL_HOST: Joi.string().required(),
+        EMAIL_PORT: Joi.number().required(),
+        EMAIL_USER: Joi.string().required(),
+        EMAIL_PASS: Joi.string().required(),
       }),
     }),
-    PrismModule,
+    PrismaModule,
     AuthModule,
     UserModule,
     CustomerModule,

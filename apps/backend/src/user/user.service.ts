@@ -16,6 +16,11 @@ export class UserService {
         ...createUserDto,
         password,
       },
+      include: {
+        customer: true,
+        business: true,
+        image: true,
+      },
     });
   }
 

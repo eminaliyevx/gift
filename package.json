@@ -26,7 +26,6 @@
     "packages/*"
   ],
   "dependencies": {
-    "@prisma/client": "^4.10.1",
-    "perf_hooks": "^0.0.1"
+    "@prisma/client": "^4.10.1"
   }
 }

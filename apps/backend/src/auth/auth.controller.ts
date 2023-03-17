@@ -10,6 +10,7 @@ import {
 import { ApiBearerAuth, ApiBody, ApiProperty, ApiTags } from "@nestjs/swagger";
 import { Role, User } from "@prisma/client";
 import { IsEmail, MaxLength, MinLength } from "class-validator";
+import { AccountWithoutPassword } from "local-types";
 import { GetUser } from "src/decorators/get-user.decorator";
 import { Public } from "src/decorators/public.decorator";
 import { Roles } from "src/decorators/roles.decorator";
@@ -57,7 +58,7 @@ export class AuthController {
   @Post("login")
   @HttpCode(200)
   @ApiBody({ type: LoginApiBody })
-  async login(@GetUser() user: User) {
+  async login(@GetUser() user: AccountWithoutPassword) {
     return this.authService.login(user);
   }
 
@@ -65,7 +66,7 @@ export class AuthController {
   @Get("account")
   async getAccount(@GetUser() user: User) {
     if (user) {
-      return this.userService.findUnique({
+      const _user = await this.userService.findUnique({
         where: { id: user.id },
         include: {
           customer: true,
@@ -73,6 +74,10 @@ export class AuthController {
           image: true,
         },
       });
+
+      delete _user.password;
+
+      return _user;
     } else {
       return user;
     }
@@ -80,7 +85,7 @@ export class AuthController {
 
   @Public()
   @Get("confirm")
-  async confirmEmail(@Query("accessToken") accessToken: string) {
-    return this.authService.confirmEmail(accessToken);
+  async confirmEmail(@Query("hash") hash: string) {
+    return this.authService.confirmEmail(hash);
   }
 }

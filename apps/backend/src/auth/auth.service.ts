@@ -1,7 +1,6 @@
 import { BadRequestException, Injectable } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
-import { User } from "@prisma/client";
-import { JwtUser, UserWithoutPassword } from "local-types";
+import { Account, AccountWithoutPassword } from "local-types";
 import { MailService } from "src/mail/mail.service";
 import { CreateUserDto } from "src/user/dto/create-user.dto";
 import { UserService } from "src/user/user.service";
@@ -16,7 +15,10 @@ export class AuthService {
   ) {}
 
   async validateUser(email: string, password: string) {
-    const user = await this.userService.findUnique({ where: { email } });
+    const user = await this.userService.findUnique({
+      where: { email },
+      include: { customer: true, business: true, image: true },
+    });
 
     if (user && compare(password, user.password)) {
       delete user.password;
@@ -27,7 +29,7 @@ export class AuthService {
     return null;
   }
 
-  async login(user: UserWithoutPassword) {
+  async login(user: AccountWithoutPassword) {
     return {
       user,
       accessToken: this.jwtService.sign(user),
@@ -38,26 +40,33 @@ export class AuthService {
     return this.userService.register(createUserDto);
   }
 
-  async sendConfirmationEmail(user: User) {
-    delete user.password;
+  async sendConfirmationEmail(account: Account) {
+    delete account.password;
 
-    const accessToken = this.jwtService.sign(user);
+    const accessToken = this.jwtService.sign(account);
+    const hash = Buffer.from(accessToken, "utf8").toString("hex");
 
     return this.mailService.sendMail({
       from: "admin@eminaliyev.tech",
-      to: user.email,
+      to: account.email,
       subject: "Gift | Email confirmation",
-      text: accessToken,
+      html: `<a href="http://138.68.125.221/confirm/${hash}">Click on the link to confirm your email address</a>`,
     });
   }
 
-  async confirmEmail(accessToken: string) {
-    const jwtUser = this.jwtService.verify(accessToken) as JwtUser;
+  async confirmEmail(hash: string) {
+    const accessToken = Buffer.from(hash, "hex").toString("utf8");
+    const account = this.jwtService.verify(accessToken) as Account;
 
-    if (jwtUser) {
+    if (account) {
       const user = await this.userService.update({
         data: { confirmed: true },
-        where: { email: jwtUser.email },
+        where: { email: account.email },
+        include: {
+          customer: true,
+          business: true,
+          image: true,
+        },
       });
 
       delete user.password;

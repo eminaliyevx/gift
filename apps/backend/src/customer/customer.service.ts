@@ -31,6 +31,11 @@ export class CustomerService {
           },
         },
       },
+      include: {
+        customer: true,
+        business: true,
+        image: true,
+      },
     });
   }
 }

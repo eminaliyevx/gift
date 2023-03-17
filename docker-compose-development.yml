@@ -5,4 +5,4 @@ services:
     ports:
       - 5434:5432
     env_file:
-      - docker-dev.env
+      - docker-development.env

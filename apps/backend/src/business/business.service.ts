@@ -18,6 +18,11 @@ export class BusinessService {
         role: Role.BUSINESS,
         business: { create: { name } },
       },
+      include: {
+        customer: true,
+        business: true,
+        image: true,
+      },
     });
   }
 }

@@ -3,8 +3,8 @@ import { Role } from "@prisma/client";
 import {
   IsEmail,
   IsIn,
+  IsMobilePhone,
   IsOptional,
-  IsPhoneNumber,
   MaxLength,
   MinLength,
 } from "class-validator";
@@ -15,7 +15,7 @@ export class CreateUserDto {
   email: string;
 
   @ApiProperty()
-  @IsPhoneNumber("AZ")
+  @IsMobilePhone("az-AZ")
   phone: string;
 
   @ApiProperty({

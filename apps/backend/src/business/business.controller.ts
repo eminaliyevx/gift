@@ -17,9 +17,9 @@ export class BusinessController {
   @HttpCode(200)
   @Post("register")
   async register(@Body() createBusinessDto: CreateBusinessDto) {
-    const user = await this.businessService.register(createBusinessDto);
-    this.authService.sendConfirmationEmail(user);
+    const business = await this.businessService.register(createBusinessDto);
+    this.authService.sendConfirmationEmail(business);
 
-    return user;
+    return business;
   }
 }

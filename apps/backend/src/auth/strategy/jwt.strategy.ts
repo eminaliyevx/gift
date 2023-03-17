@@ -1,7 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { PassportStrategy } from "@nestjs/passport";
-import { JwtUser } from "local-types";
+import { AccountWithoutPassword } from "local-types";
 import { ExtractJwt, Strategy } from "passport-jwt";
 
 @Injectable()
@@ -14,7 +14,7 @@ export class JwtStrategy extends PassportStrategy(Strategy) {
     });
   }
 
-  validate(payload: JwtUser) {
+  validate(payload: AccountWithoutPassword) {
     return payload;
   }
 }

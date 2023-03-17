@@ -15,7 +15,7 @@ services:
       dockerfile: Dockerfile
     image: gift
     env_file:
-      - .env.prod
+      - .env.production
     ports:
       - "3000:3000"
     depends_on:

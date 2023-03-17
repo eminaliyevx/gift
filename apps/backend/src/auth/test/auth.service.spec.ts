@@ -103,6 +103,15 @@ describe("AuthService", () => {
         status: Status.ACTIVE,
         createdAt: new Date(),
         updatedAt: new Date(),
+        customer: {
+          firstName: "Kanan",
+          lastName: "Ibrahimli",
+          birthDate: new Date(2001, 10, 2),
+          gender: Gender.MALE,
+          userId: 7825,
+        },
+        business: null,
+        image: null,
       };
 
       const result = await authService.login(user);

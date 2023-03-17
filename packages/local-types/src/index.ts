@@ -1,4 +1,12 @@
-import { User } from "@prisma/client";
+import { Prisma } from "@prisma/client";
 
-export type UserWithoutPassword = Omit<User, "password">;
-export type JwtUser = UserWithoutPassword & { iat: number; exp: number };
+const userArgs = Prisma.validator<Prisma.UserArgs>()({
+  include: {
+    customer: true,
+    business: true,
+    image: true,
+  },
+});
+
+export type Account = Prisma.UserGetPayload<typeof userArgs>;
+export type AccountWithoutPassword = Omit<Account, "password">;

@@ -18,9 +18,8 @@ import {
   ApiProperty,
   ApiTags,
 } from "@nestjs/swagger";
-import { Role, User } from "@prisma/client";
+import { Role } from "@prisma/client";
 import { IsEmail, MaxLength, MinLength } from "class-validator";
-import { unlinkSync } from "fs";
 import { AccountWithoutPassword } from "local-types";
 import { diskStorage } from "multer";
 import { GetUser } from "src/decorators/get-user.decorator";
@@ -28,7 +27,6 @@ import { Public } from "src/decorators/public.decorator";
 import { Roles } from "src/decorators/roles.decorator";
 import { LocalAuthGuard } from "src/guards/local-auth.guard";
 import { RoleGuard } from "src/guards/role.guard";
-import { PrismaService } from "src/prisma/prisma.service";
 import { CreateUserDto } from "src/user/dto/create-user.dto";
 import { UpdateUserDto } from "src/user/dto/update-user.dto";
 import { UserService } from "src/user/user.service";
@@ -57,7 +55,6 @@ export class AuthController {
   constructor(
     private readonly authService: AuthService,
     private readonly userService: UserService,
-    private readonly prismaService: PrismaService,
   ) {}
 
   @ApiBearerAuth()
@@ -79,7 +76,7 @@ export class AuthController {
 
   @ApiBearerAuth()
   @Get("account")
-  async getAccount(@GetUser() user: User) {
+  async getAccount(@GetUser() user: AccountWithoutPassword) {
     if (user) {
       const _user = await this.userService.findUnique({
         where: { id: user.id },
@@ -117,38 +114,11 @@ export class AuthController {
   @Patch("account")
   @ApiConsumes("multipart/form-data")
   async update(
-    @GetUser() user: User,
+    @GetUser() user: AccountWithoutPassword,
     @Body() updateUserDto: UpdateUserDto,
     @UploadedFile() image: Express.Multer.File,
   ) {
-    const userImage = await this.prismaService.userImage.findUnique({
-      where: { userId: user.id },
-    });
-
-    if (image) {
-      unlinkSync(userImage.path);
-    }
-
-    return this.userService.update({
-      data: {
-        ...updateUserDto,
-        image: image
-          ? {
-              delete: !!userImage,
-              create: {
-                filename: image.filename,
-                path: image.path,
-              },
-            }
-          : undefined,
-      },
-      where: { id: user.id },
-      include: {
-        customer: true,
-        business: true,
-        image: true,
-      },
-    });
+    return this.authService.updateUser(user.id, updateUserDto, image);
   }
 
   @Public()

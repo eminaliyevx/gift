@@ -1,8 +1,11 @@
 import { BadRequestException, Injectable } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
+import { unlinkSync } from "fs";
 import { Account, AccountWithoutPassword } from "local-types";
 import { MailService } from "src/mail/mail.service";
+import { PrismaService } from "src/prisma/prisma.service";
 import { CreateUserDto } from "src/user/dto/create-user.dto";
+import { UpdateUserDto } from "src/user/dto/update-user.dto";
 import { UserService } from "src/user/user.service";
 import { compare } from "src/utils/bcrypt.util";
 
@@ -12,6 +15,7 @@ export class AuthService {
     private readonly userService: UserService,
     private readonly jwtService: JwtService,
     private readonly mailService: MailService,
+    private readonly prismaService: PrismaService,
   ) {}
 
   async validateUser(email: string, password: string) {
@@ -78,5 +82,40 @@ export class AuthService {
     } else {
       throw new BadRequestException();
     }
+  }
+
+  async updateUser(
+    userId: number,
+    updateUserDto: UpdateUserDto,
+    image?: Express.Multer.File,
+  ) {
+    const userImage = await this.prismaService.userImage.findUnique({
+      where: { userId },
+    });
+
+    if (image && userImage) {
+      unlinkSync(userImage.path);
+    }
+
+    return this.prismaService.user.update({
+      data: {
+        ...updateUserDto,
+        image: image
+          ? {
+              delete: !!userImage,
+              create: {
+                filename: image.filename,
+                path: image.path,
+              },
+            }
+          : undefined,
+      },
+      where: { id: userId },
+      include: {
+        customer: true,
+        business: true,
+        image: true,
+      },
+    });
   }
 }

@@ -1,6 +1,7 @@
 import { Body, Controller, Get, Post, Query, UseGuards } from "@nestjs/common";
 import { ApiBearerAuth, ApiQuery, ApiTags } from "@nestjs/swagger";
-import { Role, User } from "@prisma/client";
+import { Role } from "@prisma/client";
+import { AccountWithoutPassword } from "local-types";
 import { GetUser } from "src/decorators/get-user.decorator";
 import { Roles } from "src/decorators/roles.decorator";
 import { RoleGuard } from "src/guards/role.guard";
@@ -16,7 +17,7 @@ export class CartController {
   @Roles(Role.CUSTOMER)
   @UseGuards(RoleGuard)
   @Get()
-  async findCart(@GetUser() user: User) {
+  async findCart(@GetUser() user: AccountWithoutPassword) {
     return this.cartService.findMany({
       where: { userId: user.id },
     });
@@ -25,7 +26,10 @@ export class CartController {
   @Roles(Role.CUSTOMER)
   @UseGuards(RoleGuard)
   @Post()
-  async addToCart(@GetUser() user: User, @Body() createCartDto: CreateCartDto) {
+  async addToCart(
+    @GetUser() user: AccountWithoutPassword,
+    @Body() createCartDto: CreateCartDto,
+  ) {
     return this.cartService.addToCart(user.id, createCartDto);
   }
 
@@ -34,7 +38,7 @@ export class CartController {
   @Get("total")
   @ApiQuery({ name: "discountCode", required: false })
   async findTotal(
-    @GetUser() user: User,
+    @GetUser() user: AccountWithoutPassword,
     @Query("discountCode") discountCode: string,
   ) {
     return this.cartService.findTotal(user.id, discountCode);
@@ -43,7 +47,7 @@ export class CartController {
   @Roles(Role.CUSTOMER)
   @UseGuards(RoleGuard)
   @Get("checkout")
-  async checkout(@GetUser() user: User) {
+  async checkout(@GetUser() user: AccountWithoutPassword) {
     return this.cartService.checkout(user.id);
   }
 }

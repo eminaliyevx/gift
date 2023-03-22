@@ -96,6 +96,7 @@ export class AuthController {
   }
 
   @ApiBearerAuth()
+  @ApiConsumes("multipart/form-data")
   @UseInterceptors(
     FileInterceptor("image", {
       storage: diskStorage({
@@ -112,7 +113,6 @@ export class AuthController {
     }),
   )
   @Patch("account")
-  @ApiConsumes("multipart/form-data")
   async update(
     @GetUser() user: AccountWithoutPassword,
     @Body() updateUserDto: UpdateUserDto,

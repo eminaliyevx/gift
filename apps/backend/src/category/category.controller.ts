@@ -19,11 +19,11 @@ import { CreateCategoryDto } from "./dto/create-category.dto";
 import { UpdateCategoryDto } from "./dto/update-category.dto";
 
 @ApiTags("Category")
-@ApiBearerAuth()
 @Controller("category")
 export class CategoryController {
   constructor(private readonly categoryService: CategoryService) {}
 
+  @ApiBearerAuth()
   @Roles(Role.ADMIN)
   @UseGuards(RoleGuard)
   @Post()
@@ -62,6 +62,7 @@ export class CategoryController {
     return category;
   }
 
+  @ApiBearerAuth()
   @Roles(Role.ADMIN)
   @UseGuards(RoleGuard)
   @Patch(":id")
@@ -110,6 +111,7 @@ export class CategoryController {
     });
   }
 
+  @ApiBearerAuth()
   @Roles(Role.ADMIN)
   @UseGuards(RoleGuard)
   @Delete(":id")

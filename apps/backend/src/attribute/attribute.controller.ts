@@ -19,11 +19,11 @@ import { CreateAttributeDto } from "./dto/create-attribute.dto";
 import { UpdateAttributeDto } from "./dto/update-attribute.dto";
 
 @ApiTags("Attribute")
-@ApiBearerAuth()
 @Controller("attribute")
 export class AttributeController {
   constructor(private readonly attributeService: AttributeService) {}
 
+  @ApiBearerAuth()
   @Roles(Role.ADMIN)
   @UseGuards(RoleGuard)
   @Post()
@@ -62,6 +62,7 @@ export class AttributeController {
     return attribute;
   }
 
+  @ApiBearerAuth()
   @Roles(Role.ADMIN)
   @UseGuards(RoleGuard)
   @Patch(":id")
@@ -110,6 +111,7 @@ export class AttributeController {
     });
   }
 
+  @ApiBearerAuth()
   @Roles(Role.ADMIN)
   @UseGuards(RoleGuard)
   @Delete(":id")

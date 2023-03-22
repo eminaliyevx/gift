@@ -8,9 +8,15 @@ import {
   Patch,
   Post,
   UseGuards,
+  UseInterceptors,
 } from "@nestjs/common";
-import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
+import { UploadedFiles } from "@nestjs/common/decorators";
+import { FilesInterceptor } from "@nestjs/platform-express/multer/interceptors";
+import { ApiBearerAuth, ApiConsumes, ApiTags } from "@nestjs/swagger";
 import { Role } from "@prisma/client";
+import { randomUUID } from "crypto";
+import { unlinkSync } from "fs";
+import { diskStorage } from "multer";
 import { Public } from "src/decorators/public.decorator";
 import { Roles } from "src/decorators/roles.decorator";
 import { RoleGuard } from "src/guards/role.guard";
@@ -19,16 +25,36 @@ import { UpdateProductDto } from "./dto/update-product.dto";
 import { ProductService } from "./product.service";
 
 @ApiTags("Product")
-@ApiBearerAuth()
 @Controller("product")
 export class ProductController {
   constructor(private readonly productService: ProductService) {}
 
+  @ApiBearerAuth()
+  @ApiConsumes("multipart/form-data")
+  @UseInterceptors(
+    FilesInterceptor("images", undefined, {
+      storage: diskStorage({
+        destination: (_req, _file, callback) => {
+          callback(null, "./product-images");
+        },
+        filename: (_req, file, callback) => {
+          const filename = `${randomUUID()}.${file.originalname
+            .split(".")
+            .pop()}`;
+
+          callback(null, filename);
+        },
+      }),
+    }),
+  )
   @Roles(Role.ADMIN)
   @UseGuards(RoleGuard)
   @Post()
-  async create(@Body() createProductDto: CreateProductDto) {
-    const { attributes, prices, images, ...rest } = createProductDto;
+  async create(
+    @Body() createProductDto: CreateProductDto,
+    @UploadedFiles() images: Array<Express.Multer.File>,
+  ) {
+    const { attributes, prices, ...rest } = createProductDto;
 
     return this.productService.create({
       data: {
@@ -49,9 +75,15 @@ export class ProductController {
         },
         images: {
           createMany: images
-            ? { data: images.map((url) => ({ url })) }
+            ? { data: images.map(({ filename, path }) => ({ filename, path })) }
             : undefined,
         },
+      },
+      include: {
+        category: true,
+        productAttributes: true,
+        prices: true,
+        images: true,
       },
     });
   }
@@ -59,7 +91,14 @@ export class ProductController {
   @Public()
   @Get()
   async findMany() {
-    return this.productService.findMany();
+    return this.productService.findMany({
+      include: {
+        category: true,
+        productAttributes: true,
+        prices: true,
+        images: true,
+      },
+    });
   }
 
   @Public()
@@ -76,18 +115,35 @@ export class ProductController {
     return product;
   }
 
+  @ApiBearerAuth()
+  @ApiConsumes("multipart/form-data")
+  @UseInterceptors(
+    FilesInterceptor("images", undefined, {
+      storage: diskStorage({
+        destination: (_req, _file, callback) => {
+          callback(null, "./product-images");
+        },
+        filename: (_req, file, callback) => {
+          const filename = `${randomUUID()}.${file.originalname
+            .split(".")
+            .pop()}`;
+
+          callback(null, filename);
+        },
+      }),
+    }),
+  )
   @Roles(Role.ADMIN)
   @UseGuards(RoleGuard)
   @Patch(":id")
   async update(
     @Param("id") id: string,
     @Body() updateProductDto: UpdateProductDto,
+    @UploadedFiles() images: Array<Express.Multer.File>,
   ) {
     const product = await this.productService.findUnique({
       where: { id },
       include: {
-        productAttributes: true,
-        prices: true,
         images: true,
       },
     });
@@ -96,7 +152,13 @@ export class ProductController {
       throw new NotFoundException("Product not found");
     }
 
-    const { attributes, prices, images, ...rest } = updateProductDto;
+    if (images.length > 0 && product.images.length > 0) {
+      product.images.forEach(({ path }) => {
+        unlinkSync(path);
+      });
+    }
+
+    const { attributes, prices, ...rest } = updateProductDto;
 
     return this.productService.update({
       data: {
@@ -121,25 +183,40 @@ export class ProductController {
           deleteMany: images ? {} : undefined,
           createMany: images
             ? {
-                data: images.map((url) => ({ url })),
+                data: images.map(({ filename, path }) => ({ filename, path })),
               }
             : undefined,
         },
       },
       where: { id },
+      include: {
+        productAttributes: true,
+        prices: true,
+        images: true,
+      },
     });
   }
 
+  @ApiBearerAuth()
   @Roles(Role.ADMIN)
   @UseGuards(RoleGuard)
   @Delete(":id")
   async delete(@Param("id") id: string) {
     const product = await this.productService.findUnique({
       where: { id },
+      include: {
+        images: true,
+      },
     });
 
     if (!product) {
       throw new NotFoundException("Product not found");
+    }
+
+    if (product.images.length > 0) {
+      product.images.forEach(({ path }) => {
+        unlinkSync(path);
+      });
     }
 
     return this.productService.delete({

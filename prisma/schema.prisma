@@ -63,12 +63,14 @@ model Customer {
   gender    Gender
   userId    Int      @id
   user      User     @relation(fields: [userId], references: [id], onDelete: Cascade)
+  orders    Order[]
 }
 
 model Business {
-  name   String
-  userId Int    @id
-  user   User   @relation(fields: [userId], references: [id], onDelete: Cascade)
+  name    String
+  userId  Int       @id
+  user    User      @relation(fields: [userId], references: [id], onDelete: Cascade)
+  product Product[]
 }
 
 model Category {
@@ -89,10 +91,12 @@ model Product {
   id                String             @id @default(cuid())
   name              String             @db.VarChar(256)
   description       String             @db.Text
-  categoryId        String
   createdAt         DateTime           @default(now()) @db.Timestamp()
   updatedAt         DateTime           @updatedAt @db.Timestamp()
+  categoryId        String
+  businessUserId    Int?
   category          Category           @relation(fields: [categoryId], references: [id])
+  business          Business?          @relation(fields: [businessUserId], references: [userId])
   productAttributes ProductAttribute[]
   images            ProductImage[]
   prices            Price[]
@@ -133,6 +137,7 @@ model Cart {
   quantity  Int     @default(1) @db.Integer
   orderId   String?
   product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
+  order     Order?  @relation(fields: [orderId], references: [id])
 
   @@id([userId, productId])
 }
@@ -148,4 +153,19 @@ model Discount {
   endDate   DateTime?    @db.Timestamp()
   createdAt DateTime     @default(now()) @db.Timestamp()
   updatedAt DateTime     @updatedAt @db.Timestamp()
+}
+
+model Order {
+  id             String      @id @default(cuid())
+  status         OrderStatus @default(PENDING)
+  total          Float       @db.DoublePrecision
+  discountTotal  Float?      @db.DoublePrecision
+  location       String      @db.Text
+  note           String?     @db.Text
+  deliveredAt    DateTime?
+  items          Cart[]
+  customerUserId Int?
+  customer       Customer?   @relation(fields: [customerUserId], references: [userId], onDelete: SetNull)
+  createdAt      DateTime    @default(now()) @db.Timestamp()
+  updatedAt      DateTime    @updatedAt @db.Timestamp()
 }

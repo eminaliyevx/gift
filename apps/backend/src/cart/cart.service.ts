@@ -1,13 +1,7 @@
 import { Injectable } from "@nestjs/common";
 import { Cart, DiscountType, Prisma } from "@prisma/client";
 import { PrismaService } from "src/prisma/prisma.service";
-import Stripe from "stripe";
-import { CartItem, CreateCartDto } from "./dto/create-cart.dto";
-
-const stripe = new Stripe(
-  "sk_test_51MIdcaFDm83hh989c1RyCXyQrnWN6FbShtk95LerPXNqEwOXX8Ja8jt5QDlDQnI7dNj1Xmi335EXRHWCSV8EeFEo00et16hvsP",
-  { apiVersion: "2022-11-15" },
-);
+import { CartItem, CheckoutDto, CreateCartDto } from "./dto/cart.dto";
 
 @Injectable()
 export class CartService {
@@ -100,17 +94,6 @@ export class CartService {
         default:
           break;
       }
-
-      if (discount.limit) {
-        await this.prismaService.discount.update({
-          data: {
-            remaining: {
-              decrement: 1,
-            },
-          },
-          where: { code: discountCode },
-        });
-      }
     }
 
     return discountTotal;
@@ -155,63 +138,52 @@ export class CartService {
     return {
       total,
       discountTotal,
+      cart,
     };
   }
 
-  async checkout(userId: number) {
-    const now = new Date();
+  async checkout(userId: number, checkoutDto: CheckoutDto) {
+    const { total, discountTotal, cart } = await this.findTotal(
+      userId,
+      checkoutDto.discountCode,
+    );
 
-    const cart = await this.prismaService.cart.findMany({
-      where: { userId },
-      select: {
-        quantity: true,
-        product: {
-          select: {
-            id: true,
-            name: true,
-            description: true,
-            prices: {
-              select: {
-                id: true,
-                value: true,
-                startDate: true,
-                endDate: true,
-              },
-            },
-          },
+    const order = await this.prismaService.order.create({
+      data: {
+        total,
+        discountTotal,
+        location: checkoutDto.location,
+        note: checkoutDto.note,
+        customer: {
+          connect: { userId },
+        },
+        items: {
+          connect: cart.map(({ product }) => ({
+            userId_productId: { userId, productId: product.id },
+          })),
         },
       },
     });
 
-    const line_items: Stripe.Checkout.SessionCreateParams.LineItem[] = [];
+    if (order) {
+      const discount = checkoutDto.discountCode
+        ? await this.prismaService.discount.findUnique({
+            where: { code: checkoutDto.discountCode },
+          })
+        : null;
 
-    cart.forEach((item) => {
-      const price = item.product.prices.find(
-        (_price) =>
-          !_price.endDate || (_price.startDate < now && _price.endDate > now),
-      );
-
-      line_items.push({
-        price_data: {
-          currency: "azn",
-          product_data: {
-            name: item.product.name,
-            description: item.product.description,
+      if (discount?.limit) {
+        await this.prismaService.discount.update({
+          data: {
+            remaining: {
+              decrement: 1,
+            },
           },
-          unit_amount: price.value * 100,
-        },
-        quantity: item.quantity,
-      });
-    });
+          where: { code: checkoutDto.discountCode },
+        });
+      }
+    }
 
-    const session = await stripe.checkout.sessions.create({
-      mode: "payment",
-      payment_method_types: ["card"],
-      line_items,
-      success_url: "http://localhost:3000/order/success/{CHECKOUT_SESSION_ID}",
-      cancel_url: "http://localhost:3000/order/error/{CHECKOUT_SESSION_ID}",
-    });
-
-    return session.url;
+    return order;
   }
 }

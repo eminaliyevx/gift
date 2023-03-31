@@ -2,21 +2,19 @@ import {
   Body,
   Controller,
   Delete,
+  ForbiddenException,
   Get,
   NotFoundException,
   Param,
   Patch,
   Post,
   UseGuards,
-  UseInterceptors,
 } from "@nestjs/common";
-import { UploadedFiles } from "@nestjs/common/decorators";
-import { FilesInterceptor } from "@nestjs/platform-express/multer/interceptors";
-import { ApiBearerAuth, ApiConsumes, ApiTags } from "@nestjs/swagger";
+import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 import { Role } from "@prisma/client";
-import { randomUUID } from "crypto";
 import { unlinkSync } from "fs";
-import { diskStorage } from "multer";
+import { AccountWithoutPassword } from "local-types";
+import { GetUser } from "src/decorators/get-user.decorator";
 import { Public } from "src/decorators/public.decorator";
 import { Roles } from "src/decorators/roles.decorator";
 import { RoleGuard } from "src/guards/role.guard";
@@ -30,35 +28,19 @@ export class ProductController {
   constructor(private readonly productService: ProductService) {}
 
   @ApiBearerAuth()
-  @ApiConsumes("multipart/form-data")
-  @UseInterceptors(
-    FilesInterceptor("images", undefined, {
-      storage: diskStorage({
-        destination: (_req, _file, callback) => {
-          callback(null, "./product-images");
-        },
-        filename: (_req, file, callback) => {
-          const filename = `${randomUUID()}.${file.originalname
-            .split(".")
-            .pop()}`;
-
-          callback(null, filename);
-        },
-      }),
-    }),
-  )
-  @Roles(Role.ADMIN)
+  @Roles(Role.ADMIN, Role.BUSINESS)
   @UseGuards(RoleGuard)
   @Post()
   async create(
+    @GetUser() user: AccountWithoutPassword,
     @Body() createProductDto: CreateProductDto,
-    @UploadedFiles() images: Array<Express.Multer.File>,
   ) {
     const { attributes, prices, ...rest } = createProductDto;
 
     return this.productService.create({
       data: {
         ...rest,
+        businessUserId: user.role === Role.BUSINESS ? user.id : null,
         productAttributes: {
           createMany: attributes
             ? {
@@ -71,11 +53,6 @@ export class ProductController {
             ? {
                 data: prices,
               }
-            : undefined,
-        },
-        images: {
-          createMany: images
-            ? { data: images.map(({ filename, path }) => ({ filename, path })) }
             : undefined,
         },
       },
@@ -116,30 +93,13 @@ export class ProductController {
   }
 
   @ApiBearerAuth()
-  @ApiConsumes("multipart/form-data")
-  @UseInterceptors(
-    FilesInterceptor("images", undefined, {
-      storage: diskStorage({
-        destination: (_req, _file, callback) => {
-          callback(null, "./product-images");
-        },
-        filename: (_req, file, callback) => {
-          const filename = `${randomUUID()}.${file.originalname
-            .split(".")
-            .pop()}`;
-
-          callback(null, filename);
-        },
-      }),
-    }),
-  )
-  @Roles(Role.ADMIN)
+  @Roles(Role.ADMIN, Role.BUSINESS)
   @UseGuards(RoleGuard)
   @Patch(":id")
   async update(
+    @GetUser() user: AccountWithoutPassword,
     @Param("id") id: string,
     @Body() updateProductDto: UpdateProductDto,
-    @UploadedFiles() images: Array<Express.Multer.File>,
   ) {
     const product = await this.productService.findUnique({
       where: { id },
@@ -152,10 +112,8 @@ export class ProductController {
       throw new NotFoundException("Product not found");
     }
 
-    if (images.length > 0 && product.images.length > 0) {
-      product.images.forEach(({ path }) => {
-        unlinkSync(path);
-      });
+    if (user.role === Role.BUSINESS && product.businessUserId !== user.id) {
+      throw new ForbiddenException();
     }
 
     const { attributes, prices, ...rest } = updateProductDto;
@@ -179,14 +137,6 @@ export class ProductController {
               }
             : undefined,
         },
-        images: {
-          deleteMany: images ? {} : undefined,
-          createMany: images
-            ? {
-                data: images.map(({ filename, path }) => ({ filename, path })),
-              }
-            : undefined,
-        },
       },
       where: { id },
       include: {
@@ -198,10 +148,13 @@ export class ProductController {
   }
 
   @ApiBearerAuth()
-  @Roles(Role.ADMIN)
+  @Roles(Role.ADMIN, Role.BUSINESS)
   @UseGuards(RoleGuard)
   @Delete(":id")
-  async delete(@Param("id") id: string) {
+  async delete(
+    @GetUser() user: AccountWithoutPassword,
+    @Param("id") id: string,
+  ) {
     const product = await this.productService.findUnique({
       where: { id },
       include: {
@@ -211,6 +164,10 @@ export class ProductController {
 
     if (!product) {
       throw new NotFoundException("Product not found");
+    }
+
+    if (user.role === Role.BUSINESS && product.businessUserId !== user.id) {
+      throw new ForbiddenException();
     }
 
     if (product.images.length > 0) {

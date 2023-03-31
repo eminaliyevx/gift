@@ -6,7 +6,7 @@ import { GetUser } from "src/decorators/get-user.decorator";
 import { Roles } from "src/decorators/roles.decorator";
 import { RoleGuard } from "src/guards/role.guard";
 import { CartService } from "./cart.service";
-import { CreateCartDto } from "./dto/create-cart.dto";
+import { CheckoutDto, CreateCartDto } from "./dto/cart.dto";
 
 @ApiTags("Cart")
 @ApiBearerAuth()
@@ -41,13 +41,21 @@ export class CartController {
     @GetUser() user: AccountWithoutPassword,
     @Query("discountCode") discountCode: string,
   ) {
-    return this.cartService.findTotal(user.id, discountCode);
+    const { total, discountTotal } = await this.cartService.findTotal(
+      user.id,
+      discountCode,
+    );
+
+    return { total, discountTotal };
   }
 
   @Roles(Role.CUSTOMER)
   @UseGuards(RoleGuard)
-  @Get("checkout")
-  async checkout(@GetUser() user: AccountWithoutPassword) {
-    return this.cartService.checkout(user.id);
+  @Post("checkout")
+  async checkout(
+    @GetUser() user: AccountWithoutPassword,
+    @Body() checkoutDto: CheckoutDto,
+  ) {
+    return this.cartService.checkout(user.id, checkoutDto);
   }
 }

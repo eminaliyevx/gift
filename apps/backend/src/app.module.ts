@@ -13,6 +13,7 @@ import { CategoryModule } from "./category/category.module";
 import { CustomerModule } from "./customer/customer.module";
 import { DiscountModule } from "./discount/discount.module";
 import { JwtAuthGuard } from "./guards/jwt-auth.guard";
+import { OrderModule } from "./order/order.module";
 import { PrismaModule } from "./prisma/prisma.module";
 import { ProductModule } from "./product/product.module";
 import { UserModule } from "./user/user.module";
@@ -41,6 +42,7 @@ import { UserModule } from "./user/user.module";
     ProductModule,
     CartModule,
     DiscountModule,
+    OrderModule,
     MailerModule,
     ServeStaticModule.forRoot({
       rootPath: join(__dirname, "../..", "frontend", "dist"),

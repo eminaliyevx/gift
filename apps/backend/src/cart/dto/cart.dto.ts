@@ -1,9 +1,9 @@
 import { ApiProperty } from "@nestjs/swagger";
 import { Type } from "class-transformer";
 import {
-  IsArray,
   IsNotEmpty,
   IsNumber,
+  IsOptional,
   IsString,
   ValidateNested,
 } from "class-validator";
@@ -21,8 +21,23 @@ export class CartItem {
 
 export class CreateCartDto {
   @ApiProperty({ isArray: true, type: CartItem, required: true })
-  @IsArray()
   @ValidateNested({ each: true })
   @Type(() => CartItem)
   items: CartItem[];
+}
+
+export class CheckoutDto {
+  @ApiProperty()
+  @IsString()
+  @IsNotEmpty()
+  location: string;
+
+  @ApiProperty()
+  @IsString()
+  @IsNotEmpty()
+  note: string;
+
+  @ApiProperty()
+  @IsOptional()
+  discountCode?: string;
 }

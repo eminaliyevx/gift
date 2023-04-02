@@ -10,6 +10,8 @@ RUN npm install
 
 RUN npm run build
 
-EXPOSE 3000
+COPY /apps/frontend/dist /user/src/app/apps/backend/public
+
+EXPOSE 80
 
 CMD ["npm", "start"]

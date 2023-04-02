@@ -101,6 +101,7 @@ model Product {
   images            ProductImage[]
   prices            Price[]
   cart              Cart[]
+  OrderItem         OrderItem[]
 }
 
 model ProductAttribute {
@@ -135,9 +136,7 @@ model Cart {
   userId    Int
   productId String
   quantity  Int     @default(1) @db.Integer
-  orderId   String?
   product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
-  order     Order?  @relation(fields: [orderId], references: [id])
 
   @@id([userId, productId])
 }
@@ -155,6 +154,15 @@ model Discount {
   updatedAt DateTime     @updatedAt @db.Timestamp()
 }
 
+model OrderItem {
+  id        String   @id @default(cuid())
+  quantity  Int      @default(1) @db.Integer
+  productId String?
+  orderId   String?
+  product   Product? @relation(fields: [productId], references: [id], onDelete: SetNull)
+  order     Order?   @relation(fields: [orderId], references: [id], onDelete: Cascade)
+}
+
 model Order {
   id             String      @id @default(cuid())
   status         OrderStatus @default(PENDING)
@@ -163,7 +171,7 @@ model Order {
   location       String      @db.Text
   note           String?     @db.Text
   deliveredAt    DateTime?
-  items          Cart[]
+  items          OrderItem[]
   customerUserId Int?
   customer       Customer?   @relation(fields: [customerUserId], references: [userId], onDelete: SetNull)
   createdAt      DateTime    @default(now()) @db.Timestamp()

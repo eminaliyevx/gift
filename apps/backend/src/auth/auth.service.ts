@@ -2,6 +2,7 @@ import { BadRequestException, Injectable } from "@nestjs/common";
 import { JwtService } from "@nestjs/jwt";
 import { unlinkSync } from "fs";
 import { Account, AccountWithoutPassword } from "local-types";
+import { join } from "path";
 import { MailService } from "src/mail/mail.service";
 import { PrismaService } from "src/prisma/prisma.service";
 import { CreateUserDto } from "src/user/dto/create-user.dto";
@@ -46,6 +47,7 @@ export class AuthService {
 
   async sendConfirmationEmail(account: Account) {
     delete account.password;
+    account.confirmed = true;
 
     const accessToken = this.jwtService.sign(account);
     const hash = Buffer.from(accessToken, "utf8").toString("hex");
@@ -64,7 +66,7 @@ export class AuthService {
 
     if (account) {
       const user = await this.userService.update({
-        data: { confirmed: true },
+        data: { confirmed: account.confirmed },
         where: { email: account.email },
         include: {
           customer: true,
@@ -94,7 +96,7 @@ export class AuthService {
     });
 
     if (image && userImage) {
-      unlinkSync(userImage.path);
+      unlinkSync(join(__dirname, "../../public/", userImage.path));
     }
 
     return this.prismaService.user.update({
@@ -105,7 +107,11 @@ export class AuthService {
               delete: !!userImage,
               create: {
                 filename: image.filename,
-                path: image.path,
+                path: image.path
+                  .replace(/[\\/]+/g, "/")
+                  .split("/")
+                  .slice(-2)
+                  .join("/"),
               },
             }
           : undefined,

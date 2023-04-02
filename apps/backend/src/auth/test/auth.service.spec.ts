@@ -149,6 +149,7 @@ describe("AuthService", () => {
   describe("confirmEmail", () => {
     it("should confirm email given a valid access token", async () => {
       delete user.password;
+      user.confirmed = true;
 
       const accessToken = jwtService.sign(user);
       const hash = Buffer.from(accessToken, "utf8").toString("hex");

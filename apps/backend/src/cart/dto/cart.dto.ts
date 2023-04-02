@@ -33,11 +33,12 @@ export class CheckoutDto {
   location: string;
 
   @ApiProperty()
+  @IsOptional()
   @IsString()
-  @IsNotEmpty()
-  note: string;
+  note?: string;
 
   @ApiProperty()
   @IsOptional()
+  @IsString()
   discountCode?: string;
 }

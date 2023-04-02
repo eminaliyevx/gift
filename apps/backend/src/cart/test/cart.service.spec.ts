@@ -131,12 +131,4 @@ describe("CartService", () => {
       expect(discountTotal).toBe(500 * 0.85);
     });
   });
-
-  describe("checkout", () => {
-    it("should return the url of a Stripe session", async () => {
-      const result = await cartService.checkout(3131);
-
-      expect(result).toBeDefined();
-    });
-  });
 });

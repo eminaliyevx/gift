@@ -20,6 +20,14 @@ export class CartController {
   async findCart(@GetUser() user: AccountWithoutPassword) {
     return this.cartService.findMany({
       where: { userId: user.id },
+      include: {
+        product: {
+          include: {
+            prices: true,
+            images: true,
+          },
+        },
+      },
     });
   }
 

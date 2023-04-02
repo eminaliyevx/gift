@@ -158,14 +158,19 @@ export class CartService {
           connect: { userId },
         },
         items: {
-          connect: cart.map(({ product }) => ({
-            userId_productId: { userId, productId: product.id },
-          })),
+          createMany: {
+            data: cart.map((item) => ({
+              productId: item.product.id,
+              quantity: item.quantity,
+            })),
+          },
         },
       },
     });
 
     if (order) {
+      await this.prismaService.cart.deleteMany({ where: { userId } });
+
       const discount = checkoutDto.discountCode
         ? await this.prismaService.discount.findUnique({
             where: { code: checkoutDto.discountCode },

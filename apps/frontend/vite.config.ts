@@ -6,7 +6,15 @@ export default defineConfig({
   server: {
     proxy: {
       "/api": {
-        target: "http://localhost:80",
+        target: "http://localhost",
+        changeOrigin: true,
+      },
+      "/user-images": {
+        target: "http://localhost",
+        changeOrigin: true,
+      },
+      "/product-images": {
+        target: "http://localhost",
         changeOrigin: true,
       },
     },

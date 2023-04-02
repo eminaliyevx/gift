@@ -1,15 +1,14 @@
 import { ApiProperty } from "@nestjs/swagger";
-import { Type } from "class-transformer";
 import {
   IsDateString,
+  IsJSON,
   IsNotEmpty,
   IsNumber,
   IsOptional,
   IsString,
-  ValidateNested,
 } from "class-validator";
 
-class ProductAttribute {
+export class ProductAttribute {
   @ApiProperty()
   @IsString()
   @IsNotEmpty()
@@ -21,7 +20,7 @@ class ProductAttribute {
   value: string;
 }
 
-class Price {
+export class Price {
   @ApiProperty()
   @IsNumber()
   value: number;
@@ -53,15 +52,22 @@ export class CreateProductDto {
   @IsNotEmpty()
   categoryId: string;
 
-  @ApiProperty({ isArray: true, type: ProductAttribute, required: false })
+  @ApiProperty()
   @IsOptional()
-  @ValidateNested({ each: true })
-  @Type(() => ProductAttribute)
-  attributes?: ProductAttribute[];
+  @IsJSON()
+  attributes?: string;
 
-  @ApiProperty({ isArray: true, type: Price, required: false })
+  @ApiProperty()
   @IsOptional()
-  @ValidateNested({ each: true })
-  @Type(() => Price)
-  prices?: Price[];
+  @IsJSON()
+  prices?: string;
+
+  @ApiProperty({
+    isArray: true,
+    type: "file",
+    format: "binary",
+    required: false,
+  })
+  @IsOptional()
+  images?: Express.Multer.File[];
 }

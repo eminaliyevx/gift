@@ -17,7 +17,8 @@ import { useState } from "react";
 import { Outlet } from "react-router-dom";
 import { ChevronDown, Logout, User } from "tabler-icons-react";
 import { Login } from "../features/auth";
-import { useAuthStore } from "../stores/useAuthStore";
+import { AuthGuard, RoleGuard } from "../guards";
+import { useAuthStore } from "../stores";
 
 const BusinessLayout = () => {
   const { user, setAccessToken } = useAuthStore();
@@ -26,83 +27,87 @@ const BusinessLayout = () => {
   const [opened, setOpened] = useState(false);
 
   return (
-    <AppShell
-      navbarOffsetBreakpoint="sm"
-      navbar={
-        smAndDown ? (
-          <Navbar hiddenBreakpoint="sm" hidden={!opened}>
-            Navbar
-          </Navbar>
-        ) : undefined
-      }
-      header={
-        <Header height={80}>
-          <Container
-            sx={{
-              height: "100%",
-              display: "flex",
-              alignItems: "center",
-            }}
-          >
-            <Burger
-              size="sm"
-              display={!smAndDown ? "none" : undefined}
-              opened={opened}
-              onClick={() => setOpened((o) => !o)}
-            />
+    <AuthGuard>
+      <RoleGuard roles={["BUSINESS"]}>
+        <AppShell
+          navbarOffsetBreakpoint="sm"
+          navbar={
+            smAndDown ? (
+              <Navbar hiddenBreakpoint="sm" hidden={!opened}>
+                Navbar
+              </Navbar>
+            ) : undefined
+          }
+          header={
+            <Header height={80}>
+              <Container
+                sx={{
+                  height: "100%",
+                  display: "flex",
+                  alignItems: "center",
+                }}
+              >
+                <Burger
+                  size="sm"
+                  display={!smAndDown ? "none" : undefined}
+                  opened={opened}
+                  onClick={() => setOpened((o) => !o)}
+                />
 
-            <Group ml="auto">
-              {!user && (
-                <Button
-                  size="lg"
-                  color="green"
-                  onClick={() =>
-                    openModal({
-                      modalId: "login",
-                      title: <Text fz="xl">Login</Text>,
-                      children: <Login />,
-                    })
-                  }
-                >
-                  Login
-                </Button>
-              )}
-
-              {user && (
-                <Menu width={200}>
-                  <Menu.Target>
+                <Group ml="auto">
+                  {!user && (
                     <Button
-                      variant="light"
-                      color="gray"
-                      size="md"
-                      leftIcon={<User />}
-                      rightIcon={<ChevronDown size={20} />}
+                      size="lg"
+                      color="green"
+                      onClick={() =>
+                        openModal({
+                          modalId: "login",
+                          title: <Text fz="xl">Login</Text>,
+                          children: <Login />,
+                        })
+                      }
                     >
-                      {user.business?.name}
+                      Login
                     </Button>
-                  </Menu.Target>
+                  )}
 
-                  <Menu.Dropdown>
-                    <Menu.Item
-                      icon={<Logout size={20} />}
-                      onClick={() => setAccessToken(null)}
-                    >
-                      Logout
-                    </Menu.Item>
-                  </Menu.Dropdown>
-                </Menu>
-              )}
-            </Group>
+                  {user && (
+                    <Menu width={200}>
+                      <Menu.Target>
+                        <Button
+                          variant="light"
+                          color="gray"
+                          size="md"
+                          leftIcon={<User />}
+                          rightIcon={<ChevronDown size={20} />}
+                        >
+                          {user.business?.name}
+                        </Button>
+                      </Menu.Target>
+
+                      <Menu.Dropdown>
+                        <Menu.Item
+                          icon={<Logout size={20} />}
+                          onClick={() => setAccessToken(null)}
+                        >
+                          Logout
+                        </Menu.Item>
+                      </Menu.Dropdown>
+                    </Menu>
+                  )}
+                </Group>
+              </Container>
+            </Header>
+          }
+        >
+          <Container>
+            <Box component="main">
+              <Outlet />
+            </Box>
           </Container>
-        </Header>
-      }
-    >
-      <Container>
-        <Box component="main">
-          <Outlet />
-        </Box>
-      </Container>
-    </AppShell>
+        </AppShell>
+      </RoleGuard>
+    </AuthGuard>
   );
 };
 

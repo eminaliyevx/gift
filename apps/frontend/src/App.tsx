@@ -11,14 +11,14 @@ import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 import { AccountWithoutPassword } from "local-types";
 import { useCallback, useEffect } from "react";
 import {
-  createBrowserRouter,
   Navigate,
   RouterProvider,
+  createBrowserRouter,
 } from "react-router-dom";
 import { AdminLayout, BusinessLayout, CustomerLayout } from "./layouts";
 import { axios } from "./lib";
 import { AdminHome, BusinessHome, Confirm, CustomerHome } from "./pages";
-import { useAuthStore } from "./stores/useAuthStore";
+import { useAuthStore } from "./stores";
 
 const router = createBrowserRouter([
   {
@@ -49,7 +49,7 @@ const queryClient = new QueryClient({
 });
 
 const App = () => {
-  const { accessToken, setUser, user } = useAuthStore();
+  const { accessToken, setUser, user, loading } = useAuthStore();
 
   const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
     key: "color-scheme",

@@ -1,5 +1,5 @@
 import defaultAxios from "axios";
-import { useAuthStore } from "../stores/useAuthStore";
+import { useAuthStore } from "../stores";
 
 const axios = defaultAxios.create({
   baseURL: "/api",

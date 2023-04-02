@@ -1,4 +1,5 @@
 import {
+  ActionIcon,
   AppShell,
   Box,
   Burger,
@@ -6,6 +7,8 @@ import {
   Container,
   Group,
   Header,
+  Indicator,
+  LoadingOverlay,
   Menu,
   Navbar,
   Text,
@@ -14,14 +17,35 @@ import {
 import { useMediaQuery } from "@mantine/hooks";
 import { openModal } from "@mantine/modals";
 import { showNotification } from "@mantine/notifications";
-import { useEffect, useState } from "react";
-import { Link, Outlet } from "react-router-dom";
-import { ChevronDown, Dashboard, Logout, Mail, User } from "tabler-icons-react";
+import { useQuery } from "@tanstack/react-query";
+import { CartItem } from "local-types";
+import { useCallback, useEffect, useMemo, useState } from "react";
+import { Navigate, Outlet } from "react-router-dom";
+import {
+  ChevronDown,
+  Logout,
+  Mail,
+  ShoppingCart,
+  User,
+} from "tabler-icons-react";
 import { Login } from "../features/auth";
-import { useAuthStore } from "../stores/useAuthStore";
+import { Cart } from "../features/cart";
+import { axios } from "../lib";
+import { useAuthStore, useCartStore } from "../stores";
 
 const CustomerLayout = () => {
-  const { user, setAccessToken } = useAuthStore();
+  const { loading, user, setAccessToken } = useAuthStore();
+  const { setItems, items } = useCartStore();
+
+  const quantity = useMemo(
+    () => items.reduce((accumulator, item) => accumulator + item.quantity, 0),
+    [items]
+  );
+
+  const logout = useCallback(() => {
+    setAccessToken(null);
+    setItems([]);
+  }, []);
 
   useEffect(() => {
     if (user && !user.confirmed) {
@@ -34,9 +58,36 @@ const CustomerLayout = () => {
     }
   }, [user]);
 
+  useQuery({
+    queryKey: ["cart"],
+    queryFn: () =>
+      axios.get<CartItem[]>("/cart").then((response) => response.data),
+    onSuccess: (items) => {
+      setItems(items);
+    },
+    enabled: user?.role === "CUSTOMER",
+  });
+
   const theme = useMantineTheme();
   const smAndDown = useMediaQuery(`(max-width: ${theme.breakpoints.sm})`);
   const [opened, setOpened] = useState(false);
+
+  if (loading) {
+    return (
+      <LoadingOverlay
+        loaderProps={{ color: "green", variant: "bars" }}
+        visible
+      />
+    );
+  }
+
+  if (user && user.role === "BUSINESS") {
+    return <Navigate to="/business" replace />;
+  }
+
+  if (user && user.role === "ADMIN") {
+    return <Navigate to="/admin" replace />;
+  }
 
   return (
     <AppShell
@@ -98,7 +149,7 @@ const CustomerLayout = () => {
                   <Menu.Dropdown>
                     <Menu.Item
                       icon={<Logout size={20} />}
-                      onClick={() => setAccessToken(null)}
+                      onClick={() => logout()}
                     >
                       Logout
                     </Menu.Item>
@@ -106,17 +157,26 @@ const CustomerLayout = () => {
                 </Menu>
               )}
 
-              {user && user.role !== "CUSTOMER" && (
-                <Button
-                  color="green"
-                  size="md"
-                  component={Link}
-                  to={user.role === "BUSINESS" ? "/business" : "/admin"}
-                  leftIcon={<Dashboard />}
+              <Indicator label={quantity} inline size={20} color="green">
+                <ActionIcon
+                  variant="light"
+                  size="xl"
+                  onClick={() =>
+                    openModal({
+                      modalId: "cart",
+                      title: (
+                        <Text fz={24} weight="bold">
+                          Your cart
+                        </Text>
+                      ),
+                      children: <Cart />,
+                      size: 1200,
+                    })
+                  }
                 >
-                  Dashboard
-                </Button>
-              )}
+                  <ShoppingCart />
+                </ActionIcon>
+              </Indicator>
             </Group>
           </Container>
         </Header>

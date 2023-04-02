@@ -5,14 +5,14 @@ import { AccountWithoutPassword } from "local-types";
 import { useNavigate, useParams } from "react-router-dom";
 import { AlertCircle, Check } from "tabler-icons-react";
 import { axios } from "../../lib";
-import { useAuthStore } from "../../stores/useAuthStore";
+import { useAuthStore } from "../../stores";
 
 const Confirm = () => {
   const { setAccessToken } = useAuthStore();
   const { hash } = useParams();
   const navigate = useNavigate();
 
-  const { isLoading, error } = useQuery({
+  const { isFetching, error } = useQuery({
     queryKey: ["confirm"],
     queryFn: () =>
       axios.get<{ user: AccountWithoutPassword; accessToken: string }>(
@@ -40,7 +40,11 @@ const Confirm = () => {
 
   return (
     <>
-      <LoadingOverlay visible={isLoading} />
+      <LoadingOverlay
+        loaderProps={{ color: "green", variant: "bars" }}
+        visible={isFetching}
+      />
+
       <Container
         size="xs"
         mih="100vh"

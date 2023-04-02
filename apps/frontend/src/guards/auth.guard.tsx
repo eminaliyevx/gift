@@ -1,34 +1,39 @@
 import { LoadingOverlay } from "@mantine/core";
-import { Role } from "@prisma/client";
-import { PropsWithChildren } from "react";
-import { Navigate } from "react-router-dom";
-import { useAuthStore } from "../stores/useAuthStore";
+import { PropsWithChildren, useState } from "react";
+import { Navigate, useLocation } from "react-router-dom";
+import { useAuthStore } from "../stores";
 
-const USER_NAVIGATES = {
-  [Role.CUSTOMER]: "/",
-  [Role.BUSINESS]: "/business",
-  [Role.ADMIN]: "/admin",
-};
-
-const AuthGuard = ({
-  roles,
-  children,
-}: PropsWithChildren<{ roles: Role[] }>) => {
-  const { user, loading } = useAuthStore();
+const AuthGuard = ({ children }: PropsWithChildren<{}>) => {
+  const { loading, user } = useAuthStore();
+  const { pathname } = useLocation();
+  const [requestedLocation, setRequestedLocation] = useState<string | null>(
+    null
+  );
 
   if (loading) {
-    return <LoadingOverlay visible />;
+    return (
+      <LoadingOverlay
+        loaderProps={{ color: "green", variant: "bars" }}
+        visible
+      />
+    );
   }
 
-  if (user && roles.some((role) => user.role === role)) {
-    return <>{children}</>;
+  if (!user) {
+    if (pathname !== requestedLocation) {
+      setRequestedLocation(pathname);
+    }
+
+    return <Navigate to="/" replace />;
   }
 
-  if (user) {
-    return <Navigate to={USER_NAVIGATES[user.role]} replace />;
+  if (requestedLocation && pathname !== requestedLocation) {
+    setRequestedLocation(null);
+
+    return <Navigate to={requestedLocation} />;
   }
 
-  return <Navigate to={USER_NAVIGATES[Role.CUSTOMER]} replace />;
+  return <>{children}</>;
 };
 
 export default AuthGuard;

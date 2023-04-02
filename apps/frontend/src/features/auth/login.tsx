@@ -15,7 +15,7 @@ import { X } from "tabler-icons-react";
 import { z } from "zod";
 import { Register } from ".";
 import { axios } from "../../lib";
-import { useAuthStore } from "../../stores/useAuthStore";
+import { useAuthStore } from "../../stores";
 
 const schema = z
   .object({
@@ -58,7 +58,7 @@ const Login = () => {
       showNotification({
         title: "Error",
         message: "Invalid username or password",
-        icon: <X />,
+        icon: <X size={20} />,
         color: "red",
       });
 

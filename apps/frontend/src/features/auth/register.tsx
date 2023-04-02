@@ -52,10 +52,7 @@ const baseSchema = z
         required_error: "Select role",
         invalid_type_error: "Select role",
       })
-      .refine(
-        (arg) => arg === "CUSTOMER" || arg === "BUSINESS",
-        "Select role"
-      ),
+      .refine((arg) => arg === "CUSTOMER" || arg === "BUSINESS", "Select role"),
   })
   .required();
 
@@ -72,10 +69,7 @@ const customerSchema = baseSchema
         required_error: "Select gender",
         invalid_type_error: "Select gender",
       })
-      .refine(
-        (arg) => arg === "MALE"|| arg === "FEMALE",
-        "Select gender"
-      ),
+      .refine((arg) => arg === "MALE" || arg === "FEMALE", "Select gender"),
   })
   .required();
 
@@ -142,7 +136,7 @@ const Register = () => {
         return showNotification({
           title: "Error",
           message: "No role selected",
-          icon: <X />,
+          icon: <X size={20} />,
           color: "red",
         });
       }
@@ -160,7 +154,7 @@ const Register = () => {
       showNotification({
         title: "Error",
         message: "An error occurred",
-        icon: <X />,
+        icon: <X size={20} />,
         color: "red",
       });
 
@@ -229,7 +223,7 @@ const Register = () => {
         placeholder="Who are you?"
         size="lg"
         data={[
-          { value: "CUSTOMER", label: "Customer"},
+          { value: "CUSTOMER", label: "Customer" },
           { value: "BUSINESS", label: "Business" },
         ]}
         mb="md"

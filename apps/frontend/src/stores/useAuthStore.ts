@@ -10,7 +10,7 @@ interface AuthState {
   setUser: (user: AccountWithoutPassword | null) => void;
 }
 
-export const useAuthStore = create<AuthState>()(
+const useAuthStore = create<AuthState>()(
   persist(
     (set) => ({
       accessToken: null,
@@ -25,3 +25,5 @@ export const useAuthStore = create<AuthState>()(
     }
   )
 );
+
+export default useAuthStore;

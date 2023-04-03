@@ -18,17 +18,19 @@ const Home = () => {
         visible={isFetching}
       />
 
-      <SimpleGrid
-        breakpoints={[
-          { minWidth: "xs", cols: 2 },
-          { minWidth: "sm", cols: 3 },
-          { minWidth: "md", cols: 4 },
-        ]}
-      >
-        {products?.map((product) => (
-          <ProductCard key={product.id} product={product} />
-        ))}
-      </SimpleGrid>
+      {products && products.length > 0 && (
+        <SimpleGrid
+          breakpoints={[
+            { minWidth: "xs", cols: 2 },
+            { minWidth: "sm", cols: 3 },
+            { minWidth: "md", cols: 4 },
+          ]}
+        >
+          {products.map((product) => (
+            <ProductCard key={product.id} product={product} />
+          ))}
+        </SimpleGrid>
+      )}
     </>
   );
 };

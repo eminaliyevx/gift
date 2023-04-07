@@ -20,10 +20,7 @@ import {
 } from "@nestjs/swagger";
 import { Role } from "@prisma/client";
 import { IsEmail, MaxLength, MinLength } from "class-validator";
-import { randomUUID } from "crypto";
 import { AccountWithoutPassword } from "local-types";
-import { diskStorage } from "multer";
-import { join } from "path";
 import { GetUser } from "src/decorators/get-user.decorator";
 import { Public } from "src/decorators/public.decorator";
 import { Roles } from "src/decorators/roles.decorator";
@@ -99,23 +96,7 @@ export class AuthController {
 
   @ApiBearerAuth()
   @ApiConsumes("multipart/form-data")
-  @UseInterceptors(
-    FileInterceptor("image", {
-      storage: diskStorage({
-        destination: (_req, _file, callback) => {
-          callback(null, join(__dirname, "../../public/", "user-images"));
-        },
-        filename: (req, file, callback) => {
-          const user = req.user as AccountWithoutPassword;
-          const filename = `${user.id}-${randomUUID()}.${file.originalname
-            .split(".")
-            .pop()}`;
-
-          callback(null, filename);
-        },
-      }),
-    }),
-  )
+  @UseInterceptors(FileInterceptor("image"))
   @Patch("account")
   async update(
     @GetUser() user: AccountWithoutPassword,

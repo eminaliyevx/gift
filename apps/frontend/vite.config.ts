@@ -9,14 +9,6 @@ export default defineConfig({
         target: "http://localhost",
         changeOrigin: true,
       },
-      "/user-images": {
-        target: "http://localhost",
-        changeOrigin: true,
-      },
-      "/product-images": {
-        target: "http://localhost",
-        changeOrigin: true,
-      },
     },
   },
 });

@@ -110,7 +110,7 @@ const Cart = () => {
             <Group key={item.productId} position="apart">
               <Group>
                 <Image
-                  src={item.product.images[0]?.path}
+                  src={item.product.images[0]?.url}
                   width={150}
                   height={150}
                   alt="Product image"

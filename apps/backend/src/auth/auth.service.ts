@@ -1,10 +1,12 @@
+import { PutObjectCommand } from "@aws-sdk/client-s3";
 import { BadRequestException, Injectable } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
 import { JwtService } from "@nestjs/jwt";
-import { unlinkSync } from "fs";
+import { randomUUID } from "crypto";
 import { Account, AccountWithoutPassword } from "local-types";
-import { join } from "path";
 import { MailService } from "src/mail/mail.service";
 import { PrismaService } from "src/prisma/prisma.service";
+import { S3Service } from "src/s3/s3.service";
 import { CreateUserDto } from "src/user/dto/create-user.dto";
 import { UpdateUserDto } from "src/user/dto/update-user.dto";
 import { UserService } from "src/user/user.service";
@@ -17,6 +19,8 @@ export class AuthService {
     private readonly jwtService: JwtService,
     private readonly mailService: MailService,
     private readonly prismaService: PrismaService,
+    private readonly s3Service: S3Service,
+    private readonly configService: ConfigService,
   ) {}
 
   async validateUser(email: string, password: string) {
@@ -95,8 +99,27 @@ export class AuthService {
       where: { userId },
     });
 
-    if (image && userImage) {
-      unlinkSync(join(__dirname, "../../public/", userImage.path));
+    const key =
+      image &&
+      `user-images/${userId}-${randomUUID()}.${image.originalname
+        .split(".")
+        .pop()}`;
+    const url =
+      image && `${this.configService.get<string>("SPACES_CDN_ENDPOINT")}${key}`;
+
+    try {
+      image &&
+        (await this.s3Service.send(
+          new PutObjectCommand({
+            Bucket: this.configService.get<string>("SPACES_BUCKET"),
+            Key: key,
+            Body: image.buffer,
+            ContentLength: image.size,
+            ACL: "public-read",
+          }),
+        ));
+    } catch {
+      throw new BadRequestException();
     }
 
     return this.prismaService.user.update({
@@ -106,12 +129,8 @@ export class AuthService {
           ? {
               delete: !!userImage,
               create: {
-                filename: image.filename,
-                path: image.path
-                  .replace(/[\\/]+/g, "/")
-                  .split("/")
-                  .slice(-2)
-                  .join("/"),
+                key,
+                url,
               },
             }
           : undefined,

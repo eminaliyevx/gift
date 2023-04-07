@@ -6,6 +6,7 @@ import { Test } from "@nestjs/testing";
 import { Gender, Role, Status, User } from "@prisma/client";
 import { MailService } from "src/mail/mail.service";
 import { PrismaService } from "src/prisma/prisma.service";
+import { S3Service } from "src/s3/s3.service";
 import { UserService } from "src/user/user.service";
 import { AuthService } from "../auth.service";
 import { JwtStrategy } from "../strategy/jwt.strategy";
@@ -45,6 +46,7 @@ describe("AuthService", () => {
         PrismaService,
         ConfigService,
         MailService,
+        S3Service,
       ],
     }).compile();
 

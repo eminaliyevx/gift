@@ -45,7 +45,7 @@ import { UserModule } from "./user/user.module";
     OrderModule,
     MailerModule,
     ServeStaticModule.forRoot({
-      rootPath: join(__dirname, "..", "public"),
+      rootPath: join(__dirname, "../..", "frontend", "dist"),
     }),
   ],
   providers: [

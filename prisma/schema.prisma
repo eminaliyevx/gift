@@ -49,11 +49,11 @@ model User {
 }
 
 model UserImage {
-  id       String @id @default(cuid())
-  filename String @db.Text
-  path     String @db.Text
-  userId   Int    @unique
-  user     User?  @relation(fields: [userId], references: [id], onDelete: Cascade)
+  id     String @id @default(cuid())
+  key    String @db.Text
+  url    String @db.Text
+  userId Int    @unique
+  user   User?  @relation(fields: [userId], references: [id], onDelete: Cascade)
 }
 
 model Customer {
@@ -101,7 +101,7 @@ model Product {
   images            ProductImage[]
   prices            Price[]
   cart              Cart[]
-  OrderItem         OrderItem[]
+  orderItems        OrderItem[]
 }
 
 model ProductAttribute {
@@ -115,8 +115,8 @@ model ProductAttribute {
 
 model ProductImage {
   id        String  @id @default(cuid())
-  filename  String  @db.Text
-  path      String  @db.Text
+  key       String  @db.Text
+  url       String  @db.Text
   productId String
   product   Product @relation(fields: [productId], references: [id], onDelete: Cascade)
 }

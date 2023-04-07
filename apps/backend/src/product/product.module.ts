@@ -1,9 +1,10 @@
 import { Module } from "@nestjs/common";
+import { S3Service } from "src/s3/s3.service";
 import { ProductController } from "./product.controller";
 import { ProductService } from "./product.service";
 
 @Module({
   controllers: [ProductController],
-  providers: [ProductService],
+  providers: [ProductService, S3Service],
 })
 export class ProductModule {}

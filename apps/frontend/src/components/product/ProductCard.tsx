@@ -36,7 +36,7 @@ const ProductCard = ({ product }: ProductCardProps) => {
     <Card withBorder sx={{ display: "flex", flexDirection: "column" }}>
       <Card.Section>
         <Image
-          src={product.images[0]?.path}
+          src={product.images[0]?.url}
           height={200}
           alt="Product image"
           withPlaceholder

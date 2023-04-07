@@ -4,6 +4,7 @@ import { JwtModule } from "@nestjs/jwt";
 import { PassportModule } from "@nestjs/passport";
 import { MailModule } from "src/mail/mail.module";
 import { MailService } from "src/mail/mail.service";
+import { S3Service } from "src/s3/s3.service";
 import { UserModule } from "src/user/user.module";
 import { UserService } from "src/user/user.service";
 import { AuthController } from "./auth.controller";
@@ -31,6 +32,7 @@ import { LocalStrategy } from "./strategy/local.strategy";
     LocalStrategy,
     JwtStrategy,
     MailService,
+    S3Service,
   ],
   exports: [AuthService],
 })

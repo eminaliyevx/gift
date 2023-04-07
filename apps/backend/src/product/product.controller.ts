@@ -1,4 +1,6 @@
+import { PutObjectCommand } from "@aws-sdk/client-s3";
 import {
+  BadRequestException,
   Body,
   Controller,
   Delete,
@@ -12,18 +14,17 @@ import {
   UseGuards,
   UseInterceptors,
 } from "@nestjs/common";
+import { ConfigService } from "@nestjs/config";
 import { FilesInterceptor } from "@nestjs/platform-express";
 import { ApiBearerAuth, ApiConsumes, ApiTags } from "@nestjs/swagger";
 import { Role } from "@prisma/client";
 import { randomUUID } from "crypto";
-import { unlinkSync } from "fs";
 import { AccountWithoutPassword } from "local-types";
-import { diskStorage } from "multer";
-import { join } from "path";
 import { GetUser } from "src/decorators/get-user.decorator";
 import { Public } from "src/decorators/public.decorator";
 import { Roles } from "src/decorators/roles.decorator";
 import { RoleGuard } from "src/guards/role.guard";
+import { S3Service } from "src/s3/s3.service";
 import {
   CreateProductDto,
   Price,
@@ -35,28 +36,17 @@ import { ProductService } from "./product.service";
 @ApiTags("Product")
 @Controller("product")
 export class ProductController {
-  constructor(private readonly productService: ProductService) {}
+  constructor(
+    private readonly productService: ProductService,
+    private readonly s3Service: S3Service,
+    private readonly configService: ConfigService,
+  ) {}
 
   @ApiBearerAuth()
   @ApiConsumes("multipart/form-data")
   @Roles(Role.ADMIN, Role.BUSINESS)
   @UseGuards(RoleGuard)
-  @UseInterceptors(
-    FilesInterceptor("images", undefined, {
-      storage: diskStorage({
-        destination: (_req, _file, callback) => {
-          callback(null, join(__dirname, "../../public/", "product-images"));
-        },
-        filename: (_req, file, callback) => {
-          const filename = `${randomUUID()}.${file.originalname
-            .split(".")
-            .pop()}`;
-
-          callback(null, filename);
-        },
-      }),
-    }),
-  )
+  @UseInterceptors(FilesInterceptor("images"))
   @Post()
   async create(
     @GetUser() user: AccountWithoutPassword,
@@ -71,6 +61,33 @@ export class ProductController {
       : undefined;
 
     const parsedPrices = prices ? (JSON.parse(prices) as Price[]) : undefined;
+
+    const _images: Array<{ key: string; url: string }> = [];
+
+    try {
+      for (const image of images) {
+        const key = `product-images/${randomUUID()}.${image.originalname
+          .split(".")
+          .pop()}`;
+        const url = `${this.configService.get<string>(
+          "SPACES_CDN_ENDPOINT",
+        )}${key}`;
+
+        await this.s3Service.send(
+          new PutObjectCommand({
+            Bucket: this.configService.get<string>("SPACES_BUCKET"),
+            Key: key,
+            Body: image.buffer,
+            ContentLength: image.size,
+            ACL: "public-read",
+          }),
+        );
+
+        _images.push({ key, url });
+      }
+    } catch {
+      throw new BadRequestException();
+    }
 
     return this.productService.create({
       data: {
@@ -94,16 +111,9 @@ export class ProductController {
         },
         images: {
           createMany:
-            images.length > 0
+            _images.length > 0
               ? {
-                  data: images.map(({ filename, path }) => ({
-                    filename,
-                    path: path
-                      .replace(/[\\/]+/g, "/")
-                      .split("/")
-                      .slice(-2)
-                      .join("/"),
-                  })),
+                  data: _images,
                 }
               : undefined,
         },
@@ -136,6 +146,13 @@ export class ProductController {
   async findUnique(@Param("id") id: string) {
     const product = await this.productService.findUnique({
       where: { id },
+      include: {
+        category: true,
+        productAttributes: true,
+        prices: true,
+        images: true,
+        business: true,
+      },
     });
 
     if (!product) {
@@ -149,22 +166,7 @@ export class ProductController {
   @ApiConsumes("multipart/form-data")
   @Roles(Role.ADMIN, Role.BUSINESS)
   @UseGuards(RoleGuard)
-  @UseInterceptors(
-    FilesInterceptor("images", undefined, {
-      storage: diskStorage({
-        destination: (_req, _file, callback) => {
-          callback(null, join(__dirname, "../../public/", "product-images"));
-        },
-        filename: (_req, file, callback) => {
-          const filename = `${randomUUID()}.${file.originalname
-            .split(".")
-            .pop()}`;
-
-          callback(null, filename);
-        },
-      }),
-    }),
-  )
+  @UseInterceptors(FilesInterceptor("images"))
   @Patch(":id")
   async update(
     @GetUser() user: AccountWithoutPassword,
@@ -196,10 +198,31 @@ export class ProductController {
 
     const parsedPrices = prices ? (JSON.parse(prices) as Price[]) : undefined;
 
-    if (images.length > 0 && product.images.length > 0) {
-      product.images.forEach(({ path }) => {
-        unlinkSync(join(__dirname, "../../public/", path));
-      });
+    const _images: Array<{ key: string; url: string }> = [];
+
+    try {
+      for (const image of images) {
+        const key = `product-images/${randomUUID()}.${image.originalname
+          .split(".")
+          .pop()}`;
+        const url = `${this.configService.get<string>(
+          "SPACES_CDN_ENDPOINT",
+        )}${key}`;
+
+        await this.s3Service.send(
+          new PutObjectCommand({
+            Bucket: this.configService.get<string>("SPACES_BUCKET"),
+            Key: key,
+            Body: image.buffer,
+            ContentLength: image.size,
+            ACL: "public-read",
+          }),
+        );
+
+        _images.push({ key, url });
+      }
+    } catch {
+      throw new BadRequestException();
     }
 
     return this.productService.update({
@@ -224,18 +247,11 @@ export class ProductController {
             : undefined,
         },
         images: {
-          deleteMany: images.length > 0 ? {} : undefined,
+          deleteMany: _images.length > 0 ? {} : undefined,
           createMany:
-            images.length > 0
+            _images.length > 0
               ? {
-                  data: images.map(({ filename, path }) => ({
-                    filename,
-                    path: path
-                      .replace(/[\\/]+/g, "/")
-                      .split("/")
-                      .slice(-2)
-                      .join("/"),
-                  })),
+                  data: _images,
                 }
               : undefined,
         },
@@ -260,9 +276,6 @@ export class ProductController {
   ) {
     const product = await this.productService.findUnique({
       where: { id },
-      include: {
-        images: true,
-      },
     });
 
     if (!product) {
@@ -271,12 +284,6 @@ export class ProductController {
 
     if (user.role === Role.BUSINESS && product.businessUserId !== user.id) {
       throw new ForbiddenException();
-    }
-
-    if (product.images.length > 0) {
-      product.images.forEach(({ path }) => {
-        unlinkSync(join(__dirname, "../../public/", path));
-      });
     }
 
     return this.productService.delete({

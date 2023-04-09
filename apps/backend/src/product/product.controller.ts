@@ -138,6 +138,9 @@ export class ProductController {
         images: true,
         business: true,
       },
+      orderBy: {
+        createdAt: "desc",
+      },
     });
   }
 

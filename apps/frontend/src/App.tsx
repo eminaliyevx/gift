@@ -63,11 +63,15 @@ const App = () => {
   useHotkeys([["mod+J", () => toggleColorScheme()]]);
 
   const initialize = useCallback(async () => {
-    const { data: user } = await axios.get<AccountWithoutPassword | null>(
-      "auth/account"
-    );
+    try {
+      const { data: user } = await axios.get<AccountWithoutPassword | null>(
+        "auth/account"
+      );
 
-    setUser(user);
+      setUser(user);
+    } catch {
+      setUser(null);
+    }
   }, [accessToken]);
 
   useEffect(() => {

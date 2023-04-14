@@ -11,7 +11,7 @@
     "start": "prisma migrate deploy && node apps/backend/dist/main",
     "dev": "turbo run dev",
     "build": "turbo run build",
-    "kill:dev-test": "sudo kill $(sudo lsof -t -i :5174 -i :3133) > /dev/null 2>&1",
+    "kill:dev-test": "sudo kill $(sudo lsof -t -i :5174 -i :3133)",
     "reset:db-test": "docker compose -f docker-compose-test.yml up -d && node -e \"setTimeout(() => {}, 1000)\" && dotenv -e .env.test -- prisma migrate reset --force",
     "test": "npm run reset:db-test && (turbo run dev:test &) && wait-on http://localhost:5174/api/health && turbo run test --concurrency=1 && docker compose -f docker-compose-test.yml down && npm run kill:dev-test",
     "build:no-tests-cache": "time docker compose build",

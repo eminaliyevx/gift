@@ -4,13 +4,15 @@
     "prettier": "^2.8.7",
     "prettier-plugin-organize-imports": "^3.2.2",
     "prisma": "^4.12.0",
-    "turbo": "^1.8.8"
+    "turbo": "^1.8.8",
+    "wait-on": "^7.0.1"
   },
   "scripts": {
     "start": "prisma migrate deploy && node apps/backend/dist/main",
     "dev": "turbo run dev",
     "build": "turbo run build",
-    "test": "npm run reset:db-test && turbo run test && docker compose -f docker-compose-test.yml down",
+    "kill:dev-test": "sudo kill $(sudo lsof -t -i :5174 -i :3133)",
+    "test": "npm run reset:db-test && turbo run dev:test & && wait-on http://localhost:5174/api/health && turbo run test --concurrency=1 && docker compose -f docker-compose-test.yml down && npm run kill:dev-test",
     "reset:db-test": "docker compose -f docker-compose-test.yml up -d && node -e \"setTimeout(() => {}, 1000)\" && dotenv -e .env.test -- prisma migrate reset --force",
     "build:no-tests-cache": "time docker compose build",
     "build:no-tests-no-cache": "time docker compose build --no-cache",

@@ -5,6 +5,10 @@
       "cache": false
     },
     "test": {
+      "cache": false,
+      "dependsOn": ["^test"]
+    },
+    "dev:test": {
       "cache": false
     },
     "build": {

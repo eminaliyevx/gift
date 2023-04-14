@@ -86,11 +86,11 @@ export class AuthController {
         },
       });
 
-      delete _user.password;
+      _user && delete _user.password;
 
       return _user;
     } else {
-      return user;
+      return null;
     }
   }
 

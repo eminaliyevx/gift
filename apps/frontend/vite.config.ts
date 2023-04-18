@@ -7,7 +7,9 @@ export default defineConfig(({ command }) => ({
     proxy: {
       "/api": {
         target:
-          command === "serve" ? "http://localhost:3133" : "http://localhost",
+          command === "serve"
+            ? "http://localhost:5000"
+            : "http://localhost:3000",
         changeOrigin: true,
       },
     },

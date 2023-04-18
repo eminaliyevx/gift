@@ -26,7 +26,7 @@ import { UserModule } from "./user/user.module";
       validationSchema: Joi.object({
         DATABASE_URL: Joi.string().required(),
         JWT_SECRET: Joi.string().required(),
-        PORT: Joi.number().default(80),
+        PORT: Joi.number().default(3000),
         EMAIL_HOST: Joi.string().required(),
         EMAIL_PORT: Joi.number().required(),
         EMAIL_USER: Joi.string().required(),

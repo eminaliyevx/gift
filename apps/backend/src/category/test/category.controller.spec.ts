@@ -2,7 +2,6 @@ import { ConfigService } from "@nestjs/config";
 import { Test } from "@nestjs/testing";
 import { PrismaService } from "src/prisma/prisma.service";
 import { CategoryController } from "../category.controller";
-import { CategoryService } from "../category.service";
 
 describe("CategoryController", () => {
   let categoryController: CategoryController;
@@ -11,7 +10,7 @@ describe("CategoryController", () => {
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
       controllers: [CategoryController],
-      providers: [CategoryService, PrismaService, ConfigService],
+      providers: [PrismaService, ConfigService],
     }).compile();
 
     categoryController = moduleRef.get<CategoryController>(CategoryController);
@@ -42,7 +41,7 @@ describe("CategoryController", () => {
 
       const result = await categoryController.create(createCategoryDto);
 
-      expect(result.name).toBe(createCategoryDto.name);
+      expect(result.name).toEqual(createCategoryDto.name);
       expect(result.attributes.map(({ id }) => id)).toEqual(
         createCategoryDto.attributes,
       );
@@ -72,7 +71,7 @@ describe("CategoryController", () => {
 
       const result = await categoryController.update("cat1", updateCategoryDto);
 
-      expect(result.name).toBe(updateCategoryDto.name);
+      expect(result.name).toEqual(updateCategoryDto.name);
       expect(result.attributes.map(({ id }) => id)).toEqual(
         updateCategoryDto.attributes,
       );
@@ -83,7 +82,7 @@ describe("CategoryController", () => {
     it("should delete category", async () => {
       const result = await categoryController.delete("cat1");
 
-      expect(result.id).toBe("cat1");
+      expect(result.id).toEqual("cat1");
     });
   });
 });

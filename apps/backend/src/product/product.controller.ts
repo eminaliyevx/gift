@@ -1,11 +1,11 @@
 import { PutObjectCommand } from "@aws-sdk/client-s3";
 import {
-  BadRequestException,
   Body,
   Controller,
   Delete,
   ForbiddenException,
   Get,
+  InternalServerErrorException,
   NotFoundException,
   Param,
   Patch,
@@ -21,9 +21,10 @@ import { Role } from "@prisma/client";
 import { randomUUID } from "crypto";
 import { AccountWithoutPassword } from "local-types";
 import { GetUser } from "src/decorators/get-user.decorator";
-import { Public } from "src/decorators/public.decorator";
 import { Roles } from "src/decorators/roles.decorator";
+import { JwtAuthGuard } from "src/guards/jwt-auth.guard";
 import { RoleGuard } from "src/guards/role.guard";
+import { PrismaService } from "src/prisma/prisma.service";
 import { S3Service } from "src/s3/s3.service";
 import {
   CreateProductDto,
@@ -31,21 +32,20 @@ import {
   ProductAttribute,
 } from "./dto/create-product.dto";
 import { UpdateProductDto } from "./dto/update-product.dto";
-import { ProductService } from "./product.service";
 
 @ApiTags("Product")
 @Controller("product")
 export class ProductController {
   constructor(
-    private readonly productService: ProductService,
-    private readonly s3Service: S3Service,
     private readonly configService: ConfigService,
+    private readonly prismaService: PrismaService,
+    private readonly s3Service: S3Service,
   ) {}
 
   @ApiBearerAuth()
   @ApiConsumes("multipart/form-data")
   @Roles(Role.ADMIN, Role.BUSINESS)
-  @UseGuards(RoleGuard)
+  @UseGuards(JwtAuthGuard, RoleGuard)
   @UseInterceptors(FilesInterceptor("images"))
   @Post()
   async create(
@@ -85,55 +85,47 @@ export class ProductController {
 
         _images.push({ key, url });
       }
-    } catch {
-      throw new BadRequestException();
-    }
 
-    return this.productService.create({
-      data: {
-        name,
-        description,
-        categoryId,
-        businessUserId: user.role === Role.BUSINESS ? user.id : null,
-        productAttributes: {
-          createMany: parsedAttributes
-            ? {
-                data: parsedAttributes,
-              }
-            : undefined,
-        },
-        prices: {
-          createMany: parsedPrices
-            ? {
-                data: parsedPrices,
-              }
-            : undefined,
-        },
-        images: {
-          createMany:
-            _images.length > 0
+      return this.prismaService.product.create({
+        data: {
+          name,
+          description,
+          categoryId,
+          businessUserId: user.role === Role.BUSINESS ? user.id : null,
+          productAttributes: {
+            createMany: parsedAttributes
               ? {
-                  data: _images,
+                  data: parsedAttributes,
                 }
               : undefined,
+          },
+          prices: {
+            createMany: parsedPrices
+              ? {
+                  data: parsedPrices,
+                }
+              : undefined,
+          },
+          images: {
+            createMany:
+              _images.length > 0
+                ? {
+                    data: _images,
+                  }
+                : undefined,
+          },
         },
-      },
-      include: {
-        category: true,
-        productAttributes: true,
-        prices: true,
-        images: true,
-      },
-    });
+      });
+    } catch {
+      throw new InternalServerErrorException();
+    }
   }
 
-  @Public()
   @Get()
   async findMany() {
-    return this.productService.findMany({
+    return this.prismaService.product.findMany({
       include: {
         category: true,
-        productAttributes: true,
         prices: true,
         images: true,
         business: true,
@@ -144,10 +136,9 @@ export class ProductController {
     });
   }
 
-  @Public()
   @Get(":id")
   async findUnique(@Param("id") id: string) {
-    const product = await this.productService.findUnique({
+    const product = await this.prismaService.product.findUnique({
       where: { id },
       include: {
         category: true,
@@ -168,7 +159,7 @@ export class ProductController {
   @ApiBearerAuth()
   @ApiConsumes("multipart/form-data")
   @Roles(Role.ADMIN, Role.BUSINESS)
-  @UseGuards(RoleGuard)
+  @UseGuards(JwtAuthGuard, RoleGuard)
   @UseInterceptors(FilesInterceptor("images"))
   @Patch(":id")
   async update(
@@ -177,7 +168,7 @@ export class ProductController {
     @Body() updateProductDto: UpdateProductDto,
     @UploadedFiles() images: Array<Express.Multer.File>,
   ) {
-    const product = await this.productService.findUnique({
+    const product = await this.prismaService.product.findUnique({
       where: { id },
       include: {
         images: true,
@@ -224,60 +215,54 @@ export class ProductController {
 
         _images.push({ key, url });
       }
-    } catch {
-      throw new BadRequestException();
-    }
 
-    return this.productService.update({
-      data: {
-        name,
-        description,
-        categoryId,
-        productAttributes: {
-          deleteMany: parsedAttributes ? {} : undefined,
-          createMany: parsedAttributes
-            ? {
-                data: parsedAttributes,
-              }
-            : undefined,
-        },
-        prices: {
-          deleteMany: parsedPrices ? {} : undefined,
-          createMany: parsedPrices
-            ? {
-                data: parsedPrices,
-              }
-            : undefined,
-        },
-        images: {
-          deleteMany: _images.length > 0 ? {} : undefined,
-          createMany:
-            _images.length > 0
+      return this.prismaService.product.update({
+        data: {
+          name,
+          description,
+          categoryId,
+          productAttributes: {
+            deleteMany: parsedAttributes ? {} : undefined,
+            createMany: parsedAttributes
               ? {
-                  data: _images,
+                  data: parsedAttributes,
                 }
               : undefined,
+          },
+          prices: {
+            deleteMany: parsedPrices ? {} : undefined,
+            createMany: parsedPrices
+              ? {
+                  data: parsedPrices,
+                }
+              : undefined,
+          },
+          images: {
+            deleteMany: _images.length > 0 ? {} : undefined,
+            createMany:
+              _images.length > 0
+                ? {
+                    data: _images,
+                  }
+                : undefined,
+          },
         },
-      },
-      where: { id },
-      include: {
-        category: true,
-        productAttributes: true,
-        prices: true,
-        images: true,
-      },
-    });
+        where: { id },
+      });
+    } catch {
+      throw new InternalServerErrorException();
+    }
   }
 
   @ApiBearerAuth()
   @Roles(Role.ADMIN, Role.BUSINESS)
-  @UseGuards(RoleGuard)
+  @UseGuards(JwtAuthGuard, RoleGuard)
   @Delete(":id")
   async delete(
     @GetUser() user: AccountWithoutPassword,
     @Param("id") id: string,
   ) {
-    const product = await this.productService.findUnique({
+    const product = await this.prismaService.product.findUnique({
       where: { id },
     });
 
@@ -289,7 +274,7 @@ export class ProductController {
       throw new ForbiddenException();
     }
 
-    return this.productService.delete({
+    return this.prismaService.product.delete({
       where: { id },
     });
   }

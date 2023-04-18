@@ -8,6 +8,7 @@ import {
   Grid,
   Group,
   Image,
+  InputBase,
   NumberInput,
   Stack,
   Text,
@@ -19,7 +20,9 @@ import { closeModal } from "@mantine/modals";
 import { showNotification } from "@mantine/notifications";
 import type { Order } from "@prisma/client";
 import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import { isCreditCard } from "class-validator";
 import { useMemo } from "react";
+import InputMask from "react-input-mask";
 import { Check, InfoCircle, Trash, X } from "tabler-icons-react";
 import { z } from "zod";
 import { axios } from "../../lib";
@@ -30,6 +33,16 @@ const schema = z.object({
   location: z.string().trim().min(1, "Location is required"),
   note: z.string(),
   discountCode: z.string(),
+  number: z
+    .string()
+    .refine(
+      (arg) => isCreditCard(arg.replace(/\D/g, "")),
+      "Invalid card number"
+    ),
+  exp: z.string().regex(/^(0[1-9]|1[0-2])\/{1}(2[3-9]|[3-9][0-9])$/, {
+    message: "Invalid expiration date",
+  }),
+  cvc: z.string().regex(/^[0-9]{3,4}$/, { message: "Invalid CVC" }),
 });
 
 const Cart = () => {
@@ -42,6 +55,9 @@ const Cart = () => {
       location: "",
       note: "",
       discountCode: "",
+      number: "",
+      exp: "",
+      cvc: "",
     },
   });
 
@@ -69,7 +85,15 @@ const Cart = () => {
 
   const { mutate: checkout, isLoading } = useMutation({
     mutationFn: (data: typeof form.values) => {
-      return axios.post<Order>("/cart/checkout", data);
+      const { exp, number, ...rest } = data;
+      const [exp_month, exp_year] = data.exp.split("/").map(Number);
+
+      return axios.post<Order>("/cart/checkout", {
+        ...rest,
+        number: number.replace(/\D/g, ""),
+        exp_month,
+        exp_year,
+      });
     },
     onSuccess: ({ data: { id } }) => {
       showNotification({
@@ -206,7 +230,6 @@ const Cart = () => {
           <TextInput
             placeholder="Location"
             size="lg"
-            sx={{ flex: 1 }}
             styles={(theme) => ({
               input: {
                 ":focus": {
@@ -224,7 +247,6 @@ const Cart = () => {
           <Textarea
             placeholder="Note"
             size="lg"
-            sx={{ flex: 1 }}
             styles={(theme) => ({
               input: {
                 ":focus": {
@@ -267,6 +289,61 @@ const Cart = () => {
             >
               APPLY
             </Button>
+          </Flex>
+
+          <InputBase
+            placeholder="Card number"
+            size="lg"
+            styles={(theme) => ({
+              input: {
+                ":focus": {
+                  borderColor: theme.colors.green[5],
+                },
+                ":focus-within": {
+                  borderColor: theme.colors.green[5],
+                },
+              },
+            })}
+            mb="md"
+            component={InputMask}
+            mask="9999 9999 9999 9999"
+            {...form.getInputProps("number")}
+          />
+
+          <Flex align="center" gap="xs" mb="lg">
+            <TextInput
+              placeholder="MM/YY"
+              size="lg"
+              sx={{ flex: 1 }}
+              styles={(theme) => ({
+                input: {
+                  ":focus": {
+                    borderColor: theme.colors.green[5],
+                  },
+                  ":focus-within": {
+                    borderColor: theme.colors.green[5],
+                  },
+                },
+              })}
+              {...form.getInputProps("exp")}
+            />
+
+            <TextInput
+              placeholder="CVC"
+              size="lg"
+              sx={{ flex: 1 }}
+              styles={(theme) => ({
+                input: {
+                  ":focus": {
+                    borderColor: theme.colors.green[5],
+                  },
+                  ":focus-within": {
+                    borderColor: theme.colors.green[5],
+                  },
+                },
+              })}
+              {...form.getInputProps("cvc")}
+            />
           </Flex>
 
           <Button

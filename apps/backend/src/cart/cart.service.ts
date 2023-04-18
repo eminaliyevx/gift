@@ -1,11 +1,17 @@
-import { Injectable } from "@nestjs/common";
+import { Injectable, InternalServerErrorException } from "@nestjs/common";
 import { Cart, DiscountType, Prisma } from "@prisma/client";
+import { AccountWithoutPassword } from "local-types";
+import { PaymentService } from "src/payment/payment.service";
 import { PrismaService } from "src/prisma/prisma.service";
-import { CartItem, CheckoutDto, CreateCartDto } from "./dto/cart.dto";
+import { CheckoutDto } from "./dto/checkout.dto";
+import { CartItem, CreateCartDto } from "./dto/create-cart.dto";
 
 @Injectable()
 export class CartService {
-  constructor(private readonly prismaService: PrismaService) {}
+  constructor(
+    private readonly prismaService: PrismaService,
+    private readonly paymentService: PaymentService,
+  ) {}
 
   async findMany<T extends Prisma.CartFindManyArgs>(
     args?: Prisma.SelectSubset<T, Prisma.CartFindManyArgs>,
@@ -61,7 +67,7 @@ export class CartService {
     return this.findMany({ where: { userId } });
   }
 
-  async applyDiscount(total: number, discountCode: string) {
+  async applyDiscount(total: number, discountCode?: string) {
     const now = new Date();
     let discountTotal = total;
 
@@ -142,53 +148,60 @@ export class CartService {
     };
   }
 
-  async checkout(userId: number, checkoutDto: CheckoutDto) {
+  async checkout(user: AccountWithoutPassword, checkoutDto: CheckoutDto) {
     const { total, discountTotal, cart } = await this.findTotal(
-      userId,
+      user.id,
       checkoutDto.discountCode,
     );
 
-    const order = await this.prismaService.order.create({
-      data: {
-        total,
-        discountTotal,
-        location: checkoutDto.location,
-        note: checkoutDto.note,
-        customer: {
-          connect: { userId },
-        },
-        items: {
-          createMany: {
-            data: cart.map((item) => ({
-              productId: item.product.id,
-              quantity: item.quantity,
-            })),
-          },
-        },
-      },
-    });
-
-    if (order) {
-      await this.prismaService.cart.deleteMany({ where: { userId } });
-
-      const discount = checkoutDto.discountCode
-        ? await this.prismaService.discount.findUnique({
-            where: { code: checkoutDto.discountCode },
-          })
-        : null;
-
-      if (discount?.limit) {
-        await this.prismaService.discount.update({
+    return this.paymentService
+      .chargeCustomer(user, {
+        ...checkoutDto,
+        amount: discountTotal * 100,
+      })
+      .then(async (response) => {
+        const order = await this.prismaService.order.create({
           data: {
-            remaining: {
-              decrement: 1,
+            id: response.id,
+            total,
+            discountTotal,
+            location: checkoutDto.location,
+            note: checkoutDto.note,
+            customer: {
+              connect: {
+                userId: user.id,
+              },
+            },
+            items: {
+              createMany: {
+                data: cart.map((item) => ({
+                  productId: item.product.id,
+                  quantity: item.quantity,
+                })),
+              },
             },
           },
-          where: { code: checkoutDto.discountCode },
         });
-      }
-    }
 
-    return order;
+        await this.prismaService.cart.deleteMany({
+          where: { userId: user.id },
+        });
+
+        if (discountTotal < total) {
+          await this.prismaService.discount.update({
+            data: {
+              remaining: {
+                decrement: 1,
+              },
+            },
+            where: { code: checkoutDto.discountCode },
+          });
+        }
+
+        return order;
+      })
+      .catch(() => {
+        throw new InternalServerErrorException();
+      });
   }
 }

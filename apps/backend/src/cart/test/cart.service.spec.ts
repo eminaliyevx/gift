@@ -1,6 +1,9 @@
+import { MailerModule } from "@nestjs-modules/mailer";
 import { ConfigService } from "@nestjs/config";
 import { Test } from "@nestjs/testing";
 import { DiscountType, Gender, Role } from "@prisma/client";
+import { MailService } from "src/mail/mail.service";
+import { PaymentService } from "src/payment/payment.service";
 import { PrismaService } from "src/prisma/prisma.service";
 import { CartService } from "../cart.service";
 
@@ -10,7 +13,28 @@ describe("CartService", () => {
 
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
-      providers: [CartService, ConfigService, PrismaService],
+      imports: [
+        MailerModule.forRoot({
+          transport: {
+            host: "test@test.com",
+            port: 465,
+            auth: {
+              user: "test",
+              pass: "test",
+            },
+          },
+          defaults: {
+            from: "test@test.com",
+          },
+        }),
+      ],
+      providers: [
+        CartService,
+        ConfigService,
+        PrismaService,
+        PaymentService,
+        MailService,
+      ],
     }).compile();
 
     cartService = moduleRef.get<CartService>(CartService);

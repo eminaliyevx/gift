@@ -19,13 +19,13 @@ describe("BusinessService", () => {
     it("should register business", async () => {
       const user = await businessService.register({
         email: "business@test.com",
-        phone: "557777777",
+        phone: "+994557777777",
         password: "qwerty123",
         role: Role.BUSINESS,
         name: "NestJS",
       });
 
-      expect(user.role).toBe(Role.BUSINESS);
+      expect(user.role).toEqual(Role.BUSINESS);
     });
   });
 });

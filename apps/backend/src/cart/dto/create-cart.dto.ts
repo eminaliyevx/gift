@@ -3,7 +3,6 @@ import { Type } from "class-transformer";
 import {
   IsNotEmpty,
   IsNumber,
-  IsOptional,
   IsString,
   ValidateNested,
 } from "class-validator";
@@ -24,21 +23,4 @@ export class CreateCartDto {
   @ValidateNested({ each: true })
   @Type(() => CartItem)
   items: CartItem[];
-}
-
-export class CheckoutDto {
-  @ApiProperty()
-  @IsString()
-  @IsNotEmpty()
-  location: string;
-
-  @ApiProperty()
-  @IsOptional()
-  @IsString()
-  note?: string;
-
-  @ApiProperty()
-  @IsOptional()
-  @IsString()
-  discountCode?: string;
 }

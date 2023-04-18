@@ -15,12 +15,10 @@ export class CustomerService {
     gender,
     ...user
   }: CreateCustomerDto) {
-    const password = hash(user.password);
-
     return this.prismaService.user.create({
       data: {
         ...user,
-        password,
+        password: hash(user.password),
         role: Role.CUSTOMER,
         customer: {
           create: {
@@ -31,10 +29,12 @@ export class CustomerService {
           },
         },
       },
-      include: {
-        customer: true,
-        business: true,
-        image: true,
+      select: {
+        id: true,
+        role: true,
+        status: true,
+        createdAt: true,
+        updatedAt: true,
       },
     });
   }

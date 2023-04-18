@@ -1,7 +1,6 @@
 import { Body, Controller, HttpCode, Post } from "@nestjs/common";
 import { ApiTags } from "@nestjs/swagger";
 import { AuthService } from "src/auth/auth.service";
-import { Public } from "src/decorators/public.decorator";
 import { CustomerService } from "./customer.service";
 import { CreateCustomerDto } from "./dto/create-customer.dto";
 
@@ -13,12 +12,11 @@ export class CustomerController {
     private readonly authService: AuthService,
   ) {}
 
-  @Public()
   @HttpCode(200)
   @Post("register")
   async register(@Body() createCustomerDto: CreateCustomerDto) {
     const customer = await this.customerService.register(createCustomerDto);
-    this.authService.sendConfirmationEmail(customer);
+    this.authService.sendConfirmationEmail(customer.id);
 
     return customer;
   }

@@ -19,7 +19,7 @@ describe("CustomerService", () => {
     it("should register customer", async () => {
       const user = await customerService.register({
         email: "customer@test.com",
-        phone: "556666666",
+        phone: "+994556666666",
         password: "qwerty123",
         role: Role.CUSTOMER,
         firstName: "Emin",
@@ -28,7 +28,7 @@ describe("CustomerService", () => {
         gender: Gender.MALE,
       });
 
-      expect(user.role).toBe(Role.CUSTOMER);
+      expect(user.role).toEqual(Role.CUSTOMER);
     });
   });
 });

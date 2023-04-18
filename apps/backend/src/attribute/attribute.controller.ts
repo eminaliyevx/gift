@@ -11,26 +11,26 @@ import {
 } from "@nestjs/common";
 import { ApiBearerAuth, ApiTags } from "@nestjs/swagger";
 import { Role } from "@prisma/client";
-import { Public } from "src/decorators/public.decorator";
 import { Roles } from "src/decorators/roles.decorator";
+import { JwtAuthGuard } from "src/guards/jwt-auth.guard";
 import { RoleGuard } from "src/guards/role.guard";
-import { AttributeService } from "./attribute.service";
+import { PrismaService } from "src/prisma/prisma.service";
 import { CreateAttributeDto } from "./dto/create-attribute.dto";
 import { UpdateAttributeDto } from "./dto/update-attribute.dto";
 
 @ApiTags("Attribute")
 @Controller("attribute")
 export class AttributeController {
-  constructor(private readonly attributeService: AttributeService) {}
+  constructor(private readonly prismaService: PrismaService) {}
 
   @ApiBearerAuth()
   @Roles(Role.ADMIN)
-  @UseGuards(RoleGuard)
+  @UseGuards(JwtAuthGuard, RoleGuard)
   @Post()
   async create(@Body() createAttributeDto: CreateAttributeDto) {
     const { categories, ...rest } = createAttributeDto;
 
-    return this.attributeService.create({
+    return this.prismaService.attribute.create({
       data: {
         ...rest,
         categories: {
@@ -41,16 +41,14 @@ export class AttributeController {
     });
   }
 
-  @Public()
   @Get()
   async findMany() {
-    return this.attributeService.findMany();
+    return this.prismaService.attribute.findMany();
   }
 
-  @Public()
   @Get(":id")
   async findUnique(@Param("id") id: string) {
-    const attribute = await this.attributeService.findUnique({
+    const attribute = await this.prismaService.attribute.findUnique({
       where: { id },
       include: { categories: true },
     });
@@ -64,13 +62,13 @@ export class AttributeController {
 
   @ApiBearerAuth()
   @Roles(Role.ADMIN)
-  @UseGuards(RoleGuard)
+  @UseGuards(JwtAuthGuard, RoleGuard)
   @Patch(":id")
   async update(
     @Param("id") id: string,
     @Body() updateAttributeDto: UpdateAttributeDto,
   ) {
-    const attribute = await this.attributeService.findUnique({
+    const attribute = await this.prismaService.attribute.findUnique({
       where: { id },
       include: {
         categories: true,
@@ -98,7 +96,7 @@ export class AttributeController {
           .map((id) => ({ id }))
       : undefined;
 
-    return this.attributeService.update({
+    return this.prismaService.attribute.update({
       data: {
         ...rest,
         categories: {
@@ -113,10 +111,10 @@ export class AttributeController {
 
   @ApiBearerAuth()
   @Roles(Role.ADMIN)
-  @UseGuards(RoleGuard)
+  @UseGuards(JwtAuthGuard, RoleGuard)
   @Delete(":id")
   async delete(@Param("id") id: string) {
-    const attribute = await this.attributeService.findUnique({
+    const attribute = await this.prismaService.attribute.findUnique({
       where: { id },
     });
 
@@ -124,9 +122,8 @@ export class AttributeController {
       throw new NotFoundException("Attribute not found");
     }
 
-    return this.attributeService.delete({
+    return this.prismaService.attribute.delete({
       where: { id },
-      include: { categories: true },
     });
   }
 }

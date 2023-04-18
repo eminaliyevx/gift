@@ -4,9 +4,11 @@ import { Role } from "@prisma/client";
 import { AccountWithoutPassword } from "local-types";
 import { GetUser } from "src/decorators/get-user.decorator";
 import { Roles } from "src/decorators/roles.decorator";
+import { JwtAuthGuard } from "src/guards/jwt-auth.guard";
 import { RoleGuard } from "src/guards/role.guard";
 import { CartService } from "./cart.service";
-import { CheckoutDto, CreateCartDto } from "./dto/cart.dto";
+import { CheckoutDto } from "./dto/checkout.dto";
+import { CreateCartDto } from "./dto/create-cart.dto";
 
 @ApiTags("Cart")
 @ApiBearerAuth()
@@ -15,9 +17,9 @@ export class CartController {
   constructor(private readonly cartService: CartService) {}
 
   @Roles(Role.CUSTOMER)
-  @UseGuards(RoleGuard)
+  @UseGuards(JwtAuthGuard, RoleGuard)
   @Get()
-  async findCart(@GetUser() user: AccountWithoutPassword) {
+  async getCart(@GetUser() user: AccountWithoutPassword) {
     return this.cartService.findMany({
       where: { userId: user.id },
       include: {
@@ -32,7 +34,7 @@ export class CartController {
   }
 
   @Roles(Role.CUSTOMER)
-  @UseGuards(RoleGuard)
+  @UseGuards(JwtAuthGuard, RoleGuard)
   @Post()
   async addToCart(
     @GetUser() user: AccountWithoutPassword,
@@ -42,12 +44,12 @@ export class CartController {
   }
 
   @Roles(Role.CUSTOMER)
-  @UseGuards(RoleGuard)
+  @UseGuards(JwtAuthGuard, RoleGuard)
   @Get("total")
   @ApiQuery({ name: "discountCode", required: false })
-  async findTotal(
+  async getCartTotal(
     @GetUser() user: AccountWithoutPassword,
-    @Query("discountCode") discountCode: string,
+    @Query("discountCode") discountCode?: string,
   ) {
     const { total, discountTotal } = await this.cartService.findTotal(
       user.id,
@@ -58,12 +60,12 @@ export class CartController {
   }
 
   @Roles(Role.CUSTOMER)
-  @UseGuards(RoleGuard)
+  @UseGuards(JwtAuthGuard, RoleGuard)
   @Post("checkout")
   async checkout(
     @GetUser() user: AccountWithoutPassword,
     @Body() checkoutDto: CheckoutDto,
   ) {
-    return this.cartService.checkout(user.id, checkoutDto);
+    return this.cartService.checkout(user, checkoutDto);
   }
 }

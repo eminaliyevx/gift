@@ -2,7 +2,6 @@ import { ConfigService } from "@nestjs/config";
 import { Test } from "@nestjs/testing";
 import { PrismaService } from "src/prisma/prisma.service";
 import { AttributeController } from "../attribute.controller";
-import { AttributeService } from "../attribute.service";
 
 describe("AttributeController", () => {
   let attributeController: AttributeController;
@@ -11,7 +10,7 @@ describe("AttributeController", () => {
   beforeAll(async () => {
     const moduleRef = await Test.createTestingModule({
       controllers: [AttributeController],
-      providers: [AttributeService, PrismaService, ConfigService],
+      providers: [ConfigService, PrismaService],
     }).compile();
 
     attributeController =
@@ -43,7 +42,7 @@ describe("AttributeController", () => {
 
       const result = await attributeController.create(createAttributeDto);
 
-      expect(result.name).toBe(createAttributeDto.name);
+      expect(result.name).toEqual(createAttributeDto.name);
       expect(result.categories.map(({ id }) => id)).toEqual(
         createAttributeDto.categories,
       );
@@ -76,7 +75,7 @@ describe("AttributeController", () => {
         updateAttributeDto,
       );
 
-      expect(result.name).toBe(updateAttributeDto.name);
+      expect(result.name).toEqual(updateAttributeDto.name);
       expect(result.categories.map(({ id }) => id)).toEqual(
         updateAttributeDto.categories,
       );
@@ -87,7 +86,7 @@ describe("AttributeController", () => {
     it("should delete attribute", async () => {
       const result = await attributeController.delete("att1");
 
-      expect(result.id).toBe("att1");
+      expect(result.id).toEqual("att1");
     });
   });
 });

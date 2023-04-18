@@ -9,12 +9,13 @@ import { PrismaService } from "src/prisma/prisma.service";
 import { S3Service } from "src/s3/s3.service";
 import { UserService } from "src/user/user.service";
 import { AuthService } from "../auth.service";
-import { JwtStrategy } from "../strategy/jwt.strategy";
+import { JwtStrategy } from "../strategies/jwt.strategy";
 
 describe("AuthService", () => {
   let authService: AuthService;
-  let jwtService: JwtService;
+  let userService: UserService;
   let prismaService: PrismaService;
+  let jwtService: JwtService;
   let user: User;
 
   beforeAll(async () => {
@@ -40,25 +41,26 @@ describe("AuthService", () => {
         }),
       ],
       providers: [
+        ConfigService,
         AuthService,
         UserService,
-        JwtStrategy,
         PrismaService,
-        ConfigService,
-        MailService,
+        JwtStrategy,
         S3Service,
+        MailService,
       ],
     }).compile();
 
     authService = moduleRef.get<AuthService>(AuthService);
-    jwtService = moduleRef.get<JwtService>(JwtService);
+    userService = moduleRef.get<UserService>(UserService);
     prismaService = moduleRef.get<PrismaService>(PrismaService);
+    jwtService = moduleRef.get<JwtService>(JwtService);
 
     user = await prismaService.user.create({
       data: {
         id: 1331,
         email: "ealiyev12125@ada.edu.az",
-        phone: "504206878",
+        phone: "+994504206878",
         password: "jarvissa",
         role: Role.CUSTOMER,
         customer: {
@@ -75,7 +77,7 @@ describe("AuthService", () => {
 
   describe("validateUser", () => {
     it("should return user with undefined password given email and password are valid", async () => {
-      prismaService.user.findUnique = jest.fn().mockReturnValue({
+      userService.findUnique = jest.fn().mockReturnValue({
         email: "kibrahimli7825@ada.edu.az",
         password:
           "$2b$13$sP4JN2BTLSI7qZsPDWNDAOyBnXvfUbmTIkiYb4IHnAnTiPoLrl1Q2",
@@ -87,11 +89,11 @@ describe("AuthService", () => {
       );
 
       expect(result).toBeDefined();
-      expect(result.password).toBeUndefined();
+      expect((result as any).password).toBeUndefined();
     });
 
     it("should return null given email and password are invalid", async () => {
-      prismaService.user.findUnique = jest.fn().mockReturnValue({
+      userService.findUnique = jest.fn().mockReturnValue({
         email: "kibrahimli7825@ada.edu.az",
         password:
           "$2b$13$sP4JN2BTLSI7qZsPDWNDAOyBnXvfUbmTIkiYb4IHnAnTiPoLrl1Q2",
@@ -106,12 +108,25 @@ describe("AuthService", () => {
     });
   });
 
+  describe("register", () => {
+    it("should register user", async () => {
+      const user = await authService.register({
+        email: "auth@test.com",
+        phone: "+994555555555",
+        password: "qwerty123",
+        role: Role.CUSTOMER,
+      });
+
+      expect(user.role).toEqual(Role.CUSTOMER);
+    });
+  });
+
   describe("login", () => {
     it("should return user and accessToken given a user payload", async () => {
       const user = {
         id: 7825,
         email: "kibrahimli7825@ada.edu.az",
-        phone: "702496971",
+        phone: "+994702496971",
         role: Role.CUSTOMER,
         confirmed: true,
         status: Status.ACTIVE,
@@ -130,21 +145,7 @@ describe("AuthService", () => {
 
       const result = await authService.login(user);
 
-      expect(result.user).toBeDefined();
       expect(result.accessToken).toBeDefined();
-    });
-  });
-
-  describe("register", () => {
-    it("should register user", async () => {
-      const user = await authService.register({
-        email: "auth@test.com",
-        phone: "555555555",
-        password: "qwerty123",
-        role: Role.CUSTOMER,
-      });
-
-      expect(user.email).toBe("auth@test.com");
     });
   });
 
@@ -157,7 +158,7 @@ describe("AuthService", () => {
       const hash = Buffer.from(accessToken, "utf8").toString("hex");
       const result = await authService.confirmEmail(hash);
 
-      expect(result.user.confirmed).toBe(true);
+      expect(result.accessToken).toBeDefined();
     });
   });
 });

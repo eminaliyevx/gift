@@ -3,9 +3,8 @@ import { BadRequestException, Injectable } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { JwtService } from "@nestjs/jwt";
 import { randomUUID } from "crypto";
-import { Account, AccountWithoutPassword } from "local-types";
+import { AccountWithoutPassword } from "local-types";
 import { MailService } from "src/mail/mail.service";
-import { PrismaService } from "src/prisma/prisma.service";
 import { S3Service } from "src/s3/s3.service";
 import { CreateUserDto } from "src/user/dto/create-user.dto";
 import { UpdateUserDto } from "src/user/dto/update-user.dto";
@@ -15,12 +14,11 @@ import { compare } from "src/utils/bcrypt.util";
 @Injectable()
 export class AuthService {
   constructor(
+    private readonly configService: ConfigService,
     private readonly userService: UserService,
     private readonly jwtService: JwtService,
-    private readonly mailService: MailService,
-    private readonly prismaService: PrismaService,
     private readonly s3Service: S3Service,
-    private readonly configService: ConfigService,
+    private readonly mailService: MailService,
   ) {}
 
   async validateUser(email: string, password: string) {
@@ -30,27 +28,98 @@ export class AuthService {
     });
 
     if (user && compare(password, user.password)) {
-      delete user.password;
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+      const { password, ...rest } = user;
 
-      return user;
+      return rest;
     }
 
     return null;
-  }
-
-  async login(user: AccountWithoutPassword) {
-    return {
-      user,
-      accessToken: this.jwtService.sign(user),
-    };
   }
 
   async register(createUserDto: CreateUserDto) {
     return this.userService.register(createUserDto);
   }
 
-  async sendConfirmationEmail(account: Account) {
-    delete account.password;
+  async login(user: AccountWithoutPassword) {
+    return {
+      accessToken: this.jwtService.sign(user),
+    };
+  }
+
+  async getAccount(userId: number) {
+    // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    const { password, ...rest } = await this.userService.findUnique({
+      where: { id: userId },
+      include: {
+        customer: true,
+        business: true,
+        image: true,
+      },
+    });
+
+    return rest;
+  }
+
+  async updateAccount(
+    userId: number,
+    updateUserDto: UpdateUserDto,
+    image?: Express.Multer.File,
+  ) {
+    const _user = await this.userService.findUnique({
+      where: { id: userId },
+      select: { image: true },
+    });
+
+    const key =
+      image &&
+      `user-images/${userId}-${randomUUID()}.${image.originalname
+        .split(".")
+        .pop()}`;
+    const url =
+      image && `${this.configService.get<string>("SPACES_CDN_ENDPOINT")}${key}`;
+
+    try {
+      if (image) {
+        await this.s3Service.send(
+          new PutObjectCommand({
+            Bucket: this.configService.get<string>("SPACES_BUCKET"),
+            Key: key,
+            Body: image.buffer,
+            ContentLength: image.size,
+            ACL: "public-read",
+          }),
+        );
+      }
+
+      return this.userService.update({
+        data: {
+          email: updateUserDto.email,
+          phone: updateUserDto.phone,
+          image: image
+            ? {
+                delete: !!_user.image,
+                create: { key, url },
+              }
+            : undefined,
+        },
+        where: { id: userId },
+        select: {
+          id: true,
+          role: true,
+          status: true,
+          createdAt: true,
+          updatedAt: true,
+        },
+      });
+    } catch {
+      throw new BadRequestException();
+    }
+  }
+
+  async sendConfirmationEmail(userId: number) {
+    const account = await this.getAccount(userId);
+
     account.confirmed = true;
 
     const accessToken = this.jwtService.sign(account);
@@ -66,81 +135,32 @@ export class AuthService {
 
   async confirmEmail(hash: string) {
     const accessToken = Buffer.from(hash, "hex").toString("utf8");
-    const account = this.jwtService.verify(accessToken) as Account;
-
-    if (account) {
-      const user = await this.userService.update({
-        data: { confirmed: account.confirmed },
-        where: { email: account.email },
-        include: {
-          customer: true,
-          business: true,
-          image: true,
-        },
-      });
-
-      delete user.password;
-
-      return {
-        user,
-        accessToken: this.jwtService.sign(user),
-      };
-    } else {
-      throw new BadRequestException();
-    }
-  }
-
-  async updateUser(
-    userId: number,
-    updateUserDto: UpdateUserDto,
-    image?: Express.Multer.File,
-  ) {
-    const userImage = await this.prismaService.userImage.findUnique({
-      where: { userId },
-    });
-
-    const key =
-      image &&
-      `user-images/${userId}-${randomUUID()}.${image.originalname
-        .split(".")
-        .pop()}`;
-    const url =
-      image && `${this.configService.get<string>("SPACES_CDN_ENDPOINT")}${key}`;
 
     try {
-      image &&
-        (await this.s3Service.send(
-          new PutObjectCommand({
-            Bucket: this.configService.get<string>("SPACES_BUCKET"),
-            Key: key,
-            Body: image.buffer,
-            ContentLength: image.size,
-            ACL: "public-read",
-          }),
-        ));
-    } catch {
+      const account = await this.jwtService.verifyAsync<AccountWithoutPassword>(
+        accessToken,
+      );
+
+      if (account) {
+        // eslint-disable-next-line @typescript-eslint/no-unused-vars
+        const { password, ...rest } = await this.userService.update({
+          data: { confirmed: account.confirmed },
+          where: { id: account.id },
+          include: {
+            customer: true,
+            business: true,
+            image: true,
+          },
+        });
+
+        return {
+          accessToken: this.jwtService.sign(rest),
+        };
+      } else {
+        throw new BadRequestException();
+      }
+    } catch (error) {
       throw new BadRequestException();
     }
-
-    return this.prismaService.user.update({
-      data: {
-        ...updateUserDto,
-        image: image
-          ? {
-              delete: !!userImage,
-              create: {
-                key,
-                url,
-              },
-            }
-          : undefined,
-      },
-      where: { id: userId },
-      include: {
-        customer: true,
-        business: true,
-        image: true,
-      },
-    });
   }
 }

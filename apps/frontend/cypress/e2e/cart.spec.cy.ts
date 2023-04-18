@@ -21,6 +21,10 @@ describe("cart", () => {
 
     cy.get('input[placeholder="Location"]').type("Baku");
     cy.get('textarea[placeholder="Note"]').type("Note");
+    cy.get('input[placeholder="Card number"]').type("4242424242424242");
+    cy.get('input[placeholder="MM/YY"]').type("04/27");
+    cy.get('input[placeholder="CVC"]').type("123");
+
     cy.get("form").submit();
 
     cy.contains("Your order was successful");

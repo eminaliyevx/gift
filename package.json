@@ -5,6 +5,7 @@
     "prettier-plugin-organize-imports": "^3.2.2",
     "prisma": "^4.13.0",
     "turbo": "^1.9.3",
+    "typescript": "^5.0.4",
     "wait-on": "^7.0.1"
   },
   "scripts": {
@@ -28,6 +29,7 @@
     "packages/*"
   ],
   "dependencies": {
-    "@prisma/client": "^4.13.0"
+    "@prisma/client": "^4.13.0",
+    "perf_hooks": "^0.0.1"
   }
 }

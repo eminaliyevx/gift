@@ -1,42 +1,51 @@
 import { spawn } from "child_process";
-import FastSpeedtest from "fast-speedtest-api";
 import { appendFileSync, readFileSync, writeFileSync } from "fs";
 import os from "os";
 import { performance } from "perf_hooks";
 
-const SPEEDTEST = new FastSpeedtest({
-  token: "YXNkZmFzZGxmbnNkYWZoYXNkZmhrYWxm",
-  https: true,
-  unit: FastSpeedtest.UNITS.Mbps,
-});
-
-const NUM_OF_RUNS = 100;
+const NUM_OF_RUNS = 2;
 let data = [];
 
-const BUILD_TYPE = process.argv[2] || "no-tests";
+const DEPLOY_TYPE = process.argv[2] || "no-tests-cache";
 
 try {
-  const buffer = readFileSync(`build_${BUILD_TYPE}.json`);
+  const buffer = readFileSync(`deploy_${DEPLOY_TYPE}.json`);
   data = JSON.parse(buffer);
 } catch {
   data = [];
 }
 
-async function getSpeed() {
-  try {
-    const speed = await SPEEDTEST.getSpeed();
+function getInternetSpeed() {
+  return new Promise((resolve, reject) => {
+    const child = spawn("speedtest-cli", ["--json"]);
+    let internetSpeed = null;
 
-    return speed;
-  } catch {
-    return null;
-  }
+    child.stdout.on("data", (data) => {
+      internetSpeed = JSON.parse(data).download / 1e6;
+    });
+
+    child.stderr.on("data", (_data) => {
+      internetSpeed = null;
+    });
+
+    child.on("close", (code) => {
+      if (code !== 0) {
+        reject(null);
+      } else {
+        resolve(internetSpeed);
+      }
+    });
+  });
 }
 
-function runBuild(num) {
+function runDeploy(num) {
   return new Promise(async (resolve, reject) => {
-    const internetSpeed = await getSpeed();
+    const internetSpeed = DEPLOY_TYPE.includes("no-cache")
+      ? await getInternetSpeed()
+      : undefined;
+
     const start = performance.now();
-    const child = spawn("npm", ["run", `build:${BUILD_TYPE}`]);
+    const child = spawn("npm", ["run", `deploy:${DEPLOY_TYPE}`]);
 
     let stdout = "";
     let stderr = "";
@@ -51,13 +60,13 @@ function runBuild(num) {
 
     child.on("close", (code) => {
       const end = performance.now();
-      const time = end - start;
+      const time = (end - start) / 1000;
 
       if (code !== 0) {
         reject(new Error(`Process exited with code ${code}`));
       } else {
         data.push({
-          time: time,
+          time,
           type: os.type(),
           arch: os.arch(),
           model: os.cpus()[0].model,
@@ -67,7 +76,7 @@ function runBuild(num) {
 
         const log = `
           ===============================
-          Build run: ${num}
+          Deploy run: ${num}
           ===============================
           Standard output
           ===============================
@@ -77,19 +86,19 @@ function runBuild(num) {
           ===============================
           ${stderr}
           ===============================
-          Completed in ${time / 1000} seconds
+          Completed in ${time} seconds
           ===============================
           OS name: ${os.type()}
           OS CPU architecture: ${os.arch()}
           CPU model: ${os.cpus()[0].model}
           CPU speed: ${os.cpus()[0].speed}
-          Internet speed: ${internetSpeed} Mbps
+          ${internetSpeed ? `Internet speed: ${internetSpeed} Mbps` : ""}
           ===============================
         `;
 
         try {
-          writeFileSync(`build_${BUILD_TYPE}.json`, JSON.stringify(data));
-          appendFileSync(`build_${BUILD_TYPE}.log`, log);
+          writeFileSync(`deploy_${DEPLOY_TYPE}.json`, JSON.stringify(data));
+          appendFileSync(`deploy_${DEPLOY_TYPE}.log`, log);
 
           resolve();
         } catch (error) {
@@ -100,13 +109,13 @@ function runBuild(num) {
   });
 }
 
-async function runBuilds() {
+async function runDeploys() {
   for (let i = 1; i <= NUM_OF_RUNS; i++) {
-    console.log(`Running build ${i} of ${NUM_OF_RUNS}`);
-    await runBuild(i);
+    console.log(`Running deploy ${i} of ${NUM_OF_RUNS}`);
+    await runDeploy(i);
   }
 }
 
-runBuilds()
-  .then(() => console.log("All builds completed"))
+runDeploys()
+  .then(() => console.log("All deploys completed"))
   .catch((err) => console.error(err));

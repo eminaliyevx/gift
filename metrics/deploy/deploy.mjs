@@ -3,7 +3,7 @@ import { appendFileSync, readFileSync, writeFileSync } from "fs";
 import os from "os";
 import { performance } from "perf_hooks";
 
-const NUM_OF_RUNS = 2;
+const NUM_OF_RUNS = 100;
 let data = [];
 
 const DEPLOY_TYPE = process.argv[2] || "no-tests-cache";

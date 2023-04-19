@@ -1,10 +1,7 @@
-node_modules
+**/node_modules
+**/dist
 .git
 .env.test
 .env.development
 .env.production
-docker.env
-docker-test.dev
-docker-development.env
-docker-compose-test.yml
-docker-compose-development.yml
+.env.sample

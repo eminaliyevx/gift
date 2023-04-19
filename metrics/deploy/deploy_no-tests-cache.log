@@ -1,0 +1,6405 @@
+
+          ===============================
+          Deploy run: 1
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.6s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [3/6] WORKDIR /usr/src/app
+#6 CACHED
+
+#7 [4/6] COPY . .
+#7 CACHED
+
+#8 [5/6] RUN npm install
+#8 CACHED
+
+#9 [2/6] RUN apk add --no-cache libc6-compat
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.6078326909989118 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 2
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [2/6] RUN apk add --no-cache libc6-compat
+#6 CACHED
+
+#7 [4/6] COPY . .
+#7 CACHED
+
+#8 [3/6] WORKDIR /usr/src/app
+#8 CACHED
+
+#9 [5/6] RUN npm install
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.201010161999613 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 3
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [2/6] RUN apk add --no-cache libc6-compat
+#6 CACHED
+
+#7 [3/6] WORKDIR /usr/src/app
+#7 CACHED
+
+#8 [4/6] COPY . .
+#8 CACHED
+
+#9 [5/6] RUN npm install
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.2041132570020854 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 4
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [4/6] COPY . .
+#6 CACHED
+
+#7 [2/6] RUN apk add --no-cache libc6-compat
+#7 CACHED
+
+#8 [3/6] WORKDIR /usr/src/app
+#8 CACHED
+
+#9 [5/6] RUN npm install
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.1843237279988825 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 5
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [3/6] WORKDIR /usr/src/app
+#6 CACHED
+
+#7 [4/6] COPY . .
+#7 CACHED
+
+#8 [5/6] RUN npm install
+#8 CACHED
+
+#9 [2/6] RUN apk add --no-cache libc6-compat
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.201092443998903 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 6
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [2/6] RUN apk add --no-cache libc6-compat
+#6 CACHED
+
+#7 [3/6] WORKDIR /usr/src/app
+#7 CACHED
+
+#8 [4/6] COPY . .
+#8 CACHED
+
+#9 [5/6] RUN npm install
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.2153112099990249 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 7
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [4/6] COPY . .
+#6 CACHED
+
+#7 [3/6] WORKDIR /usr/src/app
+#7 CACHED
+
+#8 [5/6] RUN npm install
+#8 CACHED
+
+#9 [2/6] RUN apk add --no-cache libc6-compat
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.2106187609992922 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 8
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [2/6] RUN apk add --no-cache libc6-compat
+#6 CACHED
+
+#7 [3/6] WORKDIR /usr/src/app
+#7 CACHED
+
+#8 [4/6] COPY . .
+#8 CACHED
+
+#9 [5/6] RUN npm install
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.167439338002354 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 9
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [3/6] WORKDIR /usr/src/app
+#6 CACHED
+
+#7 [2/6] RUN apk add --no-cache libc6-compat
+#7 CACHED
+
+#8 [4/6] COPY . .
+#8 CACHED
+
+#9 [5/6] RUN npm install
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.201326535001397 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 10
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [2/6] RUN apk add --no-cache libc6-compat
+#6 CACHED
+
+#7 [3/6] WORKDIR /usr/src/app
+#7 CACHED
+
+#8 [4/6] COPY . .
+#8 CACHED
+
+#9 [5/6] RUN npm install
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.1778759160004557 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 11
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [2/6] RUN apk add --no-cache libc6-compat
+#6 CACHED
+
+#7 [3/6] WORKDIR /usr/src/app
+#7 CACHED
+
+#8 [4/6] COPY . .
+#8 CACHED
+
+#9 [5/6] RUN npm install
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.1992978370003402 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 12
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [2/6] RUN apk add --no-cache libc6-compat
+#6 CACHED
+
+#7 [3/6] WORKDIR /usr/src/app
+#7 CACHED
+
+#8 [4/6] COPY . .
+#8 CACHED
+
+#9 [5/6] RUN npm install
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.1885786219984293 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 13
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [2/6] RUN apk add --no-cache libc6-compat
+#6 CACHED
+
+#7 [3/6] WORKDIR /usr/src/app
+#7 CACHED
+
+#8 [4/6] COPY . .
+#8 CACHED
+
+#9 [5/6] RUN npm install
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.1784944179989398 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 14
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [4/6] COPY . .
+#6 CACHED
+
+#7 [3/6] WORKDIR /usr/src/app
+#7 CACHED
+
+#8 [5/6] RUN npm install
+#8 CACHED
+
+#9 [2/6] RUN apk add --no-cache libc6-compat
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.1985567019991576 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 15
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [3/6] WORKDIR /usr/src/app
+#6 CACHED
+
+#7 [4/6] COPY . .
+#7 CACHED
+
+#8 [5/6] RUN npm install
+#8 CACHED
+
+#9 [2/6] RUN apk add --no-cache libc6-compat
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.1735038180015982 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 16
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [2/6] RUN apk add --no-cache libc6-compat
+#6 CACHED
+
+#7 [3/6] WORKDIR /usr/src/app
+#7 CACHED
+
+#8 [4/6] COPY . .
+#8 CACHED
+
+#9 [5/6] RUN npm install
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.1750521660000086 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 17
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [3/6] WORKDIR /usr/src/app
+#6 CACHED
+
+#7 [4/6] COPY . .
+#7 CACHED
+
+#8 [5/6] RUN npm install
+#8 CACHED
+
+#9 [2/6] RUN apk add --no-cache libc6-compat
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.1713209990002216 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 18
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [2/6] RUN apk add --no-cache libc6-compat
+#6 CACHED
+
+#7 [3/6] WORKDIR /usr/src/app
+#7 CACHED
+
+#8 [4/6] COPY . .
+#8 CACHED
+
+#9 [5/6] RUN npm install
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.1947722589969636 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 19
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [2/6] RUN apk add --no-cache libc6-compat
+#6 CACHED
+
+#7 [3/6] WORKDIR /usr/src/app
+#7 CACHED
+
+#8 [5/6] RUN npm install
+#8 CACHED
+
+#9 [4/6] COPY . .
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.1849818050004541 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 20
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [3/6] WORKDIR /usr/src/app
+#6 CACHED
+
+#7 [4/6] COPY . .
+#7 CACHED
+
+#8 [5/6] RUN npm install
+#8 CACHED
+
+#9 [2/6] RUN apk add --no-cache libc6-compat
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.2395539310015737 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 21
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [2/6] RUN apk add --no-cache libc6-compat
+#6 CACHED
+
+#7 [3/6] WORKDIR /usr/src/app
+#7 CACHED
+
+#8 [4/6] COPY . .
+#8 CACHED
+
+#9 [5/6] RUN npm install
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.1886979180015624 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 22
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [4/6] COPY . .
+#6 CACHED
+
+#7 [2/6] RUN apk add --no-cache libc6-compat
+#7 CACHED
+
+#8 [5/6] RUN npm install
+#8 CACHED
+
+#9 [3/6] WORKDIR /usr/src/app
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.3195938050001859 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 23
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [3/6] WORKDIR /usr/src/app
+#6 CACHED
+
+#7 [2/6] RUN apk add --no-cache libc6-compat
+#7 CACHED
+
+#8 [4/6] COPY . .
+#8 CACHED
+
+#9 [5/6] RUN npm install
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.2785866659991443 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 24
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [4/6] COPY . .
+#6 CACHED
+
+#7 [5/6] RUN npm install
+#7 CACHED
+
+#8 [2/6] RUN apk add --no-cache libc6-compat
+#8 CACHED
+
+#9 [3/6] WORKDIR /usr/src/app
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.193637961998582 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 25
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [3/6] WORKDIR /usr/src/app
+#6 CACHED
+
+#7 [4/6] COPY . .
+#7 CACHED
+
+#8 [5/6] RUN npm install
+#8 CACHED
+
+#9 [2/6] RUN apk add --no-cache libc6-compat
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.192181386999786 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 26
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [2/6] RUN apk add --no-cache libc6-compat
+#6 CACHED
+
+#7 [3/6] WORKDIR /usr/src/app
+#7 CACHED
+
+#8 [4/6] COPY . .
+#8 CACHED
+
+#9 [5/6] RUN npm install
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.213984596002847 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 27
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [2/6] RUN apk add --no-cache libc6-compat
+#6 CACHED
+
+#7 [3/6] WORKDIR /usr/src/app
+#7 CACHED
+
+#8 [4/6] COPY . .
+#8 CACHED
+
+#9 [5/6] RUN npm install
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.1872316029965877 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 28
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.3s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [2/6] RUN apk add --no-cache libc6-compat
+#6 CACHED
+
+#7 [3/6] WORKDIR /usr/src/app
+#7 CACHED
+
+#8 [4/6] COPY . .
+#8 CACHED
+
+#9 [5/6] RUN npm install
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.351571687001735 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 29
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [5/6] RUN npm install
+#6 CACHED
+
+#7 [2/6] RUN apk add --no-cache libc6-compat
+#7 CACHED
+
+#8 [3/6] WORKDIR /usr/src/app
+#8 CACHED
+
+#9 [4/6] COPY . .
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.3210768090002238 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 30
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [3/6] WORKDIR /usr/src/app
+#6 CACHED
+
+#7 [5/6] RUN npm install
+#7 CACHED
+
+#8 [2/6] RUN apk add --no-cache libc6-compat
+#8 CACHED
+
+#9 [4/6] COPY . .
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.2333260120004415 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 31
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [4/6] COPY . .
+#6 CACHED
+
+#7 [5/6] RUN npm install
+#7 CACHED
+
+#8 [3/6] WORKDIR /usr/src/app
+#8 CACHED
+
+#9 [2/6] RUN apk add --no-cache libc6-compat
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.3039747609980403 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 32
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [2/6] RUN apk add --no-cache libc6-compat
+#6 CACHED
+
+#7 [3/6] WORKDIR /usr/src/app
+#7 CACHED
+
+#8 [4/6] COPY . .
+#8 CACHED
+
+#9 [5/6] RUN npm install
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.1838464880026878 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 33
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.3s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [4/6] COPY . .
+#6 CACHED
+
+#7 [2/6] RUN apk add --no-cache libc6-compat
+#7 CACHED
+
+#8 [3/6] WORKDIR /usr/src/app
+#8 CACHED
+
+#9 [5/6] RUN npm install
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.2888993750028312 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 34
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [3/6] WORKDIR /usr/src/app
+#6 CACHED
+
+#7 [4/6] COPY . .
+#7 CACHED
+
+#8 [5/6] RUN npm install
+#8 CACHED
+
+#9 [2/6] RUN apk add --no-cache libc6-compat
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.2369396860003472 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 35
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [4/6] COPY . .
+#6 CACHED
+
+#7 [2/6] RUN apk add --no-cache libc6-compat
+#7 CACHED
+
+#8 [3/6] WORKDIR /usr/src/app
+#8 CACHED
+
+#9 [5/6] RUN npm install
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.337319414999336 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 36
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.3s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [2/6] RUN apk add --no-cache libc6-compat
+#6 CACHED
+
+#7 [3/6] WORKDIR /usr/src/app
+#7 CACHED
+
+#8 [5/6] RUN npm install
+#8 CACHED
+
+#9 [4/6] COPY . .
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.3656182290017604 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 37
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [4/6] COPY . .
+#6 CACHED
+
+#7 [2/6] RUN apk add --no-cache libc6-compat
+#7 CACHED
+
+#8 [3/6] WORKDIR /usr/src/app
+#8 CACHED
+
+#9 [5/6] RUN npm install
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.2846868359968067 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 38
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [2/6] RUN apk add --no-cache libc6-compat
+#6 CACHED
+
+#7 [3/6] WORKDIR /usr/src/app
+#7 CACHED
+
+#8 [5/6] RUN npm install
+#8 CACHED
+
+#9 [4/6] COPY . .
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.2453375220000744 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 39
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [4/6] COPY . .
+#6 CACHED
+
+#7 [5/6] RUN npm install
+#7 CACHED
+
+#8 [3/6] WORKDIR /usr/src/app
+#8 CACHED
+
+#9 [2/6] RUN apk add --no-cache libc6-compat
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.256420165002346 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 40
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [2/6] RUN apk add --no-cache libc6-compat
+#6 CACHED
+
+#7 [3/6] WORKDIR /usr/src/app
+#7 CACHED
+
+#8 [4/6] COPY . .
+#8 CACHED
+
+#9 [5/6] RUN npm install
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.2041405670009553 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 41
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [3/6] WORKDIR /usr/src/app
+#6 CACHED
+
+#7 [2/6] RUN apk add --no-cache libc6-compat
+#7 CACHED
+
+#8 [4/6] COPY . .
+#8 CACHED
+
+#9 [5/6] RUN npm install
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.2255700759999455 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 42
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.4s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [3/6] WORKDIR /usr/src/app
+#6 CACHED
+
+#7 [4/6] COPY . .
+#7 CACHED
+
+#8 [5/6] RUN npm install
+#8 CACHED
+
+#9 [2/6] RUN apk add --no-cache libc6-compat
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.4668159190006553 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 43
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [2/6] RUN apk add --no-cache libc6-compat
+#6 CACHED
+
+#7 [3/6] WORKDIR /usr/src/app
+#7 CACHED
+
+#8 [4/6] COPY . .
+#8 CACHED
+
+#9 [5/6] RUN npm install
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.229232175000012 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 44
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [2/6] RUN apk add --no-cache libc6-compat
+#6 CACHED
+
+#7 [3/6] WORKDIR /usr/src/app
+#7 CACHED
+
+#8 [4/6] COPY . .
+#8 CACHED
+
+#9 [5/6] RUN npm install
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.1918925269991159 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 45
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [3/6] WORKDIR /usr/src/app
+#6 CACHED
+
+#7 [2/6] RUN apk add --no-cache libc6-compat
+#7 CACHED
+
+#8 [4/6] COPY . .
+#8 CACHED
+
+#9 [5/6] RUN npm install
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.2152440299987792 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 46
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [3/6] WORKDIR /usr/src/app
+#6 CACHED
+
+#7 [4/6] COPY . .
+#7 CACHED
+
+#8 [5/6] RUN npm install
+#8 CACHED
+
+#9 [2/6] RUN apk add --no-cache libc6-compat
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.2875581030026078 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 47
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [4/6] COPY . .
+#6 CACHED
+
+#7 [5/6] RUN npm install
+#7 CACHED
+
+#8 [3/6] WORKDIR /usr/src/app
+#8 CACHED
+
+#9 [2/6] RUN apk add --no-cache libc6-compat
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.2647158790007234 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 48
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [2/6] RUN apk add --no-cache libc6-compat
+#6 CACHED
+
+#7 [3/6] WORKDIR /usr/src/app
+#7 CACHED
+
+#8 [5/6] RUN npm install
+#8 CACHED
+
+#9 [4/6] COPY . .
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.1948820029981435 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 49
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [3/6] WORKDIR /usr/src/app
+#6 CACHED
+
+#7 [2/6] RUN apk add --no-cache libc6-compat
+#7 CACHED
+
+#8 [4/6] COPY . .
+#8 CACHED
+
+#9 [5/6] RUN npm install
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.2721435260027647 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 50
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [4/6] COPY . .
+#6 CACHED
+
+#7 [2/6] RUN apk add --no-cache libc6-compat
+#7 CACHED
+
+#8 [3/6] WORKDIR /usr/src/app
+#8 CACHED
+
+#9 [5/6] RUN npm install
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.1920899069979787 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 51
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [5/6] RUN npm install
+#6 CACHED
+
+#7 [3/6] WORKDIR /usr/src/app
+#7 CACHED
+
+#8 [4/6] COPY . .
+#8 CACHED
+
+#9 [2/6] RUN apk add --no-cache libc6-compat
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.1856586930006743 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 52
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [4/6] COPY . .
+#6 CACHED
+
+#7 [5/6] RUN npm install
+#7 CACHED
+
+#8 [2/6] RUN apk add --no-cache libc6-compat
+#8 CACHED
+
+#9 [3/6] WORKDIR /usr/src/app
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.187633276000619 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 53
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [5/6] RUN npm install
+#6 CACHED
+
+#7 [3/6] WORKDIR /usr/src/app
+#7 CACHED
+
+#8 [4/6] COPY . .
+#8 CACHED
+
+#9 [2/6] RUN apk add --no-cache libc6-compat
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.196229090001434 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 54
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [2/6] RUN apk add --no-cache libc6-compat
+#6 CACHED
+
+#7 [3/6] WORKDIR /usr/src/app
+#7 CACHED
+
+#8 [4/6] COPY . .
+#8 CACHED
+
+#9 [5/6] RUN npm install
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.1591397970020771 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 55
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [4/6] COPY . .
+#6 CACHED
+
+#7 [5/6] RUN npm install
+#7 CACHED
+
+#8 [2/6] RUN apk add --no-cache libc6-compat
+#8 CACHED
+
+#9 [3/6] WORKDIR /usr/src/app
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.2062322699986399 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 56
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [2/6] RUN apk add --no-cache libc6-compat
+#6 CACHED
+
+#7 [3/6] WORKDIR /usr/src/app
+#7 CACHED
+
+#8 [4/6] COPY . .
+#8 CACHED
+
+#9 [5/6] RUN npm install
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.163976299997419 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 57
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [5/6] RUN npm install
+#6 CACHED
+
+#7 [3/6] WORKDIR /usr/src/app
+#7 CACHED
+
+#8 [4/6] COPY . .
+#8 CACHED
+
+#9 [2/6] RUN apk add --no-cache libc6-compat
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.209205771997571 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 58
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [5/6] RUN npm install
+#6 CACHED
+
+#7 [2/6] RUN apk add --no-cache libc6-compat
+#7 CACHED
+
+#8 [3/6] WORKDIR /usr/src/app
+#8 CACHED
+
+#9 [4/6] COPY . .
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.1920256160013378 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 59
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [2/6] RUN apk add --no-cache libc6-compat
+#6 CACHED
+
+#7 [3/6] WORKDIR /usr/src/app
+#7 CACHED
+
+#8 [4/6] COPY . .
+#8 CACHED
+
+#9 [5/6] RUN npm install
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.1925290369987487 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 60
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [4/6] COPY . .
+#6 CACHED
+
+#7 [5/6] RUN npm install
+#7 CACHED
+
+#8 [2/6] RUN apk add --no-cache libc6-compat
+#8 CACHED
+
+#9 [3/6] WORKDIR /usr/src/app
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.1814921690002085 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 61
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [2/6] RUN apk add --no-cache libc6-compat
+#6 CACHED
+
+#7 [3/6] WORKDIR /usr/src/app
+#7 CACHED
+
+#8 [4/6] COPY . .
+#8 CACHED
+
+#9 [5/6] RUN npm install
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.1824423580020667 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 62
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [3/6] WORKDIR /usr/src/app
+#6 CACHED
+
+#7 [2/6] RUN apk add --no-cache libc6-compat
+#7 CACHED
+
+#8 [4/6] COPY . .
+#8 CACHED
+
+#9 [5/6] RUN npm install
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.199353627000004 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 63
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [4/6] COPY . .
+#6 CACHED
+
+#7 [2/6] RUN apk add --no-cache libc6-compat
+#7 CACHED
+
+#8 [3/6] WORKDIR /usr/src/app
+#8 CACHED
+
+#9 [5/6] RUN npm install
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.204608271997422 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 64
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [2/6] RUN apk add --no-cache libc6-compat
+#6 CACHED
+
+#7 [3/6] WORKDIR /usr/src/app
+#7 CACHED
+
+#8 [5/6] RUN npm install
+#8 CACHED
+
+#9 [4/6] COPY . .
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.1829969779998064 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 65
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [2/6] RUN apk add --no-cache libc6-compat
+#6 CACHED
+
+#7 [4/6] COPY . .
+#7 CACHED
+
+#8 [5/6] RUN npm install
+#8 CACHED
+
+#9 [3/6] WORKDIR /usr/src/app
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.1969758860021829 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 66
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [3/6] WORKDIR /usr/src/app
+#6 CACHED
+
+#7 [2/6] RUN apk add --no-cache libc6-compat
+#7 CACHED
+
+#8 [5/6] RUN npm install
+#8 CACHED
+
+#9 [4/6] COPY . .
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.228263956002891 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 67
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [4/6] COPY . .
+#6 CACHED
+
+#7 [3/6] WORKDIR /usr/src/app
+#7 CACHED
+
+#8 [2/6] RUN apk add --no-cache libc6-compat
+#8 CACHED
+
+#9 [5/6] RUN npm install
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.1820678899995982 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 68
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [2/6] RUN apk add --no-cache libc6-compat
+#6 CACHED
+
+#7 [4/6] COPY . .
+#7 CACHED
+
+#8 [5/6] RUN npm install
+#8 CACHED
+
+#9 [3/6] WORKDIR /usr/src/app
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.168674308001995 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 69
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [3/6] WORKDIR /usr/src/app
+#6 CACHED
+
+#7 [2/6] RUN apk add --no-cache libc6-compat
+#7 CACHED
+
+#8 [5/6] RUN npm install
+#8 CACHED
+
+#9 [4/6] COPY . .
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.1851440179981292 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 70
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [2/6] RUN apk add --no-cache libc6-compat
+#6 CACHED
+
+#7 [3/6] WORKDIR /usr/src/app
+#7 CACHED
+
+#8 [5/6] RUN npm install
+#8 CACHED
+
+#9 [4/6] COPY . .
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.2620428720004857 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 71
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [4/6] COPY . .
+#6 CACHED
+
+#7 [2/6] RUN apk add --no-cache libc6-compat
+#7 CACHED
+
+#8 [3/6] WORKDIR /usr/src/app
+#8 CACHED
+
+#9 [5/6] RUN npm install
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.184190391998738 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 72
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [4/6] COPY . .
+#6 CACHED
+
+#7 [5/6] RUN npm install
+#7 CACHED
+
+#8 [2/6] RUN apk add --no-cache libc6-compat
+#8 CACHED
+
+#9 [3/6] WORKDIR /usr/src/app
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.1616777630001307 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 73
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [2/6] RUN apk add --no-cache libc6-compat
+#6 CACHED
+
+#7 [3/6] WORKDIR /usr/src/app
+#7 CACHED
+
+#8 [4/6] COPY . .
+#8 CACHED
+
+#9 [5/6] RUN npm install
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.2018234459981323 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 74
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [2/6] RUN apk add --no-cache libc6-compat
+#6 CACHED
+
+#7 [3/6] WORKDIR /usr/src/app
+#7 CACHED
+
+#8 [4/6] COPY . .
+#8 CACHED
+
+#9 [5/6] RUN npm install
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.180244550999254 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 75
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [2/6] RUN apk add --no-cache libc6-compat
+#6 CACHED
+
+#7 [3/6] WORKDIR /usr/src/app
+#7 CACHED
+
+#8 [4/6] COPY . .
+#8 CACHED
+
+#9 [5/6] RUN npm install
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.1818003720007837 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 76
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [5/6] RUN npm install
+#6 CACHED
+
+#7 [2/6] RUN apk add --no-cache libc6-compat
+#7 CACHED
+
+#8 [3/6] WORKDIR /usr/src/app
+#8 CACHED
+
+#9 [4/6] COPY . .
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.1940969960018992 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 77
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.3s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [2/6] RUN apk add --no-cache libc6-compat
+#6 CACHED
+
+#7 [4/6] COPY . .
+#7 CACHED
+
+#8 [5/6] RUN npm install
+#8 CACHED
+
+#9 [3/6] WORKDIR /usr/src/app
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.229593015000224 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 78
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.3s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [3/6] WORKDIR /usr/src/app
+#6 CACHED
+
+#7 [4/6] COPY . .
+#7 CACHED
+
+#8 [5/6] RUN npm install
+#8 CACHED
+
+#9 [2/6] RUN apk add --no-cache libc6-compat
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.265242364000529 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 79
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [2/6] RUN apk add --no-cache libc6-compat
+#6 CACHED
+
+#7 [3/6] WORKDIR /usr/src/app
+#7 CACHED
+
+#8 [4/6] COPY . .
+#8 CACHED
+
+#9 [5/6] RUN npm install
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.1715937419980764 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 80
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [5/6] RUN npm install
+#6 CACHED
+
+#7 [2/6] RUN apk add --no-cache libc6-compat
+#7 CACHED
+
+#8 [3/6] WORKDIR /usr/src/app
+#8 CACHED
+
+#9 [4/6] COPY . .
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.1792496609985827 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 81
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [4/6] COPY . .
+#6 CACHED
+
+#7 [5/6] RUN npm install
+#7 CACHED
+
+#8 [2/6] RUN apk add --no-cache libc6-compat
+#8 CACHED
+
+#9 [3/6] WORKDIR /usr/src/app
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.1606631599999964 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 82
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [5/6] RUN npm install
+#6 CACHED
+
+#7 [3/6] WORKDIR /usr/src/app
+#7 CACHED
+
+#8 [4/6] COPY . .
+#8 CACHED
+
+#9 [2/6] RUN apk add --no-cache libc6-compat
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 0.0s done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.2073887870013713 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 83
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [2/6] RUN apk add --no-cache libc6-compat
+#6 CACHED
+
+#7 [3/6] WORKDIR /usr/src/app
+#7 CACHED
+
+#8 [4/6] COPY . .
+#8 CACHED
+
+#9 [5/6] RUN npm install
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.193258297998458 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 84
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.9s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [2/6] RUN apk add --no-cache libc6-compat
+#6 CACHED
+
+#7 [3/6] WORKDIR /usr/src/app
+#7 CACHED
+
+#8 [4/6] COPY . .
+#8 CACHED
+
+#9 [5/6] RUN npm install
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.7978767559975386 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 85
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [2/6] RUN apk add --no-cache libc6-compat
+#6 CACHED
+
+#7 [3/6] WORKDIR /usr/src/app
+#7 CACHED
+
+#8 [4/6] COPY . .
+#8 CACHED
+
+#9 [5/6] RUN npm install
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.1974707150012254 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 86
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [2/6] RUN apk add --no-cache libc6-compat
+#6 CACHED
+
+#7 [3/6] WORKDIR /usr/src/app
+#7 CACHED
+
+#8 [4/6] COPY . .
+#8 CACHED
+
+#9 [5/6] RUN npm install
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.2064820480011405 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 87
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [2/6] RUN apk add --no-cache libc6-compat
+#6 CACHED
+
+#7 [4/6] COPY . .
+#7 CACHED
+
+#8 [5/6] RUN npm install
+#8 CACHED
+
+#9 [3/6] WORKDIR /usr/src/app
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.2254019649997354 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 88
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [5/6] RUN npm install
+#6 CACHED
+
+#7 [4/6] COPY . .
+#7 CACHED
+
+#8 [2/6] RUN apk add --no-cache libc6-compat
+#8 CACHED
+
+#9 [3/6] WORKDIR /usr/src/app
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.181759548999369 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 89
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [2/6] RUN apk add --no-cache libc6-compat
+#6 CACHED
+
+#7 [3/6] WORKDIR /usr/src/app
+#7 CACHED
+
+#8 [4/6] COPY . .
+#8 CACHED
+
+#9 [5/6] RUN npm install
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.1896557959988714 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 90
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [2/6] RUN apk add --no-cache libc6-compat
+#6 CACHED
+
+#7 [3/6] WORKDIR /usr/src/app
+#7 CACHED
+
+#8 [4/6] COPY . .
+#8 CACHED
+
+#9 [5/6] RUN npm install
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.176689497999847 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 91
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [4/6] COPY . .
+#6 CACHED
+
+#7 [5/6] RUN npm install
+#7 CACHED
+
+#8 [2/6] RUN apk add --no-cache libc6-compat
+#8 CACHED
+
+#9 [3/6] WORKDIR /usr/src/app
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.2304304210022092 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 92
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [3/6] WORKDIR /usr/src/app
+#6 CACHED
+
+#7 [4/6] COPY . .
+#7 CACHED
+
+#8 [5/6] RUN npm install
+#8 CACHED
+
+#9 [2/6] RUN apk add --no-cache libc6-compat
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.1827933440022171 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 93
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [3/6] WORKDIR /usr/src/app
+#6 CACHED
+
+#7 [4/6] COPY . .
+#7 CACHED
+
+#8 [5/6] RUN npm install
+#8 CACHED
+
+#9 [2/6] RUN apk add --no-cache libc6-compat
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.2199947060011327 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 94
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [3/6] WORKDIR /usr/src/app
+#6 CACHED
+
+#7 [4/6] COPY . .
+#7 CACHED
+
+#8 [5/6] RUN npm install
+#8 CACHED
+
+#9 [2/6] RUN apk add --no-cache libc6-compat
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.1922911470010877 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 95
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [2/6] RUN apk add --no-cache libc6-compat
+#6 CACHED
+
+#7 [3/6] WORKDIR /usr/src/app
+#7 CACHED
+
+#8 [4/6] COPY . .
+#8 CACHED
+
+#9 [5/6] RUN npm install
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.2016871349997817 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 96
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [2/6] RUN apk add --no-cache libc6-compat
+#6 CACHED
+
+#7 [3/6] WORKDIR /usr/src/app
+#7 CACHED
+
+#8 [4/6] COPY . .
+#8 CACHED
+
+#9 [5/6] RUN npm install
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.1595324709974228 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 97
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [5/6] RUN npm install
+#6 CACHED
+
+#7 [2/6] RUN apk add --no-cache libc6-compat
+#7 CACHED
+
+#8 [3/6] WORKDIR /usr/src/app
+#8 CACHED
+
+#9 [4/6] COPY . .
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.1749253059998155 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 98
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [2/6] RUN apk add --no-cache libc6-compat
+#6 CACHED
+
+#7 [3/6] WORKDIR /usr/src/app
+#7 CACHED
+
+#8 [4/6] COPY . .
+#8 CACHED
+
+#9 [5/6] RUN npm install
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.1773907539993524 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 99
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [4/6] COPY . .
+#6 CACHED
+
+#7 [2/6] RUN apk add --no-cache libc6-compat
+#7 CACHED
+
+#8 [3/6] WORKDIR /usr/src/app
+#8 CACHED
+
+#9 [5/6] RUN npm install
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.1779448089972138 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        
+          ===============================
+          Deploy run: 100
+          ===============================
+          Standard output
+          ===============================
+          
+> deploy:no-tests-cache
+> docker compose build && docker compose up -d
+
+#1 [internal] load build definition from Dockerfile
+#1 transferring dockerfile: 32B done
+#1 DONE 0.0s
+
+#2 [internal] load .dockerignore
+#2 transferring context: 34B done
+#2 DONE 0.0s
+
+#3 [internal] load metadata for docker.io/library/node:18-alpine
+#3 DONE 0.2s
+
+#4 [1/6] FROM docker.io/library/node:18-alpine@sha256:ca5d399560a9d239cbfa28eec00417f1505e5e108f3ec6938d230767eaa81f61
+#4 DONE 0.0s
+
+#5 [internal] load build context
+#5 transferring context: 11.67kB done
+#5 DONE 0.0s
+
+#6 [3/6] WORKDIR /usr/src/app
+#6 CACHED
+
+#7 [4/6] COPY . .
+#7 CACHED
+
+#8 [5/6] RUN npm install
+#8 CACHED
+
+#9 [2/6] RUN apk add --no-cache libc6-compat
+#9 CACHED
+
+#10 [6/6] RUN npm run build
+#10 CACHED
+
+#11 exporting to image
+#11 exporting layers done
+#11 writing image sha256:b46cd7b9aac1f89454b35b9d39cfe921bf42316c9a7078c2c4ba790c809f02c3 done
+#11 naming to docker.io/library/gift-app done
+#11 DONE 0.0s
+
+          ===============================
+          Standard error
+          ===============================
+           Container gift-postgres-1  Running
+ Container gift-app-1  Running
+
+          ===============================
+          Completed in 1.1992070970013737 seconds
+          ===============================
+          OS name: Linux
+          OS CPU architecture: x64
+          CPU model: 12th Gen Intel(R) Core(TM) i7-12700H
+          CPU speed: 2688
+          
+          ===============================
+        

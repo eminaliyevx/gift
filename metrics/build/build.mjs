@@ -10,7 +10,7 @@ const SPEEDTEST = new FastSpeedtest({
   unit: FastSpeedtest.UNITS.Mbps,
 });
 
-const NUM_OF_RUNS = 1;
+const NUM_OF_RUNS = 100;
 let data = [];
 
 const BUILD_TYPE = process.argv[2] || "no-tests";

@@ -26,6 +26,7 @@
   ],
   "dependencies": {
     "@prisma/client": "^4.13.0",
+    "fast-speedtest-api": "^0.3.2",
     "perf_hooks": "^0.0.1"
   }
 }

@@ -15,14 +15,10 @@
     "kill:dev-test": "kill $(lsof -t -i :5174 -i :5000)",
     "reset:db": "docker compose -f docker-compose-test.yml up -d && node -e \"setTimeout(() => {}, 1000)\" && dotenv -e .env.test -- prisma migrate reset --force",
     "test": "npm run reset:db && (turbo run dev:test &) && wait-on http://localhost:5174/api/health && turbo run test --concurrency=1 && docker compose -f docker-compose-test.yml down && npm run kill:dev-test",
-    "build:no-tests-cache": "time docker compose build",
-    "build:no-tests-no-cache": "time docker compose build --no-cache",
-    "build:tests-cache": "time -p sh -c 'npm run test && docker compose build'",
-    "build:tests-no-cache": "time -p sh -c 'jest --clearCache && npm run test && docker compose build --no-cache'",
-    "deploy:no-tests-cache": "time -p sh -c 'docker compose build && docker compose up -d'",
-    "deploy:no-tests-no-cache": "time -p sh -c 'docker compose build --no-cache && docker compose up -d'",
-    "deploy:tests-cache": "time -p sh -c 'npm run test && docker compose build && docker compose up -d'",
-    "deploy:tests-no-cache": "time -p sh -c 'jest --clearCache && npm run test && docker compose build --no-cache && docker compose up -d'"
+    "build:no-tests": "docker compose build",
+    "build:tests": "npm run test && docker compose build",
+    "deploy:no-tests": "docker compose build && docker compose up -d",
+    "deploy:tests-cache": "npm run test && docker compose build && docker compose up -d"
   },
   "workspaces": [
     "apps/*",
@@ -30,6 +26,7 @@
   ],
   "dependencies": {
     "@prisma/client": "^4.13.0",
+    "fast-speedtest-api": "^0.3.2",
     "perf_hooks": "^0.0.1"
   }
 }

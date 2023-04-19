@@ -13,7 +13,6 @@ services:
     build:
       context: .
       dockerfile: Dockerfile
-    image: gift
     env_file:
       - .env.production
     ports:

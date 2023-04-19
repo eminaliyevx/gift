@@ -1,5 +1,5 @@
 import { spawn } from "child_process";
-import { appendFile } from "fs";
+import { appendFileSync, writeFileSync } from "fs";
 import os from "os";
 import { performance } from "perf_hooks";
 
@@ -58,13 +58,14 @@ function runTest(num) {
           ===============================
         `;
 
-        appendFile(`test.log`, log, (error) => {
-          if (error) {
-            reject(error);
-          } else {
-            resolve();
-          }
-        });
+        try {
+          writeFileSync("test.json", JSON.stringify(data));
+          appendFileSync("test.log", log);
+
+          resolve();
+        } catch (error) {
+          reject(error);
+        }
       }
     });
   });
@@ -78,13 +79,5 @@ async function runTests() {
 }
 
 runTests()
-  .then(() => {
-    appendFile(`test.json`, JSON.stringify(data), (error) => {
-      if (error) {
-        console.error(error);
-      } else {
-        console.log("Process completed");
-      }
-    });
-  })
+  .then(() => console.log("All tests completed"))
   .catch((err) => console.error(err));

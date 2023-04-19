@@ -1,10 +1,17 @@
 import { spawn } from "child_process";
-import { appendFileSync, writeFileSync } from "fs";
+import { appendFileSync, readFileSync, writeFileSync } from "fs";
 import os from "os";
 import { performance } from "perf_hooks";
 
 const NUM_OF_RUNS = 100;
-const data = [];
+let data;
+
+try {
+  const buffer = readFileSync("test.json");
+  data = JSON.parse(buffer);
+} catch {
+  data = [];
+}
 
 function runTest(num) {
   return new Promise((resolve, reject) => {
@@ -72,7 +79,7 @@ function runTest(num) {
 }
 
 async function runTests() {
-  for (let i = 1; i <= NUM_OF_RUNS; i++) {
+  for (let i = 3; i <= NUM_OF_RUNS; i++) {
     console.log(`Running test ${i} of ${NUM_OF_RUNS}`);
     await runTest(i);
   }

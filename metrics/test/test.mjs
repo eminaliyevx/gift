@@ -79,7 +79,7 @@ function runTest(num) {
 }
 
 async function runTests() {
-  for (let i = 3; i <= NUM_OF_RUNS; i++) {
+  for (let i = 1; i <= NUM_OF_RUNS; i++) {
     console.log(`Running test ${i} of ${NUM_OF_RUNS}`);
     await runTest(i);
   }

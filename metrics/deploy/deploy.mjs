@@ -22,7 +22,11 @@ function getInternetSpeed() {
 
     child.stdout.on("data", (data) => {
       try {
-        internetSpeed = JSON.parse(data).download / 1e6;
+        const parsed = JSON.parse(data);
+
+        if (parsed) {
+          internetSpeed = parsed.download / 1e6;
+        }
       } catch {
         internetSpeed = null;
       }

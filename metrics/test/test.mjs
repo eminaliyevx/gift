@@ -3,8 +3,9 @@ import { appendFileSync, readFileSync, writeFileSync } from "fs";
 import os from "os";
 import { performance } from "perf_hooks";
 
-const NUM_OF_RUNS = 100;
-let data;
+const NUM_OF_RUNS = parseInt(process.argv[2]) || 100;
+const START_RUN = parseInt(process.argv[3]) || 1;
+let data = [];
 
 try {
   const buffer = readFileSync("test.json");
@@ -31,13 +32,13 @@ function runTest(num) {
 
     child.on("close", (code) => {
       const end = performance.now();
-      const time = end - start;
+      const time = (end - start) / 1000;
 
       if (code !== 0) {
         reject(new Error(`Process exited with code ${code}`));
       } else {
         data.push({
-          time: time,
+          time,
           type: os.type(),
           arch: os.arch(),
           model: os.cpus()[0].model,
@@ -56,7 +57,7 @@ function runTest(num) {
           ===============================
           ${stderr}
           ===============================
-          Completed in ${time / 1000} seconds
+          Completed in ${time} seconds
           ===============================
           OS name: ${os.type()}
           OS CPU architecture: ${os.arch()}
@@ -79,7 +80,7 @@ function runTest(num) {
 }
 
 async function runTests() {
-  for (let i = 1; i <= NUM_OF_RUNS; i++) {
+  for (let i = START_RUN; i <= NUM_OF_RUNS; i++) {
     console.log(`Running test ${i} of ${NUM_OF_RUNS}`);
     await runTest(i);
   }

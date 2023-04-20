@@ -31,13 +31,13 @@ function runTest(num) {
 
     child.on("close", (code) => {
       const end = performance.now();
-      const time = end - start;
+      const time = (end - start) / 1000;
 
       if (code !== 0) {
         reject(new Error(`Process exited with code ${code}`));
       } else {
         data.push({
-          time: time,
+          time,
           type: os.type(),
           arch: os.arch(),
           model: os.cpus()[0].model,
@@ -56,7 +56,7 @@ function runTest(num) {
           ===============================
           ${stderr}
           ===============================
-          Completed in ${time / 1000} seconds
+          Completed in ${time} seconds
           ===============================
           OS name: ${os.type()}
           OS CPU architecture: ${os.arch()}

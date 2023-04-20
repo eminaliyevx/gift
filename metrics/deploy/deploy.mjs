@@ -21,7 +21,11 @@ function getInternetSpeed() {
     let internetSpeed = null;
 
     child.stdout.on("data", (data) => {
-      internetSpeed = JSON.parse(data).download / 1e6;
+      try {
+        internetSpeed = JSON.parse(data).download / 1e6;
+      } catch {
+        internetSpeed = null;
+      }
     });
 
     child.stderr.on("data", (_data) => {

@@ -3,8 +3,9 @@ import { appendFileSync, readFileSync, writeFileSync } from "fs";
 import os from "os";
 import { performance } from "perf_hooks";
 
-const NUM_OF_RUNS = 100;
-let data;
+const NUM_OF_RUNS = parseInt(process.argv[2]) || 100;
+const START_RUN = parseInt(process.argv[3]) || 1;
+let data = [];
 
 try {
   const buffer = readFileSync("test.json");
@@ -79,7 +80,7 @@ function runTest(num) {
 }
 
 async function runTests() {
-  for (let i = 1; i <= NUM_OF_RUNS; i++) {
+  for (let i = START_RUN; i <= NUM_OF_RUNS; i++) {
     console.log(`Running test ${i} of ${NUM_OF_RUNS}`);
     await runTest(i);
   }

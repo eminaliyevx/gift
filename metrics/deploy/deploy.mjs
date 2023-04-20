@@ -1,4 +1,4 @@
-import { spawn } from "child_process";
+import { exec, spawn } from "child_process";
 import { appendFileSync, readFileSync, writeFileSync } from "fs";
 import os from "os";
 import { performance } from "perf_hooks";
@@ -17,26 +17,30 @@ try {
 
 function getInternetSpeed() {
   return new Promise((resolve, reject) => {
-    const child = spawn("speedtest-cli", ["--json"]);
     let internetSpeed = null;
 
-    child.stdout.on("data", (data) => {
-      try {
-        internetSpeed = JSON.parse(data).download / 1e6;
-      } catch {
-        internetSpeed = null;
-      }
-    });
-
-    child.stderr.on("data", (_data) => {
-      internetSpeed = null;
-    });
-
-    child.on("close", (code) => {
-      if (code !== 0) {
+    exec("speedtest-cli --json", (error, stdout, stderr) => {
+      if (error) {
+        console.error(error);
         reject(null);
-      } else {
-        resolve(internetSpeed);
+      }
+
+      if (stderr) {
+        console.error(stderr);
+        reject(null);
+      }
+
+      if (stdout) {
+        try {
+          const data = JSON.parse(stdout);
+
+          if (data) {
+            internetSpeed = data.download / 1e6;
+            resolve(internetSpeed);
+          }
+        } catch {
+          reject(null);
+        }
       }
     });
   });

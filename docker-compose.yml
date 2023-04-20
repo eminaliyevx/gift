@@ -5,7 +5,7 @@ services:
     networks:
       - postgres
     volumes:
-      - /data/postgres:/data/postgres
+      - pgdata:/var/lib/postgresql/data
     env_file:
       - .env.production
 
@@ -25,3 +25,6 @@ services:
 networks:
   postgres:
     driver: bridge
+
+volumes:
+  pgdata:

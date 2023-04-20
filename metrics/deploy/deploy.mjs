@@ -3,10 +3,10 @@ import { appendFileSync, readFileSync, writeFileSync } from "fs";
 import os from "os";
 import { performance } from "perf_hooks";
 
-const NUM_OF_RUNS = 100;
-let data = [];
-
 const DEPLOY_TYPE = process.argv[2] || "no-tests-cache";
+const NUM_OF_RUNS = parseInt(process.argv[3]) || 100;
+const START_RUN = parseInt(process.argv[4]) || 1;
+let data = [];
 
 try {
   const buffer = readFileSync(`deploy_${DEPLOY_TYPE}.json`);
@@ -21,7 +21,11 @@ function getInternetSpeed() {
     let internetSpeed = null;
 
     child.stdout.on("data", (data) => {
-      internetSpeed = JSON.parse(data).download / 1e6;
+      try {
+        internetSpeed = JSON.parse(data).download / 1e6;
+      } catch {
+        internetSpeed = null;
+      }
     });
 
     child.stderr.on("data", (_data) => {
@@ -110,7 +114,7 @@ function runDeploy(num) {
 }
 
 async function runDeploys() {
-  for (let i = 1; i <= NUM_OF_RUNS; i++) {
+  for (let i = START_RUN; i <= NUM_OF_RUNS; i++) {
     console.log(`Running deploy ${i} of ${NUM_OF_RUNS}`);
     await runDeploy(i);
   }

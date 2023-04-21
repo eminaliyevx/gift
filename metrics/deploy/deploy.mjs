@@ -1,33 +1,42 @@
 import { exec, spawn } from "child_process";
-import { appendFileSync, readFileSync, writeFileSync } from "fs";
+import { appendFile, readFile, writeFile } from "fs/promises";
 import os from "os";
 import { performance } from "perf_hooks";
 
 const DEPLOY_TYPE = process.argv[2] || "no-tests-cache";
 const NUM_OF_RUNS = parseInt(process.argv[3]) || 100;
 const START_RUN = parseInt(process.argv[4]) || 1;
-let data = [];
+const data = await readExistingData();
 
-try {
-  const buffer = readFileSync(`deploy_${DEPLOY_TYPE}.json`);
-  data = JSON.parse(buffer);
-} catch {
-  data = [];
+(async function () {
+  for (let i = START_RUN; i <= NUM_OF_RUNS; i++) {
+    console.log(`Deploying ${i} of ${NUM_OF_RUNS}`);
+    await deploy(i);
+  }
+})()
+  .then(() => console.log("All deploys completed"))
+  .catch((error) => console.error(error));
+
+async function readExistingData() {
+  try {
+    const buffer = await readFile(`deploy_${DEPLOY_TYPE}.json`);
+    const data = JSON.parse(buffer);
+
+    return data;
+  } catch {
+    return [];
+  }
 }
 
 function getInternetSpeed() {
   return new Promise((resolve, reject) => {
-    let internetSpeed = null;
-
     exec("speedtest-cli --json", (error, stdout, stderr) => {
       if (error) {
-        console.error(error);
-        reject(null);
+        reject(error);
       }
 
       if (stderr) {
-        console.error(stderr);
-        reject(null);
+        reject(stderr);
       }
 
       if (stdout) {
@@ -35,22 +44,33 @@ function getInternetSpeed() {
           const data = JSON.parse(stdout);
 
           if (data) {
-            internetSpeed = data.download / 1e6;
+            const internetSpeed = data.download / 1e6;
+
             resolve(internetSpeed);
+          } else {
+            reject(new Error("Failed to resolve internet speed"));
           }
         } catch {
-          reject(null);
+          reject(new Error("Failed to parse standard output"));
         }
+      } else {
+        reject(new Error("Failed to receive standard output"));
       }
     });
   });
 }
 
-function runDeploy(num) {
+function deploy(num) {
   return new Promise(async (resolve, reject) => {
-    const internetSpeed = DEPLOY_TYPE.includes("no-cache")
-      ? await getInternetSpeed()
-      : undefined;
+    let internetSpeed;
+
+    if (DEPLOY_TYPE.includes("no-cache")) {
+      try {
+        internetSpeed = await getInternetSpeed();
+      } catch (error) {
+        console.error(error);
+      }
+    }
 
     const start = performance.now();
     const child = spawn("npm", ["run", `deploy:${DEPLOY_TYPE}`]);
@@ -105,10 +125,10 @@ function runDeploy(num) {
         `;
 
         try {
-          writeFileSync(`deploy_${DEPLOY_TYPE}.json`, JSON.stringify(data));
-          appendFileSync(`deploy_${DEPLOY_TYPE}.log`, log);
+          writeFile(`deploy_${DEPLOY_TYPE}.json`, JSON.stringify(data));
+          appendFile(`deploy_${DEPLOY_TYPE}.log`, log);
 
-          resolve();
+          resolve(num);
         } catch (error) {
           reject(error);
         }
@@ -116,14 +136,3 @@ function runDeploy(num) {
     });
   });
 }
-
-async function runDeploys() {
-  for (let i = START_RUN; i <= NUM_OF_RUNS; i++) {
-    console.log(`Running deploy ${i} of ${NUM_OF_RUNS}`);
-    await runDeploy(i);
-  }
-}
-
-runDeploys()
-  .then(() => console.log("All deploys completed"))
-  .catch((err) => console.error(err));

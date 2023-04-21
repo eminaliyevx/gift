@@ -1,23 +1,36 @@
 import { spawn } from "child_process";
-import { appendFileSync, readFileSync, writeFileSync } from "fs";
+import { appendFile, readFile, writeFile } from "fs/promises";
 import os from "os";
 import { performance } from "perf_hooks";
 
 const NUM_OF_RUNS = parseInt(process.argv[2]) || 100;
 const START_RUN = parseInt(process.argv[3]) || 1;
-let data = [];
+const data = await readExistingData();
 
-try {
-  const buffer = readFileSync("test.json");
-  data = JSON.parse(buffer);
-} catch {
-  data = [];
+(async function () {
+  for (let i = START_RUN; i <= NUM_OF_RUNS; i++) {
+    console.log(`Testing ${i} of ${NUM_OF_RUNS}`);
+    await test(i);
+  }
+})()
+  .then(() => console.log("All tests completed"))
+  .catch((error) => console.error(error));
+
+async function readExistingData() {
+  try {
+    const buffer = await readFile("test.json");
+    const data = JSON.parse(buffer);
+
+    return data;
+  } catch {
+    return [];
+  }
 }
 
-function runTest(num) {
-  return new Promise((resolve, reject) => {
+function test(num) {
+  return new Promise(async (resolve, reject) => {
     const start = performance.now();
-    const child = spawn("npm", ["run", "test"]);
+    const child = spawn("pnpm", ["test"]);
 
     let stdout = "";
     let stderr = "";
@@ -67,10 +80,10 @@ function runTest(num) {
         `;
 
         try {
-          writeFileSync("test.json", JSON.stringify(data));
-          appendFileSync("test.log", log);
+          writeFile("test.json", JSON.stringify(data));
+          appendFile("test.log", log);
 
-          resolve();
+          resolve(num);
         } catch (error) {
           reject(error);
         }
@@ -78,14 +91,3 @@ function runTest(num) {
     });
   });
 }
-
-async function runTests() {
-  for (let i = START_RUN; i <= NUM_OF_RUNS; i++) {
-    console.log(`Running test ${i} of ${NUM_OF_RUNS}`);
-    await runTest(i);
-  }
-}
-
-runTests()
-  .then(() => console.log("All tests completed"))
-  .catch((err) => console.error(err));

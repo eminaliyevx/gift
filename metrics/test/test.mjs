@@ -30,7 +30,7 @@ async function readExistingData() {
 function test(num) {
   return new Promise(async (resolve, reject) => {
     const start = performance.now();
-    const child = spawn("pnpm", ["test"]);
+    const child = spawn("npm", ["run", "test"]);
 
     let stdout = "";
     let stderr = "";
@@ -41,6 +41,7 @@ function test(num) {
 
     child.stderr.on("data", (data) => {
       stderr += data;
+      console.error(data);
     });
 
     child.on("close", (code) => {

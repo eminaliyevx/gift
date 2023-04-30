@@ -129,7 +129,7 @@ export class AuthService {
       from: "admin@eminaliyev.tech",
       to: account.email,
       subject: "Gift | Email confirmation",
-      html: `<a href="http://138.68.125.221/confirm/${hash}">Click on the link to confirm your email address</a>`,
+      html: `<a href="http://138.68.125.221:3000/confirm/${hash}">Click on the link to confirm your email address</a>`,
     });
   }
 

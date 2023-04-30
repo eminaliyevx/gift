@@ -1,4 +1,4 @@
-import { Badge, Button, Card, Group, Image, Text } from "@mantine/core";
+import { Badge, Button, Card, Image, Stack, Text } from "@mantine/core";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { Product } from "local-types";
 import { useMemo } from "react";
@@ -38,20 +38,21 @@ const ProductCard = ({ product }: ProductCardProps) => {
         <Image
           src={product.images[0]?.url}
           height={200}
-          alt="Product image"
+          alt={product.name}
           withPlaceholder
           fit="cover"
         />
       </Card.Section>
 
-      <Group position="apart" my="xs">
+      <Stack align="flex-start" spacing="xs" my="xs">
         <Text weight={500}>{product.name}</Text>
+
         <Badge size="xl" color="green">
           {findPrice(product) + " AZN"}
         </Badge>
-      </Group>
+      </Stack>
 
-      <Text color="dimmed" mb="md">
+      <Text color="dimmed" mb="md" lineClamp={3}>
         {product.description}
       </Text>
 

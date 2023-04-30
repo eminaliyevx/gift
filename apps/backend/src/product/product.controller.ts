@@ -2,21 +2,25 @@ import { PutObjectCommand } from "@aws-sdk/client-s3";
 import {
   Body,
   Controller,
+  DefaultValuePipe,
   Delete,
   ForbiddenException,
   Get,
   InternalServerErrorException,
   NotFoundException,
   Param,
+  ParseArrayPipe,
+  ParseIntPipe,
   Patch,
   Post,
+  Query,
   UploadedFiles,
   UseGuards,
   UseInterceptors,
 } from "@nestjs/common";
 import { ConfigService } from "@nestjs/config";
 import { FilesInterceptor } from "@nestjs/platform-express";
-import { ApiBearerAuth, ApiConsumes, ApiTags } from "@nestjs/swagger";
+import { ApiBearerAuth, ApiConsumes, ApiQuery, ApiTags } from "@nestjs/swagger";
 import { Role } from "@prisma/client";
 import { randomUUID } from "crypto";
 import { AccountWithoutPassword } from "local-types";
@@ -121,19 +125,49 @@ export class ProductController {
     }
   }
 
+  @ApiQuery({ name: "take", required: false })
+  @ApiQuery({ name: "cursor", required: false })
+  @ApiQuery({ name: "name", required: false })
+  @ApiQuery({ name: "categoryId", required: false })
   @Get()
-  async findMany() {
-    return this.prismaService.product.findMany({
+  async findMany(
+    @Query("take", new DefaultValuePipe(8), ParseIntPipe) take: number,
+    @Query("cursor") cursor?: string,
+    @Query("name") name?: string,
+    @Query("categories", new ParseArrayPipe({ items: String, optional: true }))
+    categories?: string[],
+  ) {
+    const products = await this.prismaService.product.findMany({
+      take,
+      skip: cursor ? 1 : 0,
+      cursor: cursor ? { id: cursor } : undefined,
+      orderBy: [
+        {
+          createdAt: "desc",
+        },
+        { id: "asc" },
+      ],
       include: {
         category: true,
         prices: true,
         images: true,
         business: true,
       },
-      orderBy: {
-        createdAt: "desc",
+      where: {
+        name: {
+          contains: name,
+          mode: "insensitive",
+        },
+        categoryId: {
+          in: categories,
+        },
       },
     });
+
+    return {
+      products,
+      cursor: products.length === take ? products[take - 1].id : undefined,
+    };
   }
 
   @Get(":id")

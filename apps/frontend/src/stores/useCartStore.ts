@@ -6,7 +6,7 @@ interface CartState {
   setItems: (items: CartItem[]) => void;
 }
 
-const useCartStore = create<CartState>()((set, get) => ({
+const useCartStore = create<CartState>()((set) => ({
   items: [],
   setItems: (items) => set({ items }),
 }));

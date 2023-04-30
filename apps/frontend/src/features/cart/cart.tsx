@@ -40,7 +40,7 @@ const schema = z.object({
       "Invalid card number"
     ),
   exp: z.string().regex(/^(0[1-9]|1[0-2])\/{1}(2[3-9]|[3-9][0-9])$/, {
-    message: "Invalid expiration date",
+    message: "Invalid date",
   }),
   cvc: z.string().regex(/^[0-9]{3,4}$/, { message: "Invalid CVC" }),
 });
@@ -137,7 +137,7 @@ const Cart = () => {
                   src={item.product.images[0]?.url}
                   width={150}
                   height={150}
-                  alt="Product image"
+                  alt={item.product.name}
                   withPlaceholder
                 />
 

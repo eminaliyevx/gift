@@ -59,7 +59,7 @@ export class PaymentService {
       from: "admin@eminaliyev.tech",
       to: user.email,
       subject: "Gift | Payment received",
-      html: `<a href="http://138.68.125.221/order/${paymentIntent.id}">Click on the link to view your order</a>`,
+      html: `<a href="http://138.68.125.221:3000/order/${paymentIntent.id}">Click on the link to view your order</a>`,
     });
 
     return paymentIntent;

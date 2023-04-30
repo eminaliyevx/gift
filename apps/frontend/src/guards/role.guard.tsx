@@ -3,7 +3,7 @@ import { PropsWithChildren } from "react";
 import { Navigate } from "react-router-dom";
 import { useAuthStore } from "../stores";
 
-const USER_NAVIGATES = {
+export const USER_NAVIGATES = {
   CUSTOMER: "/",
   BUSINESS: "/business",
   ADMIN: "/admin",

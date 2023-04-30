@@ -7,9 +7,9 @@ import {
 import { useHotkeys, useLocalStorage } from "@mantine/hooks";
 import { ModalsProvider } from "@mantine/modals";
 import { Notifications } from "@mantine/notifications";
-import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
+import { useQuery } from "@tanstack/react-query";
 import { AccountWithoutPassword } from "local-types";
-import { useCallback, useEffect } from "react";
+import { useEffect } from "react";
 import {
   Navigate,
   RouterProvider,
@@ -40,16 +40,8 @@ const router = createBrowserRouter([
   { path: "*", element: <Navigate to="/" /> },
 ]);
 
-const queryClient = new QueryClient({
-  defaultOptions: {
-    queries: {
-      refetchOnWindowFocus: false,
-    },
-  },
-});
-
 const App = () => {
-  const { accessToken, setUser, user, loading } = useAuthStore();
+  const { accessToken, setUser } = useAuthStore();
 
   const [colorScheme, setColorScheme] = useLocalStorage<ColorScheme>({
     key: "color-scheme",
@@ -62,45 +54,44 @@ const App = () => {
 
   useHotkeys([["mod+J", () => toggleColorScheme()]]);
 
-  const initialize = useCallback(async () => {
-    try {
-      const { data: user } = await axios.get<AccountWithoutPassword | null>(
-        "auth/account"
-      );
-
+  useQuery({
+    queryKey: ["account"],
+    queryFn: () =>
+      axios
+        .get<AccountWithoutPassword>("/auth/account")
+        .then((response) => response.data),
+    enabled: !!accessToken,
+    onSuccess: (user) => {
       setUser(user);
-    } catch {
+    },
+    onError: () => {
       setUser(null);
-    }
-  }, [accessToken]);
+    },
+  });
 
   useEffect(() => {
     if (!accessToken) {
       setUser(null);
-    } else {
-      initialize();
     }
   }, [accessToken]);
 
   return (
-    <QueryClientProvider client={queryClient}>
-      <ColorSchemeProvider
-        colorScheme={colorScheme}
-        toggleColorScheme={toggleColorScheme}
+    <ColorSchemeProvider
+      colorScheme={colorScheme}
+      toggleColorScheme={toggleColorScheme}
+    >
+      <MantineProvider
+        theme={{ colorScheme, fontFamily: "JetBrains Mono" }}
+        withGlobalStyles
+        withNormalizeCSS
       >
-        <MantineProvider
-          theme={{ colorScheme, fontFamily: "JetBrains Mono" }}
-          withGlobalStyles
-          withNormalizeCSS
-        >
-          <Notifications position="top-right" />
+        <Notifications position="top-right" />
 
-          <ModalsProvider>
-            <RouterProvider router={router} />
-          </ModalsProvider>
-        </MantineProvider>
-      </ColorSchemeProvider>
-    </QueryClientProvider>
+        <ModalsProvider>
+          <RouterProvider router={router} />
+        </ModalsProvider>
+      </MantineProvider>
+    </ColorSchemeProvider>
   );
 };
 

@@ -404,17 +404,19 @@ const CustomerLayout = () => {
                         color="gray"
                         size="md"
                         leftIcon={
-                          <Image
-                            src={user.image?.url}
-                            alt={
-                              user.customer?.firstName +
-                              " " +
-                              user.customer?.lastName
-                            }
-                            width={40}
-                            height={40}
-                            radius="xl"
-                          />
+                          user.image ? (
+                            <Image
+                              src={user.image.url}
+                              alt={
+                                user.customer?.firstName +
+                                " " +
+                                user.customer?.lastName
+                              }
+                              width={40}
+                              height={40}
+                              radius="xl"
+                            />
+                          ) : undefined
                         }
                         rightIcon={<ChevronDown size={20} />}
                       >

@@ -96,6 +96,7 @@ const UpdateAccount = () => {
           src={user.image.url}
           alt={user.id.toString()}
           width={200}
+          height={200}
           radius="50%"
           mx="auto"
           mb="xl"

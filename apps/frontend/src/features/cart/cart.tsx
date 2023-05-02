@@ -347,6 +347,7 @@ const Cart = () => {
           </Flex>
 
           <Button
+            id="checkout"
             type="submit"
             size="xl"
             color="green"

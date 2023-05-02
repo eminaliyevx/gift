@@ -363,7 +363,14 @@ const Register = () => {
         </Anchor>
       </Text>
 
-      <Button type="submit" size="lg" color="green" fullWidth loading={loading}>
+      <Button
+        id="register"
+        type="submit"
+        size="lg"
+        color="green"
+        fullWidth
+        loading={loading}
+      >
         Register
       </Button>
     </Box>

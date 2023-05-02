@@ -121,7 +121,7 @@ const Login = () => {
         </Anchor>
       </Text>
 
-      <Button type="submit" size="lg" color="green" fullWidth loading={loading}>
+      <Button id="login" type="submit" size="lg" color="green" fullWidth loading={loading}>
         Login
       </Button>
     </Box>

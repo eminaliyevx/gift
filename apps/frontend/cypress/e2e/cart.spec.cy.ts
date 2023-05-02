@@ -4,7 +4,7 @@ describe("cart", () => {
     cy.contains("Login").click();
     cy.get('input[placeholder="Email address"]').type("customer@test.com");
     cy.get('input[placeholder="Password"]').type("qwerty123");
-    cy.get("form").submit();
+    cy.get("#login").click();
   });
 
   it("should add/drop items to/from cart", () => {
@@ -25,7 +25,7 @@ describe("cart", () => {
     cy.get('input[placeholder="MM/YY"]').type("04/27");
     cy.get('input[placeholder="CVC"]').type("123");
 
-    cy.get("form").submit();
+    cy.get("#checkout").click();
 
     cy.contains("Your order was successful");
     cy.get(".mantine-Indicator-indicator").contains(0);

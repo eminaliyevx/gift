@@ -13,7 +13,7 @@ describe("register", () => {
     cy.get('input[placeholder="Who are you?"]').click();
     cy.contains("Business").click();
     cy.get('input[placeholder="Name"]').type("Namely");
-    cy.get("form").submit();
+    cy.get("#register").click();
 
     cy.contains("Success");
   });
